@@ -19,6 +19,8 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 // services
 import { GuiStyleService } from './services/gui-style.service';
+import { MenuBodyService } from './services/menu-body.service';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,10 @@ import { GuiStyleService } from './services/gui-style.service';
     MatListModule,
     BrowserAnimationsModule
   ],
-  providers: [GuiStyleService],
+  providers: [
+    GuiStyleService,
+    MenuBodyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

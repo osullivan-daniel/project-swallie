@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SideMenuComponent } from '../side-menu/side-menu.component';
+import { MenuBodyService } from '../../services/menu-body.service';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +7,11 @@ import { SideMenuComponent } from '../side-menu/side-menu.component';
       <section class="body">
         <div class="body">
           <div class="container">
-            <img src="../../assets/icons/menu_black.png" (click)="changeMenu()">
-            <h1 class="title">{{headline}}</h1>
+              <img src="../../assets/icons/menu_black.png" 
+              (click)="changeMenu()"  
+              [ngStyle]="{'visibility': this.displayMenuIcon}">
+
+              <h1 class="title">{{headline}}</h1>
           </div>
         </div>
       </section>
@@ -20,15 +23,23 @@ import { SideMenuComponent } from '../side-menu/side-menu.component';
 })
 
 export class HomeComponent implements OnInit {
-  headline = "This is here for testing purposes"
-  menuVisable=true
+  headline:string = "This is here for testing purposes"
+  displayMenuIcon:string;
+  backgroundColour:string;
 
-  constructor(private smComp: SideMenuComponent) {}
+  constructor(private _menuBody: MenuBodyService ) { 
+    this.displayMenuIcon = this._menuBody.menuIconVisable ? 'visible' : 'hidden'
+
+    this._menuBody.menuIconVisibilityChange.subscribe(value => {
+      this.displayMenuIcon = value ? 'visible' : 'hidden'});
+  }
 
   public changeMenu(): void {
     console.log('testing here')
-    this.smComp.changeMenu()
-    }
+    this._menuBody.changeMenuVisability()
+
+    // this.displayMenuIcon = this._menuBody.changeMenuVisability() ? 'visible' : 'hidden'
+  }
   
   ngOnInit(): void {
   }

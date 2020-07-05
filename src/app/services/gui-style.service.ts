@@ -7,6 +7,5 @@ import { Injectable } from '@angular/core';
 export class GuiStyleService {
   // TODO:: change readonly to be populated from db or some file?
   readonly backgroundColour: string = '#47909A';
-  //readonly backgroundColour: string = '#96CABE';
   readonly textColour: string = '#F0EAD6';
 }
