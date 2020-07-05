@@ -20,6 +20,7 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 // services
 import { GuiStyleService } from './services/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
+import { DataService } from './services/data.service';
 
 
 @NgModule({
@@ -43,8 +44,10 @@ import { MenuBodyService } from './services/menu-body.service';
   ],
   providers: [
     GuiStyleService,
-    MenuBodyService
+    MenuBodyService,
+    DataService
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

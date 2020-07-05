@@ -11,6 +11,9 @@ export class MenuBodyService {
   sideMenuVisable:boolean = true
   menuIconVisable:boolean = false
 
+  // sideMenuVisable:boolean = false
+  // menuIconVisable:boolean = true
+
   sideMenuVisibilityChange: Subject<boolean> = new Subject<boolean>();
   menuIconVisibilityChange: Subject<boolean> = new Subject<boolean>();
 
@@ -18,9 +21,6 @@ export class MenuBodyService {
     console.log("changeMenuVisability")
     this.sideMenuVisable=!this.sideMenuVisable
     this.menuIconVisable=!this.menuIconVisable
-
-    console.log(this.menuIconVisable)
-
     this.sideMenuVisibilityChange.next(this.sideMenuVisable);
     this.menuIconVisibilityChange.next(this.menuIconVisable);
   }

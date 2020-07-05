@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuBodyService } from '../../services/menu-body.service';
+import { DataService } from '../../services/data.service';
+
 
 @Component({
   selector: 'app-home',
   template: `
-      <section class="body">
-        <div class="body">
           <div class="container">
               <img src="../../assets/icons/menu_black.png" 
               (click)="changeMenu()"  
@@ -13,8 +13,6 @@ import { MenuBodyService } from '../../services/menu-body.service';
 
               <h1 class="title">{{headline}}</h1>
           </div>
-        </div>
-      </section>
   `,
   styles: [
     'h1 { font-weight: bold; }',
@@ -27,7 +25,8 @@ export class HomeComponent implements OnInit {
   displayMenuIcon:string;
   backgroundColour:string;
 
-  constructor(private _menuBody: MenuBodyService ) { 
+  constructor(private _menuBody: MenuBodyService, private _data: DataService) { 
+
     this.displayMenuIcon = this._menuBody.menuIconVisable ? 'visible' : 'hidden'
 
     this._menuBody.menuIconVisibilityChange.subscribe(value => {
@@ -37,14 +36,12 @@ export class HomeComponent implements OnInit {
   public changeMenu(): void {
     console.log('testing here')
     this._menuBody.changeMenuVisability()
-
-    // this.displayMenuIcon = this._menuBody.changeMenuVisability() ? 'visible' : 'hidden'
   }
   
-  ngOnInit(): void {
-  }
-
   public setText(text): void {
     this.headline=text
+  }
+
+  ngOnInit(): void {
   }
 }
