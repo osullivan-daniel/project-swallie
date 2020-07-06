@@ -8,7 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 // components
 import { AppComponent } from './app.component';
@@ -21,7 +24,6 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { GuiStyleService } from './services/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
 import { DataService } from './services/data.service';
-
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { DataService } from './services/data.service';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    BrowserAnimationsModule
+    MatDialogModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   providers: [
     GuiStyleService,

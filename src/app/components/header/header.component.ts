@@ -23,13 +23,11 @@ import { GuiStyleService } from '../../services/gui-style.service';
 export class HeaderComponent implements OnInit {
 
   backgroundColour:string;
-  textColour:string;
 
+  constructor(private _guiStyle: GuiStyleService) {}
 
-  constructor(private _guiStyle: GuiStyleService) { 
-    this.backgroundColour = this._guiStyle.backgroundColour;	
-  }
   ngOnInit(): void {
+    this.backgroundColour = this._guiStyle.backgroundColour;	
   }
 
 }   

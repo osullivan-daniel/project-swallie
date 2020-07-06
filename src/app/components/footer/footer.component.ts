@@ -24,12 +24,11 @@ export class FooterComponent implements OnInit {
   backgroundColour:string;
   textColour:string;
 
-  constructor(private _guiStyle: GuiStyleService) { 
-    this.backgroundColour = this._guiStyle.backgroundColour;	
-    this.textColour = this._guiStyle.textColour;
-  }
+  constructor(private _guiStyle: GuiStyleService) {}
 
   ngOnInit(): void {
+    this.backgroundColour = this._guiStyle.backgroundColour;	
+    this.textColour = this._guiStyle.textColour;
   }
 
 }
