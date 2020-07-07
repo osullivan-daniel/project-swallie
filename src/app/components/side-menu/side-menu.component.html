@@ -4,8 +4,8 @@
                     mode="side" class="sideNavigation" >
 
     <mat-nav-list [ngStyle]="{'color': this.textColour}">
-    <img src="assets/icons/close_white.png" (click)="changeMenu('Null')" onmouseover="">
-    <mat-list-item *ngFor="let key of keysOfOptions" (click)="changeMenu(key)">{{ key }}</mat-list-item>
+    <img src="assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
+    <mat-list-item *ngFor="let key of availableCatagories" (click)="changeMenu(key)">{{ key }}</mat-list-item>
     </mat-nav-list>
 
 </mat-sidenav>

@@ -23,13 +23,15 @@ export class SideMenuComponent implements OnInit{
   backgroundColour:string;
   textColour:string;
   jsonOfOptions:JSON;
-  keysOfOptions:Array<string>;
+  availableCatagories:Array<string>;
 
   constructor(private breakpointObserver: BreakpointObserver, private _guiStyle: GuiStyleService, 
               private _menuBody: MenuBodyService, private _data: DataService) { 
 
     this._menuBody.sideMenuVisibilityChange.subscribe(value => {this.sideMenuVisable=value});    
-    this._data.availableJsonChange.subscribe(value => {this.jsonOfOptions=value; this.keysOfOptions = Object.keys(this.jsonOfOptions)});
+    this._data.availableCatagories.subscribe(value => {this.availableCatagories = value});
+    console.log('hello')
+    console.log(this.availableCatagories)
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -39,14 +41,19 @@ export class SideMenuComponent implements OnInit{
   );
 
   public changeMenu(key): void {
-    this._data.setCurrentKey(key)
-    this._menuBody.changeMenuVisability()
+    this.closeMenu()
+    this._data.setSelectedOptions(key)
   }
 
+  public closeMenu(): void {
+    this._menuBody.changeMenuVisability()
+  }
+  
+
   ngOnInit(): void {
-    this.sideMenuVisable = this._menuBody.sideMenuVisable;
+    this.sideMenuVisable = this._menuBody.sideMenuVisable;    
     this.backgroundColour = this._guiStyle.backgroundColour;	
     this.textColour = this._guiStyle.textColour;
-    this._data.getAvailableOptions()
+    this._data.setSelectedOptions('All')
   }
 }
