@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuBodyService } from '../../services/menu-body.service';
 import { DataService } from '../../services/data.service';
+import { AddToOrderDialogComponent } from '../add-to-order-dialog/add-to-order-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 // <img id="menuIcon" src="../../assets/icons/menu-24px.svg" 
@@ -80,7 +82,7 @@ export class HomeComponent implements OnInit {
   selectedOption;
   availableSelectedSubMenu;
 
-  constructor(private _menuBody: MenuBodyService, private _data: DataService) {
+  constructor(private _menuBody: MenuBodyService, private _data: DataService, public dialog: MatDialog) {
     this._menuBody.menuIconVisibilityChange.subscribe(value => {
       this.displayMenuIcon = value ? 'visible' : 'hidden'});
 
@@ -98,11 +100,13 @@ export class HomeComponent implements OnInit {
     
   public displayAddToCart(): void {
     console.log('CanIDoTwo!!!!')
+    this.openDialog()
   }
 
-
-  
- 
+  openDialog() {
+    this.dialog.open(AddToOrderDialogComponent);
+  }
+   
   ngOnInit(): void {
     // To set visability for the first time.
     this.displayMenuIcon = this._menuBody.menuIconVisable ? 'visible' : 'hidden'

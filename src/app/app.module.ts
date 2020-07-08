@@ -19,6 +19,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { AddToOrderDialogComponent } from './components/add-to-order-dialog/add-to-order-dialog.component';
 
 // services
 import { GuiStyleService } from './services/gui-style.service';
@@ -31,7 +32,8 @@ import { DataService } from './services/data.service';
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    AddToOrderDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { DataService } from './services/data.service';
     MenuBodyService,
     DataService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddToOrderDialogComponent]
 })
 
 export class AppModule { }

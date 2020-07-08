@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from './services/data.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -12,20 +11,10 @@ import { DataService } from './services/data.service';
 `,
   styleUrls: []
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'project-swallie';
 
-  constructor(private _data: DataService) { 
+  constructor() {}
 
-  //this._data.availableJsonChange.subscribe(value => {this.jsonOfOptions=value; this.keysOfOptions = Object.keys(this.jsonOfOptions)});
-}
 
-  ngOnInit(): void {
-    // this._data.setSelectedKey('All')
-    // this._data.setavailableCatagories()
-    // this.sideMenuVisable = this._menuBody.sideMenuVisable;
-    // this.backgroundColour = this._guiStyle.backgroundColour;	
-    // this.textColour = this._guiStyle.textColour;
-    // this._data.getAvailableOptions()
-  }
 }

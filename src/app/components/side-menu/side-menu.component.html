@@ -1,11 +1,14 @@
-<mat-sidenav-container [hasBackdrop]="true" [hasBackdrop]="false">
+<!-- <mat-sidenav-container class="navContainer" [hasBackdrop]="true" [hasBackdrop]="false" [ngStyle]="{'background-color': '#FFFFFF'}"> -->
+<mat-sidenav-container class="navContainer">
+
     <mat-sidenav [ngStyle]="{'background-color': this.backgroundColour}" 
                     [(opened)]="sideMenuVisable" disableClose
-                    mode="side" class="sideNavigation" >
+                    mode="side">
+    
+    <img id="menuIcon" src="assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
 
-    <mat-nav-list [ngStyle]="{'color': this.textColour}">
-    <img src="assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
-    <mat-list-item *ngFor="let key of availableCatagories" (click)="changeMenu(key)">{{ key }}</mat-list-item>
+    <mat-nav-list>
+    <mat-list-item id="matListItems" [ngStyle]="{'color': this.textColour}" *ngFor="let key of availableCatagories" (click)="changeMenu(key)">{{ key }}</mat-list-item>
     </mat-nav-list>
 
 </mat-sidenav>

@@ -10,11 +10,19 @@ import { DataService } from '../../services/data.service';
   selector: 'app-side-menu',
   templateUrl: 'side-menu.component.html',
   styles: [
-    `mat-sidenav { height: 100%; }`,
-    `mat-sidenav-content { height: 85vh; }`,
-    `mat-nav-list { font-weight: bold; font-family: Andale Mono, monospace, sans-serif;}`,
-    `img { float:right; cursor: pointer; }`
-]
+    `.navContainer {
+      hasBackdrop: false;
+      background-color: #FFFFFF;
+    }`,
+    `#matListItems { 
+      font-weight: bold; 
+      font-family: Andale Mono, monospace, sans-serif;
+    }`,
+    `img { 
+      float:right; 
+      cursor: pointer; 
+    }`
+  ]
 })
 
 export class SideMenuComponent implements OnInit{
