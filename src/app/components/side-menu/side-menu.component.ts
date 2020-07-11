@@ -3,6 +3,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';  // Break
 import { GuiStyleService } from '../../services/gui-style.service';
 import { MenuBodyService } from '../../services/menu-body.service';
 import { DataService } from '../../services/data.service';
+import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-side-menu',
@@ -16,6 +19,7 @@ import { DataService } from '../../services/data.service';
     `#matListItems { 
       font-weight: bold; 
       font-family: Andale Mono, monospace, sans-serif;
+      color: this.textColour 
     }`,
     `img { 
       float:right; 
@@ -39,8 +43,11 @@ export class SideMenuComponent implements OnInit{
   jsonOfOptions:JSON;
   availableCatagories:Array<string>;
 
-  constructor(private breakpointObserver: BreakpointObserver, private _guiStyle: GuiStyleService, 
-              private _menuBody: MenuBodyService, private _data: DataService) { 
+  constructor(private breakpointObserver: BreakpointObserver, 
+              private _guiStyle: GuiStyleService, 
+              private _menuBody: MenuBodyService, 
+              private _data: DataService,
+              public dialog: MatDialog) { 
 
     this._menuBody.sideMenuVisibilityChange.subscribe(value => {this.sideMenuVisable=value});    
     this._data.availableCatagories.subscribe(value => {this.availableCatagories = value});
@@ -54,7 +61,27 @@ export class SideMenuComponent implements OnInit{
   public closeMenu(): void {
     this._menuBody.changeMenuVisability();
   }
-  
+
+
+
+  public displayCart(): void 
+  {
+    
+
+    let dialogRef = this.dialog.open(OrderDialogComponent, 
+    { 
+      disableClose: true,
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(res => 
+    {
+      if (!(res === 'false'))
+      {
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.sideMenuVisable = this._menuBody.sideMenuVisable;    
     this.backgroundColour = this._guiStyle.backgroundColour;	

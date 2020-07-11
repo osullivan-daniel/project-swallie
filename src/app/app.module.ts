@@ -14,6 +14,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select'
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 // components
@@ -27,6 +29,7 @@ import { AddToOrderDialogComponent } from './components/add-to-order-dialog/add-
 import { GuiStyleService } from './services/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
 import { DataService } from './services/data.service';
+import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { DataService } from './services/data.service';
     HomeComponent,
     SideMenuComponent,
     AddToOrderDialogComponent,
+    OrderDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,8 @@ import { DataService } from './services/data.service';
     FlexLayoutModule,
     MatRadioModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
   ],
   providers: [
     GuiStyleService,

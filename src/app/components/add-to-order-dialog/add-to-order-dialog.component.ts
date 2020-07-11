@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from '../../services/data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -25,51 +24,39 @@ export class AddToOrderDialogComponent implements OnInit{
   disableOrderButton: boolean;
   disabledDropdownOptions: any;
 
-  testingHere;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, 
-              private _data: DataService,
-              private dialogRef: MatDialogRef<any>) { 
-
-    this._data.disabledDropdownOptions.subscribe(value => {
-      this.disabledDropdownOptions=value;
-    });
-
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<any>) {}
 
   public enableDisableOrderButton()
   {
-    console.log('enableDisableOrderButton()::', this.data.order)
-
-    let tmpBooleanList = []
+    let orderStatus = []
     for(let key in this.data.order)
     {
-      //valid entry
       if (this.data.order[key]['addToOrder'] === true && this.data.order[key]['amount'] > 0)
       {
-        tmpBooleanList.push(false)
+        orderStatus.push('Valid')
       }
       else if (this.data.order[key]['addToOrder'] === false)
       {
-        tmpBooleanList.push(false)
+        orderStatus.push('Empty')
       }
       else
       {
-        tmpBooleanList.push(true)
+        orderStatus.push('Invalid')
       }
     }
 
-    console.log("tmpBooleanList::", tmpBooleanList)
-    this.disableOrderButton = true ? tmpBooleanList.includes(true) : false
+    let uniqueOrderValues = new Set(orderStatus)
+ 
+    if (Array.from(uniqueOrderValues).includes('Invalid')) {this.disableOrderButton = true}
+    else if (Array.from(uniqueOrderValues).length == 1 && Array.from(uniqueOrderValues).includes('Empty')) {this.disableOrderButton = true}
+    else {this.disableOrderButton = false}
   }
 
   public selectDialogOptions(event: any, size: string) 
   {
-    this.disabledDropdownOptions[this.data.name][size] = !this.disabledDropdownOptions[this.data.name][size]
     this.data.order[size]['addToOrder'] = event.checked
     this.enableDisableOrderButton()
   }
-
 
   public selectDropdownValue(size: string, amount: number)
   {
@@ -77,20 +64,12 @@ export class AddToOrderDialogComponent implements OnInit{
     this.enableDisableOrderButton()
   }
 
-  // onClose(): void {
-  //   this.dialogRef.close(this.data);
-  // }
-
   public onSave() {
-    console.log('onsave::', this.data)
     this.dialogRef.close(this.data)
   }
 
   ngOnInit(){
-    console.log('dialog oninit');
-    console.log('this.data::', this.data);
     this.sizeOptions = Object.keys(this.data.order)
-    this._data.resetDisabledDropdowns();
     this.enableDisableOrderButton();
     this.availableToOrder = [1, 2, 3] 
   }
