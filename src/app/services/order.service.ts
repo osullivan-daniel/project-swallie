@@ -11,7 +11,12 @@ export class OrderService
 
   public setOrder(key: string, updatedOrder: Array<{}>) 
   {
-    this.order[key] = updatedOrder;
+    // this.order[key] = updatedOrder;
+    this.order[key].next(updatedOrder)
+    console.log('has it has ir has it', this.order.value)
+    console.log('updated.....')
+
+    this.order[key].next(updatedOrder)
   }
 
   public createEmptyOrder(data:any) 

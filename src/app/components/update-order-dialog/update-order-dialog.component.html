@@ -1,14 +1,14 @@
-<h2 id='dialogHeader'>{{data.name}}</h2>                                
+<h2 id='dialogHeader'>{{data}}</h2>                                
 
 <mat-radio-group formControlName='options' *ngFor="let key of sizeOptions">  
     <div>
-        <mat-checkbox [checked]="this.data.order[key]['updateOrder']"
+        <mat-checkbox [checked]="this.localOrder[key]['updateOrder']"
                       id="{{key}}.checkbox" 
                       (change)="selectDialogOptions($event, key)">
                       {{ key }}
         </mat-checkbox>
 
-        <mat-select id='quantitySelect' [disabled]="!this.data.order[key]['updateOrder']" [value]="this.data.order[key]['qty']">
+        <mat-select id='quantitySelect' [disabled]="!this.localOrder[key]['updateOrder']" [value]="this.localOrder[key]['qty']">
             <mat-option *ngFor="let num of availableToOrder" 
                         id="{{key}}.dropdown" 
                         [value]=num

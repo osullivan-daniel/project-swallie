@@ -20,26 +20,26 @@ import { OrderService } from 'src/app/services/order.service';
 export class updateOrderDialogComponent implements OnInit{
 
   sizeOptions: any = []
-  order: any = {};
+  order: any;
+  localOrder: any;
   availableToOrder: any;
   disableOrderButton: boolean;
-  orderServiceOrder: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<any>, private _orderService: OrderService) 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private _orderService: OrderService) 
   {
-    this._orderService.order.subscribe(value => {this.orderServiceOrder=value});    
+    this._orderService.order.subscribe(value => {this.order=value});    
   }
 
   public enableDisableOrderButton()
   {
     let orderStatus = []
-    for(let key in this.data.order)
+    for(let key in this.localOrder)
     {
-      if (this.data.order[key]['updateOrder'] === true && this.data.order[key]['qty'] > 0)
+      if (this.localOrder[key]['updateOrder'] === true && this.localOrder[key]['qty'] > 0)
       {
         orderStatus.push('Valid')
       }
-      else if (this.data.order[key]['updateOrder'] === false)
+      else if (this.localOrder[key]['updateOrder'] === false)
       {
         orderStatus.push('Empty')
       }
@@ -58,24 +58,32 @@ export class updateOrderDialogComponent implements OnInit{
 
   public selectDialogOptions(event: any, size: string) 
   {
-    this.data.order[size]['updateOrder'] = event.checked
+    this.localOrder[size]['updateOrder'] = event.checked
     this.enableDisableOrderButton()
+
+    console.log('localOrder::', this.localOrder)
+    console.log('order::', this.order)
   }
 
   public selectDropdownValue(size: string, qty: number)
   {
-    this.data.order[size]['qty'] = qty
+    this.localOrder[size]['qty'] = qty
     this.enableDisableOrderButton()
   }
 
   public onSave() {
-    this.dialogRef.close(this.data)
+    console.log('calling onSave')
+    this.order[this.data] = this.localOrder
   }
 
   ngOnInit(){
-    this.sizeOptions = Object.keys(this.data.order)
+    console.log('what the fluff::', this.order[this.data])
+    this.localOrder  = JSON.parse(JSON.stringify(this.order[this.data]));
+
+    this.sizeOptions = Object.keys(this.localOrder)
     this.enableDisableOrderButton();
+    // TODO:: Figure our what to do with this.... -> load from file with styling???
     this.availableToOrder = [1, 2, 3] 
-    console.log(this.orderServiceOrder)
+    
   }
 }

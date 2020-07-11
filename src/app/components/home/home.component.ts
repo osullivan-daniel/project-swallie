@@ -59,8 +59,8 @@ export class HomeComponent implements OnInit {
   availableSelectedMenu; 
   selectedOption;
 
-  constructor(private _menuBody: MenuBodyService, private _data: DataService, public dialog: MatDialog) {
-    
+  constructor(private _menuBody: MenuBodyService, private _data: DataService, public dialog: MatDialog) 
+  {
     this._menuBody.menuIconVisibilityChange.subscribe(value => {
       this.displayMenuIcon = value ? 'visible' : 'hidden'
     });
@@ -74,52 +74,13 @@ export class HomeComponent implements OnInit {
     this._menuBody.changeMenuVisability()
   }
 
-
   public displayupdateCart(selectedItem): void 
   {
-    
-    this.getItemOrderDetails(selectedItem)
-
-    let dialogRef = this.dialog.open(updateOrderDialogComponent, 
+    this.dialog.open(updateOrderDialogComponent, 
     { 
       disableClose: true,
-      data: { 'name':selectedItem.name, 
-              'order': this.getItemOrderDetails(selectedItem) }
+      data: selectedItem.name
     });
-
-    dialogRef.afterClosed().subscribe(res => 
-    {
-      if (!(res === 'false'))
-      {
-        this.order[res.name] = res.order
-        console.log("res.name:", res.name)
-        console.log("res.order:", res.order)
-        console.log('this.order::', this.order)
-      }
-    });
-  }
-
-      
-  public getItemOrderDetails(selectedItem): any 
-  {
-    if (!(selectedItem.name in this.order))
-    {
-      this.createOrder(selectedItem.name, selectedItem.size);
-    }
-
-    return this.order[selectedItem.name];
-  }
-    
-  public createOrder(name: string, size: Array<any>) 
-  {
-    this.order[name] = {}
-    for(let key in size)
-    {
-      this.order[name][size[key]]={
-        'updateOrder': false,
-        'qty': 0
-      }
-    }
   }
 
   ngOnInit(): void {
