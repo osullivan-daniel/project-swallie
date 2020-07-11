@@ -86,16 +86,7 @@ export class SideMenuComponent implements OnInit{
     this.sideMenuVisable = this._menuBody.sideMenuVisable;    
     this.backgroundColour = this._guiStyle.backgroundColour;	
     this.textColour = this._guiStyle.textColour;
+    // set the default menu to 'All'
     this._data.getSubMenu('All');
   }
-
-
-  // TODO:: figure out if this is neaded later
-  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-  // .pipe(
-  //   map(result => result.matches),
-  //   shareReplay()
-  // );
-
-
 }

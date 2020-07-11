@@ -13,49 +13,22 @@ export class DataService {
   availableCatagories = new BehaviorSubject(null);
   selectedKey = new BehaviorSubject(null);
   selectedSubMenu = new BehaviorSubject(null);
-  disabledDropdownOptions = new BehaviorSubject(null);
-
 
   setUpDataService() {
-    console.log('data service :: setUpDataService');
-
     this.availableMenuFromServer = this.getMenuFromServer();
     this.standardOptions.next(this.getStandardOptions(this.availableMenuFromServer));
     this.availableMenu.next(this.createAvailableMenu(this.availableMenuFromServer, this.standardOptions.value));
     this.availableCatagories.next(Object.keys(this.availableMenu.value));
-    this.disabledDropdownOptions.next(this.setDisabledDropdowns(this.standardOptions.value['all']));
   }
 
 
   getSubMenu(key): void {
-    console.log('data service :: getSubMenu');
-
     this.selectedKey.next(key);
     this.selectedSubMenu.next(this.availableMenu.value[key]);
   }
 
 
-  setDisabledDropdowns(inputData: any){
-    console.log('data service :: setDisabledDropdowns');
-
-    let tmp = {};
-    inputData.forEach(function(key) {
-      tmp[key.name]={};
-      key.size.forEach(function(size) {
-        tmp[key.name][size] = true;
-      });
-    });
-    return tmp;
-  }
-
-  resetDisabledDropdowns(){
-    this.disabledDropdownOptions.next(this.setDisabledDropdowns(this.standardOptions.value['all']))
-  }
-
-
   getStandardOptions(inputData: any) {
-    console.log('data service :: getStandardOptions')
-
     let allKey = [];
     let cans = [];
     let halves = [];
@@ -109,7 +82,6 @@ export class DataService {
 
   // This will be replaced with api call later
   getMenuFromServer(): any {
-    console.log('data service :: getMenuFromServer')
 
     return {
       "IPA's": [        

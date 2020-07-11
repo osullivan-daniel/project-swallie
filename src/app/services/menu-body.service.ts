@@ -8,9 +8,11 @@ import { Subject } from 'rxjs';
 @Injectable() 
 export class MenuBodyService {
 
-  sideMenuVisable:boolean = true
-  menuIconVisable:boolean = false
+  order: any = {};
+  sideMenuVisable:boolean = true;
+  menuIconVisable:boolean = false;
 
+  orderChange: Subject<any> = new Subject<any>();
   sideMenuVisibilityChange: Subject<boolean> = new Subject<boolean>();
   menuIconVisibilityChange: Subject<boolean> = new Subject<boolean>();
 

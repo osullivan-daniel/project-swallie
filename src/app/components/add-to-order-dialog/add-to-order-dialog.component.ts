@@ -22,7 +22,6 @@ export class AddToOrderDialogComponent implements OnInit{
   order: any = {};
   availableToOrder: any;
   disableOrderButton: boolean;
-  disabledDropdownOptions: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<any>) {}
 
@@ -31,7 +30,7 @@ export class AddToOrderDialogComponent implements OnInit{
     let orderStatus = []
     for(let key in this.data.order)
     {
-      if (this.data.order[key]['addToOrder'] === true && this.data.order[key]['amount'] > 0)
+      if (this.data.order[key]['addToOrder'] === true && this.data.order[key]['qty'] > 0)
       {
         orderStatus.push('Valid')
       }
@@ -58,9 +57,9 @@ export class AddToOrderDialogComponent implements OnInit{
     this.enableDisableOrderButton()
   }
 
-  public selectDropdownValue(size: string, amount: number)
+  public selectDropdownValue(size: string, qty: number)
   {
-    this.data.order[size]['amount'] = amount
+    this.data.order[size]['qty'] = qty
     this.enableDisableOrderButton()
   }
 

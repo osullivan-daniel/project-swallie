@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
     {
       this.order[name][size[key]]={
         'addToOrder': false,
-        'amount': 0
+        'qty': 0
       }
     }
   }
