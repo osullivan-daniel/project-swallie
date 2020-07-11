@@ -3,8 +3,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-add-to-order-dialog',
-  templateUrl: 'add-to-order-dialog.component.html', 
+  selector: 'app-update-order-dialog',
+  templateUrl: 'update-order-dialog.component.html', 
   styles: [
     `#itemSelect: {float:left; }`,
 
@@ -16,7 +16,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   ]
 })
 
-export class AddToOrderDialogComponent implements OnInit{
+export class updateOrderDialogComponent implements OnInit{
 
   sizeOptions: any = []
   order: any = {};
@@ -30,11 +30,11 @@ export class AddToOrderDialogComponent implements OnInit{
     let orderStatus = []
     for(let key in this.data.order)
     {
-      if (this.data.order[key]['addToOrder'] === true && this.data.order[key]['qty'] > 0)
+      if (this.data.order[key]['updateOrder'] === true && this.data.order[key]['qty'] > 0)
       {
         orderStatus.push('Valid')
       }
-      else if (this.data.order[key]['addToOrder'] === false)
+      else if (this.data.order[key]['updateOrder'] === false)
       {
         orderStatus.push('Empty')
       }
@@ -53,7 +53,7 @@ export class AddToOrderDialogComponent implements OnInit{
 
   public selectDialogOptions(event: any, size: string) 
   {
-    this.data.order[size]['addToOrder'] = event.checked
+    this.data.order[size]['updateOrder'] = event.checked
     this.enableDisableOrderButton()
   }
 

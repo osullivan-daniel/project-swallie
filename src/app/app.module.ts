@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { AddToOrderDialogComponent } from './components/add-to-order-dialog/add-to-order-dialog.component';
+import { updateOrderDialogComponent } from './components/update-order-dialog/update-order-dialog.component';
 
 // services
 import { GuiStyleService } from './services/gui-style.service';
@@ -37,7 +37,7 @@ import { OrderDialogComponent } from './components/order-dialog/order-dialog.com
     HeaderComponent,
     HomeComponent,
     SideMenuComponent,
-    AddToOrderDialogComponent,
+    updateOrderDialogComponent,
     OrderDialogComponent,
   ],
   imports: [
@@ -63,7 +63,7 @@ import { OrderDialogComponent } from './components/order-dialog/order-dialog.com
     DataService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AddToOrderDialogComponent]
+  entryComponents: [updateOrderDialogComponent]
 })
 
 export class AppModule { }

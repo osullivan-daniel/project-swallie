@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuBodyService } from '../../services/menu-body.service';
 import { DataService } from '../../services/data.service';
-import { AddToOrderDialogComponent } from '../add-to-order-dialog/add-to-order-dialog.component';
+import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 
@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
               <div class=flexDiv>
                 <div *ngFor="let key of selectedSubMenu">
 
-                <img id=clickableCanImage src={{key.img}} (click)="displayAddToCart(key)">
+                <img id=clickableCanImage src={{key.img}} (click)="displayupdateCart(key)">
                 <p class=productName>{{key.name}}</p>
                 <p class=productName>{{key.APV}}%</p>
                 </div>
@@ -75,12 +75,12 @@ export class HomeComponent implements OnInit {
   }
 
 
-  public displayAddToCart(selectedItem): void 
+  public displayupdateCart(selectedItem): void 
   {
     
     this.getItemOrderDetails(selectedItem)
 
-    let dialogRef = this.dialog.open(AddToOrderDialogComponent, 
+    let dialogRef = this.dialog.open(updateOrderDialogComponent, 
     { 
       disableClose: true,
       data: { 'name':selectedItem.name, 
@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit {
     for(let key in size)
     {
       this.order[name][size[key]]={
-        'addToOrder': false,
+        'updateOrder': false,
         'qty': 0
       }
     }
