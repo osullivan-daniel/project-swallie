@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-update-order-dialog',
@@ -22,8 +23,12 @@ export class updateOrderDialogComponent implements OnInit{
   order: any = {};
   availableToOrder: any;
   disableOrderButton: boolean;
+  orderServiceOrder: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<any>) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<any>, private _orderService: OrderService) 
+  {
+    this._orderService.order.subscribe(value => {this.orderServiceOrder=value});    
+  }
 
   public enableDisableOrderButton()
   {
@@ -71,5 +76,6 @@ export class updateOrderDialogComponent implements OnInit{
     this.sizeOptions = Object.keys(this.data.order)
     this.enableDisableOrderButton();
     this.availableToOrder = [1, 2, 3] 
+    console.log(this.orderServiceOrder)
   }
 }

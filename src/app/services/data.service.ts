@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 
+import { OrderService } from './order.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,11 +16,14 @@ export class DataService {
   selectedKey = new BehaviorSubject(null);
   selectedSubMenu = new BehaviorSubject(null);
 
-  setUpDataService() {
+  // setUpDataService() {
+  constructor(private _orderService: OrderService)
+  {
     this.availableMenuFromServer = this.getMenuFromServer();
     this.standardOptions.next(this.getStandardOptions(this.availableMenuFromServer));
     this.availableMenu.next(this.createAvailableMenu(this.availableMenuFromServer, this.standardOptions.value));
     this.availableCatagories.next(Object.keys(this.availableMenu.value));
+    this._orderService.createEmptyOrder(this.availableMenu.value['All']);
   }
 
 

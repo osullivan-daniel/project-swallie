@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +13,4 @@ import { DataService } from './services/data.service';
 
 export class AppComponent{
   title = 'project-swallie';
-
-  constructor(private _data: DataService) {
-    this._data.setUpDataService()
-  }
-
-
-
 }
