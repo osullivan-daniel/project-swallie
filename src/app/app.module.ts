@@ -11,12 +11,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select'
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { AddToOrderDialogComponent } from './components/add-to-order-dialog/add-to-order-dialog.component';
@@ -29,7 +31,6 @@ import { DataService } from './services/data.service';
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
     HeaderComponent,
     HomeComponent,
     SideMenuComponent,
@@ -46,7 +47,10 @@ import { DataService } from './services/data.service';
     MatListModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [
     GuiStyleService,

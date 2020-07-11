@@ -7,27 +7,113 @@ import { Subject, BehaviorSubject } from 'rxjs';
 
 export class DataService {
 
-  availableMenu = new BehaviorSubject(this.setAvailableOptions());
-  availableCatagories = new BehaviorSubject(Object.keys(this.availableMenu.value));
+  availableMenuFromServer: Subject<any> = new Subject<any>();
+  standardOptions = new BehaviorSubject(null);
+  availableMenu = new BehaviorSubject(null);
+  availableCatagories = new BehaviorSubject(null);
+  selectedKey = new BehaviorSubject(null);
+  selectedSubMenu = new BehaviorSubject(null);
+  enabledDisabledDialogOptions = new BehaviorSubject(null);
 
-  selectedKey: Subject<string> = new Subject<string>();
-  // Do we default to all or wait for users first select...
-  //selectedKey = new BehaviorSubject('All');
-  availableSelectedSubMenu: Subject<JSON> = new Subject<JSON>();
-  
-  setSelectedOptions(key): void {
-    console.log('set key', key)
-    console.log(this.availableMenu.value[key])
-    this.selectedKey.next(key);
-    this.availableSelectedSubMenu.next(
-      this.availableMenu.value[key]
-    )
+
+  setUpDataService() {
+    console.log('data service :: setUpDataService');
+
+    this.availableMenuFromServer = this.getMenuFromServer();
+    this.standardOptions.next(this.getStandardOptions(this.availableMenuFromServer));
+    this.availableMenu.next(this.createAvailableMenu(this.availableMenuFromServer, this.standardOptions.value));
+    this.availableCatagories.next(Object.keys(this.availableMenu.value));
+    this.enabledDisabledDialogOptions.next(this.setEnabledDisabledOptions(this.standardOptions.value['all']));
   }
 
+
+  getSubMenu(key): void {
+    console.log('data service :: getSubMenu');
+
+    this.selectedKey.next(key);
+    this.selectedSubMenu.next(this.availableMenu.value[key]);
+  }
+
+
+  setEnabledDisabledOptions(inputData: any){
+    console.log('data service :: setEnabledDisabledOptions');
+
+    let tmp = {};
+    inputData.forEach(function(key) {
+      tmp[key.name]={};
+      key.size.forEach(function(size) {
+        tmp[key.name][size] = {}
+        tmp[key.name][size]['dropdown'] = true;
+        tmp[key.name][size]['checkbox'] = false;
+      });
+    });
+    return tmp;
+  }
+
+  resetEnabledDisabledOptions(){
+    this.enabledDisabledDialogOptions.next(this.setEnabledDisabledOptions(this.standardOptions.value['all']))
+  }
+
+
+  getStandardOptions(inputData: any) {
+    console.log('data service :: getStandardOptions')
+
+    let allKey = [];
+    let cans = [];
+    let halves = [];
+    let thirds = [];
+
+    const keys = Object.keys(inputData)
+    for (const key of keys) {
+      allKey = allKey.concat(inputData[key])
+        for (const item of inputData[key]) {
+
+          if (item.size.includes('cans')){
+            cans = cans.concat(item)
+          }
+          if (item.size.includes("1/2's")){
+            halves = halves.concat(item)
+          }
+          if (item.size.includes("1/3's")){
+            thirds = thirds.concat(item)
+          }
+        }
+    }
+
+    return {
+      all: allKey,
+      can: cans,
+      half: halves,
+      third: thirds
+    };
+  }
+
+  createAvailableMenu(unorderedMenu, standardOptions): any {
+    console.log('data service :: createAvailableMenu')
+
+    unorderedMenu["All"] = standardOptions['all'];
+    unorderedMenu["Can's"] = standardOptions['can'];
+    unorderedMenu["1/2's"] = standardOptions['half']
+    unorderedMenu["1/3's"] = standardOptions['third'];
+
+    // Get this from Somewhere!
+    const menuOrder = ["All", "IPA's", "DIPA's", "TIPA's", "Stout's", "Can's", "1/2's", "1/3's"]
+
+    const orderedMenu = {};
+    menuOrder.forEach(function(key) {
+      if (Object.keys(unorderedMenu).includes(key)){
+        orderedMenu[key] = unorderedMenu[key];
+    }});
+
+    return orderedMenu
+  }
+
+
   // This will be replaced with api call later
-  setAvailableOptions(): any {
-    console.log('setAvailableOptions')
-    let unorderedMenu = {
+  getMenuFromServer(): any {
+    console.log('data service :: getMenuFromServer')
+
+    return {
       "IPA's": [        
         { 
           "name": "BLACK IS THE COLOUR",
@@ -90,55 +176,5 @@ export class DataService {
        }
       ]
     }; 
-    
-    // console.log(typeof(unorderedMenu))
-    // let obj = JSON.parse(unorderedMenu)
-    // obj.forEach(function(item){
-    //   console.log('ID: ' + item.id);
-    //   console.log('MSG: ' + item.msg);
-    //   console.log('TID: ' + item.tid);
-    //   console.log('FROMWHO: ' + item.fromWho);
-    // });
-
-    let allKey = [];
-    let cans = [];
-    let halves = [];
-    let thirds = [];
-
-    const keys = Object.keys(unorderedMenu)
-    for (const key of keys) {
-      allKey = allKey.concat(unorderedMenu[key])
-        for (const item of unorderedMenu[key]) {
-          console.log(item.size)
-          if (item.size.includes('cans')){
-            cans = cans.concat(item)
-          }
-          if (item.size.includes("1/2's")){
-            halves = halves.concat(item)
-          }
-          if (item.size.includes("1/3's")){
-            thirds = thirds.concat(item)
-          }
-        }
-    }
-
-    unorderedMenu["All"] = allKey;
-    unorderedMenu["Can's"] = cans;
-    unorderedMenu["1/2's"] = halves;
-    unorderedMenu["1/3's"] = thirds;
-
-    // Get this from Somewhere!
-    const menuOrder = ["All", "IPA's", "DIPA's", "TIPA's", "Stout's", "Can's", "1/2's", "1/3's"]
-
-    const orderedMenu = {};
-    menuOrder.forEach(function(key) {
-      if (Object.keys(unorderedMenu).includes(key)){
-        orderedMenu[key] = unorderedMenu[key];
-    }});
-
-    return orderedMenu
-
-
-
   }
 }

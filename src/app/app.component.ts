@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +7,18 @@ import { Component } from '@angular/core';
 `
 <app-header></app-header>
 <app-side-menu></app-side-menu>
-<app-footer></app-footer>
 
 `,
   styleUrls: []
 })
+
 export class AppComponent{
   title = 'project-swallie';
 
-  constructor() {}
+  constructor(private _data: DataService) {
+    this._data.setUpDataService()
+  }
+
 
 
 }
