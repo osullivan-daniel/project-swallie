@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
-
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-to-order-dialog',
@@ -19,112 +19,79 @@ import { DataService } from '../../services/data.service';
 
 export class AddToOrderDialogComponent implements OnInit{
 
+  sizeOptions: any = []
   order: any = {};
   availableToOrder: any;
   disableOrderButton: boolean;
   disabledDropdownOptions: any;
 
+  testingHere;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private _data: DataService) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, 
+              private _data: DataService,
+              private dialogRef: MatDialogRef<any>) { 
 
     this._data.disabledDropdownOptions.subscribe(value => {
       this.disabledDropdownOptions=value;
     });
-  }
 
-  // public showOptions(test, key, num) {
-  //   console.log(test.checked);
-  //   console.log(key);
-  //   console.log(num);
-  // }
+  }
 
   public enableDisableOrderButton()
   {
+    console.log('enableDisableOrderButton()::', this.data.order)
 
-    //console.log('this.order::', this.order[size])
-
-
-    let tmpBoolean = true
-    for(let key in this.order)
+    let tmpBooleanList = []
+    for(let key in this.data.order)
     {
-      if (this.order[key]['addToOrder'] === true && this.order[key]['amount'] != 0)
+      //valid entry
+      if (this.data.order[key]['addToOrder'] === true && this.data.order[key]['amount'] > 0)
       {
-        tmpBoolean = false
+        tmpBooleanList.push(false)
+      }
+      else if (this.data.order[key]['addToOrder'] === false)
+      {
+        tmpBooleanList.push(false)
+      }
+      else
+      {
+        tmpBooleanList.push(true)
       }
     }
 
-    this.disableOrderButton = tmpBoolean;
-
-    // if (Object.keys(this.order).length != 0) 
-    // {
-    //   // this.order.forEach(element => 
-    //   // {
-    //   //   console.log('element::', element)
-    //   // });
-
-    //   let tmpBoolean = true
-    //   for(let key in this.order)
-    //   {
-    //     if (this.order[key]['addToOrder'] = true)
-    //     {
-    //       tmpBoolean = false
-    //     }
-    //   }
-
-    //   this.disableOrderButton = tmpBoolean
-
-    //   // this.order.forEach(function(size) 
-    //   // {
-    //   //   console.log('function::', size)
-    //   // });
-
-    //   // console.log('enableDisableOrderButton')
-    //   // if (this.order == {})
-    //   // {
-    //   //   console.log('enableDisableOrderButton:', this.order)
-    //   // }
-    // }
+    console.log("tmpBooleanList::", tmpBooleanList)
+    this.disableOrderButton = true ? tmpBooleanList.includes(true) : false
   }
 
-  public createOrder(size: any) 
-  {
-    for(let key in size)
-    {
-      console.log(size[key])
-      this.order[size[key]]={
-        'addToOrder': false,
-        'amount': 0
-      }
-    }
-  }
-
-
-  public selectDialogOptions(event: any, size: string, amount: number) 
+  public selectDialogOptions(event: any, size: string) 
   {
     this.disabledDropdownOptions[this.data.name][size] = !this.disabledDropdownOptions[this.data.name][size]
-
-    console.log(size)
-    console.log(event.checked)
-
-    this.order[size]['addToOrder'] = event.checked
+    this.data.order[size]['addToOrder'] = event.checked
     this.enableDisableOrderButton()
   }
 
 
-  public selectDropdownValue(key: string, size: number)
+  public selectDropdownValue(size: string, amount: number)
   {
-    this.order[key]['amount'] = size
-    console.log('this.order::', this.order)
+    this.data.order[size]['amount'] = amount
     this.enableDisableOrderButton()
+  }
+
+  // onClose(): void {
+  //   this.dialogRef.close(this.data);
+  // }
+
+  public onSave() {
+    console.log('onsave::', this.data)
+    this.dialogRef.close(this.data)
   }
 
   ngOnInit(){
     console.log('dialog oninit');
-    console.log(this.data);
-
+    console.log('this.data::', this.data);
+    this.sizeOptions = Object.keys(this.data.order)
     this._data.resetDisabledDropdowns();
     this.enableDisableOrderButton();
-    this.createOrder(this.data.size);
     this.availableToOrder = [1, 2, 3] 
   }
 }

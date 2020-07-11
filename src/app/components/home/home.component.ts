@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
               <div class=flexDiv>
                 <div *ngFor="let key of selectedSubMenu">
 
-                <img id=clickableCanImage src={{key.img}} (click)="logMe(key.name)" (click)="displayAddToCart(key)">
+                <img id=clickableCanImage src={{key.img}} (click)="displayAddToCart(key)">
                 <p class=productName>{{key.name}}</p>
                 <p class=productName>{{key.APV}}%</p>
                 </div>
@@ -53,6 +53,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class HomeComponent implements OnInit {
   displayMenuIcon:string;
   backgroundColour:string;
+  order: any = {};
 
   selectedSubMenu;
   availableSelectedMenu; 
@@ -72,45 +73,54 @@ export class HomeComponent implements OnInit {
   public changeMenu(): void {
     this._menuBody.changeMenuVisability()
   }
-  
-  public logMe(info): void {
-    // console.log(info)
-  }
+
+
+  public displayAddToCart(selectedItem): void 
+  {
     
-  public displayAddToCart(selectedItem): void {
-    
-    let dialogRef = this.dialog.open(AddToOrderDialogComponent, { 
-      disableClose:true,
-      data: selectedItem
+    this.getItemOrderDetails(selectedItem)
+
+    let dialogRef = this.dialog.open(AddToOrderDialogComponent, 
+    { 
+      disableClose: true,
+      data: { 'name':selectedItem.name, 
+              'order': this.getItemOrderDetails(selectedItem) }
     });
 
-      dialogRef.afterClosed().subscribe(res => {
-        // if back/cancel is NOT clicked
-        if(res != 'false') 
-        {
-          console.log("home.component:", res)
-          //TODO:: Add to order
-        }
-
-      });
-    }
-
-    public setDisableDropDowns(allKey): any {
-    
-      const enabledDisabled = {}
-      allKey.forEach(function(item) 
+    dialogRef.afterClosed().subscribe(res => 
+    {
+      if (!(res === 'false'))
       {
-        enabledDisabled[item.name] = {}
-        
-        item.size.forEach(function(size) 
-        {
-          enabledDisabled[item.name][size] = false
-        });
-      });
-  
-      console.log("first run:", enabledDisabled)
-      return enabledDisabled
+        this.order[res.name] = res.order
+        console.log("res.name:", res.name)
+        console.log("res.order:", res.order)
+        console.log('this.order::', this.order)
+      }
+    });
+  }
+
+      
+  public getItemOrderDetails(selectedItem): any 
+  {
+    if (!(selectedItem.name in this.order))
+    {
+      this.createOrder(selectedItem.name, selectedItem.size);
     }
+
+    return this.order[selectedItem.name];
+  }
+    
+  public createOrder(name: string, size: Array<any>) 
+  {
+    this.order[name] = {}
+    for(let key in size)
+    {
+      this.order[name][size[key]]={
+        'addToOrder': false,
+        'amount': 0
+      }
+    }
+  }
 
   ngOnInit(): void {
     // To set visability for the first time.

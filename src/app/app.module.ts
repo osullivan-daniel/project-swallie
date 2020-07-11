@@ -34,7 +34,7 @@ import { DataService } from './services/data.service';
     HeaderComponent,
     HomeComponent,
     SideMenuComponent,
-    AddToOrderDialogComponent
+    AddToOrderDialogComponent,
   ],
   imports: [
     BrowserModule,
