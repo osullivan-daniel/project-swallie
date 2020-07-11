@@ -13,7 +13,7 @@ export class DataService {
   availableCatagories = new BehaviorSubject(null);
   selectedKey = new BehaviorSubject(null);
   selectedSubMenu = new BehaviorSubject(null);
-  enabledDisabledDialogOptions = new BehaviorSubject(null);
+  disabledDropdownOptions = new BehaviorSubject(null);
 
 
   setUpDataService() {
@@ -23,7 +23,7 @@ export class DataService {
     this.standardOptions.next(this.getStandardOptions(this.availableMenuFromServer));
     this.availableMenu.next(this.createAvailableMenu(this.availableMenuFromServer, this.standardOptions.value));
     this.availableCatagories.next(Object.keys(this.availableMenu.value));
-    this.enabledDisabledDialogOptions.next(this.setEnabledDisabledOptions(this.standardOptions.value['all']));
+    this.disabledDropdownOptions.next(this.setDisabledDropdowns(this.standardOptions.value['all']));
   }
 
 
@@ -35,23 +35,21 @@ export class DataService {
   }
 
 
-  setEnabledDisabledOptions(inputData: any){
-    console.log('data service :: setEnabledDisabledOptions');
+  setDisabledDropdowns(inputData: any){
+    console.log('data service :: setDisabledDropdowns');
 
     let tmp = {};
     inputData.forEach(function(key) {
       tmp[key.name]={};
       key.size.forEach(function(size) {
-        tmp[key.name][size] = {}
-        tmp[key.name][size]['dropdown'] = true;
-        tmp[key.name][size]['checkbox'] = false;
+        tmp[key.name][size] = true;
       });
     });
     return tmp;
   }
 
-  resetEnabledDisabledOptions(){
-    this.enabledDisabledDialogOptions.next(this.setEnabledDisabledOptions(this.standardOptions.value['all']))
+  resetDisabledDropdowns(){
+    this.disabledDropdownOptions.next(this.setDisabledDropdowns(this.standardOptions.value['all']))
   }
 
 

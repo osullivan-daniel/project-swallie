@@ -2,14 +2,18 @@
 
     <mat-radio-group formControlName='options' *ngFor="let key of data.size">  
         <div>
-            <mat-checkbox [(ngModel)]="key.enabled" name="{{key}}" (click)="selectDialogOptions(key, num, 'check')">{{ key }}</mat-checkbox>
-            <mat-select id='quantitySelect' [disabled]="enabledDisabledOptions[data.name][key]['dropdown']">
-                <mat-option *ngFor="let num of availableToOrder" name="{{key}}" [value]="num" (click)="selectDialogOptions(key, num, 'drop')">{{ num }}</mat-option>
+            <mat-checkbox [(ngModel)]="key.enabled" name="{{key}}" (change)="selectDialogOptions($event, key, num)">{{ key }}</mat-checkbox>
+            <mat-select id='quantitySelect' [disabled]="disabledDropdownOptions[data.name][key]">
+                <mat-option *ngFor="let num of availableToOrder" 
+                            id="{{key}}.test" 
+                            [value]="num" 
+                            (click)="selectDropdownValue(key, num)">
+                            {{ num }}
+                        </mat-option>
             </mat-select>
         </div>
  
     </mat-radio-group> 
 
-    <button mat-raised-button mat-dialog-close [disabled]="disableOrderButton" (click)="placeOrder()" [mat-dialog-close]="order">Add to order</button>
+    <button mat-raised-button mat-dialog-close [disabled]="disableOrderButton" [mat-dialog-close]="order">Add to order</button>
     <button mat-raised-button mat-dialog-close mat-dialog-close=false>Back</button>
-
