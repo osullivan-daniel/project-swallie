@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ComponentFactoryResolver } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDialogRef } from '@angular/material/dialog';
 import { OrderService } from 'src/app/services/order.service';
+import { MatTableDataSource } from '@angular/material/table'
 
 @Component({
   selector: 'app-update-order-dialog',
@@ -12,7 +12,38 @@ import { OrderService } from 'src/app/services/order.service';
     `#quantitySelect {
       width:50px !important;
       float:right !important;
-    } `
+    } `,
+
+    `#deleteIcon {
+      cursor: pointer; 
+    }`,
+    `
+    #submit {
+        float: left !important;
+    }`,
+    `
+    #back {
+        float: right !important;
+    }`,
+  
+  ` .mat-cell {
+      padding: 8px 8px 0;
+    }`,
+
+    `.mat-column-size {
+      flex: 0 0 50% !important;
+      width: 50% !important;
+    }`,
+  
+    `.mat-column-qty {
+      flex: 0 0 25% !important;
+      width: 25% !important;
+    }`,
+  
+    `.mat-column-remove {
+      flex: 0 0 25% !important;
+      width: 25% !important;
+    }`,
 
   ]
 })
@@ -22,68 +53,135 @@ export class updateOrderDialogComponent implements OnInit{
   sizeOptions: any = []
   order: any;
   localOrder: any;
-  availableToOrder: any;
-  disableOrderButton: boolean;
+  
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private _orderService: OrderService) 
+  orderObjectForAll: Array<any>;
+  objectForOptionsSelections: Array<any> = [];
+  orderOptionsForDisplay: any;
+
+  availableToOrder = [1, 2, 3];
+  displayedColumns = ['size', 'qty'];
+  disableOrderButton: boolean = true;
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private _orderService: OrderService) {
+    this._orderService.order.subscribe(value => {this.order=value});
+    this._orderService.orderObjectForAll.subscribe(value => {this.orderObjectForAll=value});
+  }
+
+
+  public getObjectForOptionsSelections()
   {
-    this._orderService.order.subscribe(value => {this.order=value});    
+    for (let each in this.orderObjectForAll) 
+    {
+      if (this.orderObjectForAll[each]['name'] === this.data) 
+      {
+        let id = this.orderObjectForAll[each]['id']-1
+
+        this.objectForOptionsSelections.push(JSON.parse(JSON.stringify(this.orderObjectForAll[each])))
+      }
+    }
+    this.orderOptionsForDisplay = new MatTableDataSource(this.objectForOptionsSelections);
+  }
+
+  onSave()
+  {
+    // re-add
+    for (let each in this.objectForOptionsSelections)
+    {
+      this.orderObjectForAll[this.objectForOptionsSelections[each]['id']-1] = this.objectForOptionsSelections[each]
+    }
+  }
+
+  onBack()
+  {
+    // console.log('onBack:: orderObjectForAll', this.orderObjectForAll)
+    // Do nothing - we will not update objectForOptionsSelections
   }
 
   public enableDisableOrderButton()
   {
-    let orderStatus = []
-    for(let key in this.localOrder)
+    this.disableOrderButton = false
+
+    for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
     {
-      if (this.localOrder[key]['updateOrder'] === true && this.localOrder[key]['qty'] > 0)
+      if (value['addToOrder'] === true && value['qty'] === 0)
       {
-        orderStatus.push('Valid')
-      }
-      else if (this.localOrder[key]['updateOrder'] === false)
-      {
-        orderStatus.push('Empty')
-      }
-      else
-      {
-        orderStatus.push('Invalid')
+        this.disableOrderButton = true
       }
     }
 
-    let uniqueOrderValues = new Set(orderStatus)
+
+    // let orderStatus = []
+
+    // for(let key in this.objectForOptionsSelections)
+    // {
+    //   let localVar = this.objectForOptionsSelections[key]
+    
+    //   if (localVar['addToOrder'] === true && localVar['qty'] > 0)
+    //   {
+    //     orderStatus.push('Valid')
+    //   }
+    //   else if (localVar['addToOrder'] === false)
+    //   {
+    //     orderStatus.push('Empty')
+    //   }
+    //   else
+    //   {
+    //     orderStatus.push('Invalid')
+    //   }
+    // }
+    // let uniqueOrderValues = new Set(orderStatus)
  
-    if (Array.from(uniqueOrderValues).includes('Invalid')) {this.disableOrderButton = true}
-    else if (Array.from(uniqueOrderValues).length == 1 && Array.from(uniqueOrderValues).includes('Empty')) {this.disableOrderButton = true}
-    else {this.disableOrderButton = false}
+    // if (Array.from(uniqueOrderValues).includes('Invalid')) {this.disableOrderButton = true}
+    // else if (Array.from(uniqueOrderValues).length == 1 && Array.from(uniqueOrderValues).includes('Empty')) {this.disableOrderButton = true}
+    // else {this.disableOrderButton = false}
   }
 
   public selectDialogOptions(event: any, size: string) 
   {
-    this.localOrder[size]['updateOrder'] = event.checked
+    console.log('element::', size)
+    for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
+    {
+      if (value['size'] === size)
+      {
+        value['addToOrder'] = event.checked
+      }
+    }
     this.enableDisableOrderButton()
-
-    console.log('localOrder::', this.localOrder)
-    console.log('order::', this.order)
   }
 
   public selectDropdownValue(size: string, qty: number)
   {
-    this.localOrder[size]['qty'] = qty
+    for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
+    {
+      if (value['size'] === size)
+      {
+        value['qty'] = qty
+      }
+    }
     this.enableDisableOrderButton()
   }
 
-  public onSave() {
-    console.log('calling onSave')
-    this.order[this.data] = this.localOrder
+  public removeItem(id: number)
+  {
+    for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
+    {
+      if (value['id'] === id)
+      {
+        value.qty = 0;
+        value.addToOrder = false
+      }
+    }
+    // this.enableDisableOrderButton()
   }
 
-  ngOnInit(){
-    console.log('what the fluff::', this.order[this.data])
-    this.localOrder  = JSON.parse(JSON.stringify(this.order[this.data]));
 
-    this.sizeOptions = Object.keys(this.localOrder)
-    this.enableDisableOrderButton();
-    // TODO:: Figure our what to do with this.... -> load from file with styling???
-    this.availableToOrder = [1, 2, 3] 
-    
+
+  
+
+  ngOnInit() {
+    this.getObjectForOptionsSelections()
+    //this.enableDisableOrderButton()
   }
 }

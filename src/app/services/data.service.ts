@@ -24,6 +24,7 @@ export class DataService {
     this.availableMenu.next(this.createAvailableMenu(this.availableMenuFromServer, this.standardOptions.value));
     this.availableCatagories.next(Object.keys(this.availableMenu.value));
     this._orderService.createEmptyOrder(this.availableMenu.value['All']);
+    this._orderService.createOrderObjectForAll(this.availableMenu.value['All']) 
   }
 
 
@@ -65,7 +66,7 @@ export class DataService {
   }
 
   createAvailableMenu(unorderedMenu, standardOptions): any {
-    console.log('data service :: createAvailableMenu')
+    // console.log('data service :: createAvailableMenu')
 
     unorderedMenu["All"] = standardOptions['all'];
     unorderedMenu["Can's"] = standardOptions['can'];
