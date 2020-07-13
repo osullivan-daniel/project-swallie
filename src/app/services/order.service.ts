@@ -6,30 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class OrderService 
 {
-  //order: Subject<any> = new Subject<any>();
-  //order = new BehaviorSubject(null);
   orderServiceObjectForAll = new BehaviorSubject([]);
-  //orderObjectForDisplay = new BehaviorSubject([]);
-
-  //orderObjectForDisplay = new BehaviorSubject([]);
-
-  // public createEmptyOrder(data:any) 
-  // {
-  //   let tmpOrder = {}
-  //   data.forEach(function(item) 
-  //   {
-  //     tmpOrder[item.name] = {}
-  //     item.size.forEach(function(key) 
-  //     {
-  //       tmpOrder[item.name][key]={
-  //         'enabled': false,
-  //         'qty': 0
-  //       }
-  //     });
-  //   });
-  //   this.order.next(tmpOrder)
-  // }
-
 
   public createOrderObjectForAll (data:any) :void
   {
@@ -44,21 +21,5 @@ export class OrderService
       }
     }
     this.orderServiceObjectForAll.next(tmpOrder)
-    // console.log('createOrderObjectForAll::', this.orderObjectForAll.value)
-
   }
-
-
-  // public createorderObjectForDisplay(name:string, size:string, qty:number) 
-  // {
-  //   let currentOrder = this.orderObjectForDisplay.value;
-
-  //   // console.log(this.orderObjectForDisplay.value)
-
-
-  //   let i = currentOrder.length
-  //   currentOrder.push({'id':i++, 'name': name, 'size': size, 'qty': qty})
-  //   // console.log('currentOrder::',currentOrder)
-  //   this.orderObjectForDisplay.next(currentOrder);
-  // }
 }

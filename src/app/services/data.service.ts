@@ -16,14 +16,12 @@ export class DataService {
   selectedKey = new BehaviorSubject(null);
   selectedSubMenu = new BehaviorSubject(null);
 
-  // setUpDataService() {
   constructor(private _orderService: OrderService)
   {
     this.availableMenuFromServer = this.getMenuFromServer();
     this.standardOptions.next(this.getStandardOptions(this.availableMenuFromServer));
     this.availableMenu.next(this.createAvailableMenu(this.availableMenuFromServer, this.standardOptions.value));
     this.availableCatagories.next(Object.keys(this.availableMenu.value));
-    //this._orderService.createEmptyOrder(this.availableMenu.value['All']);
     this._orderService.createOrderObjectForAll(this.availableMenu.value['All']) 
   }
 
@@ -65,15 +63,13 @@ export class DataService {
     };
   }
 
-  createAvailableMenu(unorderedMenu, standardOptions): any {
-    // console.log('data service :: createAvailableMenu')
-
+  createAvailableMenu(unorderedMenu, standardOptions): any 
+  {
     unorderedMenu["All"] = standardOptions['all'];
     unorderedMenu["Can's"] = standardOptions['can'];
     unorderedMenu["1/2's"] = standardOptions['half']
     unorderedMenu["1/3's"] = standardOptions['third'];
 
-    // Get this from Somewhere!
     const menuOrder = ["All", "IPA's", "DIPA's", "TIPA's", "Stout's", "Can's", "1/2's", "1/3's"]
 
     const orderedMenu = {};
