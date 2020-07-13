@@ -94,3 +94,5 @@ export class OrderDialogComponent implements OnInit {
     this.orderObjectForDisplay = new MatTableDataSource(this.orderObject);
   }
 }
+
+

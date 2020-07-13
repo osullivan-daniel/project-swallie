@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuBodyService } from '../../services/menu-body.service';
-import { DataService } from '../../services/data.service';
+import { MenuBodyService } from '../../../services/menu-body.service';
+import { DataService } from '../../../services/data.service';
 import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -50,7 +50,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 
-export class HomeComponent implements OnInit {
+export class MainBodyComponent implements OnInit {
+  
   displayMenuIcon:string;
   backgroundColour:string;
   order: any = {};

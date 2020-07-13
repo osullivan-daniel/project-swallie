@@ -18,17 +18,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
 
 
-// home components
+// order-dashboard components
 import { AppComponent } from './app.component';
 
-import { HomeComponent } from './components/main-body/main-body.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
-import { updateOrderDialogComponent } from './components/update-order-dialog/update-order-dialog.component';
+import { MainBodyComponent } from './components/order-dashboard/main-body/main-body.component';
+import { SideMenuComponent } from './components/order-dashboard/side-menu/side-menu.component';
+import { OrderDialogComponent } from './components/order-dashboard/order-dialog/order-dialog.component';
+import { updateOrderDialogComponent } from './components/order-dashboard/update-order-dialog/update-order-dialog.component';
 
-// admin
-import { AdminComponent } from './components/admin-dashboard/admin-main/admin-main.component';
-
+// admin-dashboard components
+import { AdminMainComponent } from './components/admin-dashboard/admin-main/admin-main.component';
+import { AdminSidemenuComponent } from './components/admin-dashboard/admin-sidemenu/admin-sidemenu.component';
+import { AdminLiveOrdersComponent } from './components/admin-dashboard/admin-live-orders/admin-live-orders.component';
 // shared
 import { HeaderComponent } from './components/shared/header/header.component';
 
@@ -36,6 +37,9 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { DataService } from './services/data.service';
 import { GuiStyleService } from './services/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
+import { AdminMenuComponent } from './components/admin-dashboard/admin-menu/admin-menu.component';
+import { AdminProductsComponent } from './components/admin-dashboard/admin-products/admin-products.component';
+
 
 
 
@@ -43,11 +47,15 @@ import { MenuBodyService } from './services/menu-body.service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
+    MainBodyComponent,
     SideMenuComponent,
     updateOrderDialogComponent,
     OrderDialogComponent,
-    AdminComponent
+    AdminMainComponent,
+    AdminSidemenuComponent,
+    AdminLiveOrdersComponent,
+    AdminMenuComponent,
+    AdminProductsComponent
   ],
   imports: [
     BrowserModule,

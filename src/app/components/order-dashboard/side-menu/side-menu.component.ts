@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';  // Breakpoints?
-import { GuiStyleService } from '../../services/gui-style.service';
-import { MenuBodyService } from '../../services/menu-body.service';
-import { DataService } from '../../services/data.service';
+import { GuiStyleService } from '../../../services/gui-style.service';
+import { MenuBodyService } from '../../../services/menu-body.service';
+import { DataService } from '../../../services/data.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 

@@ -1,0 +1,23 @@
+<app-header></app-header>
+<mat-sidenav-container class="navContainer" fixedInViewport="true">
+    <mat-sidenav [ngStyle]="{'background-color': this.backgroundColour}" 
+                 [(opened)]="sideMenuVisable" disableClose
+                 mode="side">
+    <div id='closeMenu'>
+        <img id="menuIcon" src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
+    </div>
+
+    <app-admin-sidemenu></app-admin-sidemenu>
+</mat-sidenav>
+
+    <div class="container" id="example-container">
+        <img id="menuIcon" src="../../assets/icons/menu-black-36dp.svg" 
+        (click)="openMenu()"  
+        [ngStyle]="{'visibility': this.displayMenuIcon}">
+    </div>
+
+
+    <app-admin-live-orders *ngIf="displayBody==='live'"></app-admin-live-orders>
+    <app-admin-menu *ngIf="displayBody==='menu'"></app-admin-menu>
+    <app-admin-products *ngIf="displayBody==='products'"></app-admin-products>
+</mat-sidenav-container>

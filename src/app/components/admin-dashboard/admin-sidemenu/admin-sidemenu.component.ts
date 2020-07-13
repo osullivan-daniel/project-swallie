@@ -2,49 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
 import { AdminService } from 'src/app/services/admin.service';
 
-
 @Component({
-  selector: 'app-admin',
-  templateUrl: 'admin-main.component.html',
+  selector: 'app-admin-sidemenu',
+  templateUrl: 'admin-sidemenu.component.html',
   styles: [
-    `#menuIcon {
-      cursor: pointer; 
-    }`,
-
-    `mat-sidenav-container {
-      position: fixed;
-      height: 90%;
-      min-height: 90%;
-      width: 100%;
-      min-width: 100%;
-   }`,
-   `.navContainer {
-    hasBackdrop: false;
-    background-color: #FFFFFF;
-  }`,
-  `#closeMenu {
-    display: flex !important;
-    margin-left: 75%  }`
+    `#matListItems { 
+      font-weight: bold; 
+      font-family: Andale Mono, monospace, sans-serif;
+      color: this.textColour 
+    }`
   ]
 })
-export class AdminMainComponent implements OnInit {
 
-  textColour: string;
+export class AdminSidemenuComponent implements OnInit {
+
   displayBody:string;
+  textColour: string;
   backgroundColour:string;
-
   sideMenuVisable:boolean = true;
-  displayMenuIcon:string = 'hidden'
 
   closeMenu() {
     this.sideMenuVisable = false
-    this.displayMenuIcon = 'visible'
-    ;
   }
 
-  openMenu() {
-    this.sideMenuVisable = true
-    this.displayMenuIcon = 'hidden';
+  changeView(view) {
+    //this.displayBody = view
+    this._adminService.setVisableBody(view)
+    console.log(this.displayBody)
   }
 
   constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService) {}
@@ -55,4 +39,18 @@ export class AdminMainComponent implements OnInit {
     this.backgroundColour = this._guiStyle.backgroundColour;
     this.textColour = this._guiStyle.textColour;	
   }
+
 }
+
+
+
+// `#menuIcon { 
+//   display: block;
+//   margin-left: auto; 
+//   margin-right: auto;
+// }`,
+// `#test { 
+//   display: block;
+//   margin-left: auto; 
+//   margin-right: auto;
+// }`
