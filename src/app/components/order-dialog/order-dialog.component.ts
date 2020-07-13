@@ -62,17 +62,7 @@ import { MatTableDataSource } from '@angular/material/table'
     padding-top: 10px;
     padding-bottom: 10px !important;
   }
-
   `
-
-// `  .mat-cell {
-//     text-align: center;
-//     justify-content:center;
-//   }`,
-
-// `  .icon {
-//     line-height: unset;
-//  }`
 
   ]
 })
@@ -83,8 +73,6 @@ export class OrderDialogComponent implements OnInit {
   orderObjectForDisplay: any; // MatTableDataSource for display
   
   displayedColumns: Array<string> = ['name', 'size', 'qty', 'remove'];
-  //dataSource = ELEMENT_DATA;
-  //ELEMENT_DATA: orderObjectForDisplay[] = this.createorderObjectForDisplay(this.order) 
 
   constructor(private _orderService: OrderService) 
   {
@@ -93,6 +81,7 @@ export class OrderDialogComponent implements OnInit {
 
   public createorderObjectForDisplay(data:any): void
   {
+    this.orderObject = []
     for (const [key, value] of Object.entries(data)) 
     {
       if (value['addToOrder'] === true && value['qty'] > 0)
@@ -102,31 +91,13 @@ export class OrderDialogComponent implements OnInit {
     }
   }
 
-  public removeItem(id): void
+  public removeItem(item): void
   {
-    console.log('id::', id)
+    item['qty'] = 0
+    item['addToOrder'] = false
 
-    let orderObjectForAllIndex = this.orderObject[id-1]['id']
-    console.log('orderObjectForAllIndex::', orderObjectForAllIndex)
-
-    this.orderObject = this.orderObject.splice(this.orderObject[id-1],this.orderObject[id-1])
-    //delete this.orderObject[id-1]
-
-    console.log(this.orderObject)
-
+    this.createorderObjectForDisplay(this.orderObjectForAll)
     this.orderObjectForDisplay = new MatTableDataSource(this.orderObject);
-
-    console.log(this.orderObjectForDisplay)
-
-    // for (const [key, value] of Object.entries(this.orderObjectForDisplay.value)) 
-    // {
-    //   console.log('value::', value)
-    // }
-
-    // delete this.orderObject[id-1]
-    // console.log(this.orderObjectForDisplay[id-1])
-    // delete this.orderObjectForDisplay[id-1]
-    // console.log(this.orderObjectForDisplay)
   }
 
   ngOnInit(): void 
