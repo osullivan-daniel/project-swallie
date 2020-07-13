@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-main-body',
   template: `
           <div class="container" id="example-container">
               <img id="menuIcon" src="../../assets/icons/menu-black-36dp.svg" 

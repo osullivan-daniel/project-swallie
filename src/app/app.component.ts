@@ -4,9 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template:
 `
-<app-header></app-header>
-<app-side-menu></app-side-menu>
-
+<router-outlet></router-outlet>
 `,
   styleUrls: []
 })
@@ -14,3 +12,4 @@ import { Component } from '@angular/core';
 export class AppComponent{
   title = 'project-swallie';
 }
+// <app-side-menu></app-side-menu>

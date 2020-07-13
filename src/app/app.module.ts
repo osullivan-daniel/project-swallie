@@ -18,18 +18,26 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
 
 
-// components
+// home components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
+
+import { HomeComponent } from './components/main-body/main-body.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 import { updateOrderDialogComponent } from './components/update-order-dialog/update-order-dialog.component';
 
+// admin
+import { AdminComponent } from './components/admin-dashboard/admin-main/admin-main.component';
+
+// shared
+import { HeaderComponent } from './components/shared/header/header.component';
+
 // services
+import { DataService } from './services/data.service';
 import { GuiStyleService } from './services/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
-import { DataService } from './services/data.service';
-import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
+
+
 
 @NgModule({
   declarations: [
@@ -39,6 +47,7 @@ import { OrderDialogComponent } from './components/order-dialog/order-dialog.com
     SideMenuComponent,
     updateOrderDialogComponent,
     OrderDialogComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
