@@ -5,19 +5,7 @@ import { MatTableDataSource } from '@angular/material/table'
 @Component({
   selector: 'app-order-dialog',
   templateUrl: 'order-dialog.component.html',
-  // `
-  //   <p>
-  //     order-dialog works!
-  //   </p>
-  // `,
   styles: [
-
-  // `
-  // // .mat-dialog-content {
-  // //     width: 300px !important;
-  // // }`,
-  
-
   `#deleteIcon {
     cursor: pointer; 
   }`,
@@ -31,7 +19,7 @@ import { MatTableDataSource } from '@angular/material/table'
   }`,
 
 ` .mat-cell {
-    padding: 8px 8px 8px 0;
+    padding: 0 8px 8px 0;
   }`,
 
 `.mat-column-username {
