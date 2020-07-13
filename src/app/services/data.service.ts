@@ -23,7 +23,7 @@ export class DataService {
     this.standardOptions.next(this.getStandardOptions(this.availableMenuFromServer));
     this.availableMenu.next(this.createAvailableMenu(this.availableMenuFromServer, this.standardOptions.value));
     this.availableCatagories.next(Object.keys(this.availableMenu.value));
-    this._orderService.createEmptyOrder(this.availableMenu.value['All']);
+    //this._orderService.createEmptyOrder(this.availableMenu.value['All']);
     this._orderService.createOrderObjectForAll(this.availableMenu.value['All']) 
   }
 

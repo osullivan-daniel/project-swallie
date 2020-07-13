@@ -78,52 +78,60 @@ import { MatTableDataSource } from '@angular/material/table'
 })
 export class OrderDialogComponent implements OnInit {
 
-  order: any;
-  orderForDisplay: any;
-  displayedColumns = ['name', 'size', 'qty', 'remove'];
+  orderObject: Array<any> = [] // local copy of what is in the order
+  orderObjectForAll: any; // How we interact with oderservice
+  orderObjectForDisplay: any; // MatTableDataSource for display
+  
+  displayedColumns: Array<string> = ['name', 'size', 'qty', 'remove'];
   //dataSource = ELEMENT_DATA;
-  //ELEMENT_DATA: orderForDisplay[] = this.createOrderForDIsplay(this.order) 
+  //ELEMENT_DATA: orderObjectForDisplay[] = this.createorderObjectForDisplay(this.order) 
 
   constructor(private _orderService: OrderService) 
   {
-    this._orderService.order.subscribe(value => {this.order=value}); 
+    this._orderService.orderServiceObjectForAll.subscribe(value => {this.orderObjectForAll = value;}); 
   }
 
-  public createOrderForDIsplay(data:any) 
+  public createorderObjectForDisplay(data:any): void
   {
-    let i = 0;
-    let tmpOrder = [];
     for (const [key, value] of Object.entries(data)) 
     {
-      for (const [innerKey, innerValue] of Object.entries(value))
+      if (value['addToOrder'] === true && value['qty'] > 0)
       {
-        if (innerValue['updateOrder'] === true)
-        {
-          i++;
-          tmpOrder.push({'id':i, 'name': key, 'size': innerKey, 'qty': innerValue['qty']})
-        }
+        this.orderObject.push(value)
       }
     }
-    return tmpOrder;
   }
 
   public removeItem(id): void
   {
-    //this.orderForDisplay.deletePost(id);
+    console.log('id::', id)
 
-    delete this.orderForDisplay[id-1]
-    // console.log(this.orderForDisplay)
+    let orderObjectForAllIndex = this.orderObject[id-1]['id']
+    console.log('orderObjectForAllIndex::', orderObjectForAllIndex)
+
+    this.orderObject = this.orderObject.splice(this.orderObject[id-1],this.orderObject[id-1])
+    //delete this.orderObject[id-1]
+
+    console.log(this.orderObject)
+
+    this.orderObjectForDisplay = new MatTableDataSource(this.orderObject);
+
+    console.log(this.orderObjectForDisplay)
+
+    // for (const [key, value] of Object.entries(this.orderObjectForDisplay.value)) 
+    // {
+    //   console.log('value::', value)
+    // }
+
+    // delete this.orderObject[id-1]
+    // console.log(this.orderObjectForDisplay[id-1])
+    // delete this.orderObjectForDisplay[id-1]
+    // console.log(this.orderObjectForDisplay)
   }
 
   ngOnInit(): void 
   {
-    this.orderForDisplay = new MatTableDataSource(this.createOrderForDIsplay(this.order));
-    // console.log(this.orderForDisplay)
+    this.createorderObjectForDisplay(this.orderObjectForAll)
+    this.orderObjectForDisplay = new MatTableDataSource(this.orderObject);
   }
 }
-
-
-
-
-
-// <table mat-table [datasource]="orderForDisplay">

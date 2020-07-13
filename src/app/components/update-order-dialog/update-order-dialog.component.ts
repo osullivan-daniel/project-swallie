@@ -18,7 +18,7 @@ import { MatTableDataSource } from '@angular/material/table'
       cursor: pointer; 
     }`,
     `
-    #submit {
+    #update {
         float: left !important;
     }`,
     `
@@ -39,20 +39,19 @@ import { MatTableDataSource } from '@angular/material/table'
       flex: 0 0 25% !important;
       width: 25% !important;
     }`,
-  
-    `.mat-column-remove {
-      flex: 0 0 25% !important;
-      width: 25% !important;
-    }`,
 
+    `.button-div {
+      padding-top: 10px;
+      padding-bottom: 10px !important;
+    }`
   ]
 })
 
 export class updateOrderDialogComponent implements OnInit{
 
-  sizeOptions: any = []
-  order: any;
-  localOrder: any;
+  //sizeOptions: any = []
+  //order: any;
+  //localOrder: any;
   
 
   orderObjectForAll: Array<any>;
@@ -65,8 +64,8 @@ export class updateOrderDialogComponent implements OnInit{
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private _orderService: OrderService) {
-    this._orderService.order.subscribe(value => {this.order=value});
-    this._orderService.orderObjectForAll.subscribe(value => {this.orderObjectForAll=value});
+    //this._orderService.order.subscribe(value => {this.order=value});
+    this._orderService.orderServiceObjectForAll.subscribe(value => {this.orderObjectForAll=value});
   }
 
 
@@ -95,7 +94,6 @@ export class updateOrderDialogComponent implements OnInit{
 
   onBack()
   {
-    // console.log('onBack:: orderObjectForAll', this.orderObjectForAll)
     // Do nothing - we will not update objectForOptionsSelections
   }
 
@@ -110,37 +108,10 @@ export class updateOrderDialogComponent implements OnInit{
         this.disableOrderButton = true
       }
     }
-
-
-    // let orderStatus = []
-
-    // for(let key in this.objectForOptionsSelections)
-    // {
-    //   let localVar = this.objectForOptionsSelections[key]
-    
-    //   if (localVar['addToOrder'] === true && localVar['qty'] > 0)
-    //   {
-    //     orderStatus.push('Valid')
-    //   }
-    //   else if (localVar['addToOrder'] === false)
-    //   {
-    //     orderStatus.push('Empty')
-    //   }
-    //   else
-    //   {
-    //     orderStatus.push('Invalid')
-    //   }
-    // }
-    // let uniqueOrderValues = new Set(orderStatus)
- 
-    // if (Array.from(uniqueOrderValues).includes('Invalid')) {this.disableOrderButton = true}
-    // else if (Array.from(uniqueOrderValues).length == 1 && Array.from(uniqueOrderValues).includes('Empty')) {this.disableOrderButton = true}
-    // else {this.disableOrderButton = false}
   }
 
   public selectDialogOptions(event: any, size: string) 
   {
-    console.log('element::', size)
     for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
     {
       if (value['size'] === size)
@@ -163,25 +134,7 @@ export class updateOrderDialogComponent implements OnInit{
     this.enableDisableOrderButton()
   }
 
-  public removeItem(id: number)
-  {
-    for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
-    {
-      if (value['id'] === id)
-      {
-        value.qty = 0;
-        value.addToOrder = false
-      }
-    }
-    // this.enableDisableOrderButton()
-  }
-
-
-
-  
-
   ngOnInit() {
     this.getObjectForOptionsSelections()
-    //this.enableDisableOrderButton()
   }
 }
