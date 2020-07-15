@@ -3,6 +3,11 @@
                     [ngStyle]="{'color': this.textColour}"
                     (click)="changeView('live')">
                     Live Orders</mat-list-item>
+    
+    <mat-list-item id="matListItems"                         
+                    [ngStyle]="{'color': this.textColour}"
+                    (click)="changeView('completed')">
+                    Completed Orders</mat-list-item>
 
     <mat-list-item id="matListItems"                         
                     [ngStyle]="{'color': this.textColour}"

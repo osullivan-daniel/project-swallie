@@ -12,19 +12,22 @@ import { AdminService } from 'src/app/services/admin.service';
     }`,
 
     `mat-sidenav-container {
-      position: fixed;
-      height: 90%;
-      min-height: 90%;
+      height: 100vh;
+      min-height: 100vh;
       width: 100%;
       min-width: 100%;
    }`,
+
    `.navContainer {
+    height: 100vh;
     hasBackdrop: false;
     background-color: #FFFFFF;
   }`,
+  
   `#closeMenu {
     display: flex !important;
-    margin-left: 75%  }`
+    margin-left: 75%  
+  }`,  
   ]
 })
 export class AdminMainComponent implements OnInit {
@@ -36,21 +39,25 @@ export class AdminMainComponent implements OnInit {
   sideMenuVisable:boolean = true;
   displayMenuIcon:string = 'hidden'
 
-  closeMenu() {
-    this.sideMenuVisable = false
-    this.displayMenuIcon = 'visible'
-    ;
+  closeMenu() 
+  {
+    this.sideMenuVisable = false;
+    this.displayMenuIcon = 'visible';
+    this._adminService.setDisplaySideMenu(false);
   }
 
   openMenu() {
-    this.sideMenuVisable = true
+    this.sideMenuVisable = true;
     this.displayMenuIcon = 'hidden';
+    this._adminService.setDisplaySideMenu(true);
   }
 
   constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService) {}
 
   ngOnInit(): void {
     this._adminService.displayBody.subscribe(value => {this.displayBody=value});    
+    this._adminService.displaySideMenu.subscribe(value => {this.sideMenuVisable=value});    
+    this._adminService.menuIconVisable.subscribe(value => {this.displayMenuIcon=value});    
 
     this.backgroundColour = this._guiStyle.backgroundColour;
     this.textColour = this._guiStyle.textColour;	

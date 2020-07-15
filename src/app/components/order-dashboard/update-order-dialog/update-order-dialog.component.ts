@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OrderService } from 'src/app/services/order.service';
 import { MatTableDataSource } from '@angular/material/table'
@@ -48,11 +48,6 @@ import { MatTableDataSource } from '@angular/material/table'
 })
 
 export class updateOrderDialogComponent implements OnInit{
-
-  //sizeOptions: any = []
-  //order: any;
-  //localOrder: any;
-  
 
   orderObjectForAll: Array<any>;
   objectForOptionsSelections: Array<any> = [];

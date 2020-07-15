@@ -5,8 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
 
 @Component({
-  selector: 'app-admin-live-orders',
-  templateUrl: 'admin-live-orders.component.html',
+  selector: 'app-admin-completed-orders',
+  templateUrl: 'admin-completed-orders.component.html',
   styles: [
     `#menuIcon {
       cursor: pointer; 
@@ -55,58 +55,29 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
     }`
   ]
 })
+export class AdminCompletedOrdersComponent implements OnInit {
 
-export class AdminLiveOrdersComponent implements OnInit 
-{
-  localQueue: Array<any> = []
-  localProgress: Array<any> = []
+  //localComplete: Array<any> = []
   localOrderDetails: Array<any> = []
-  localDisplayListInProgress: Array<any> = [];
-  localDisplayListInQueue: Array<any> = [];
+  localDisplayListComplete: Array<any> = [];
 
   displayedColumns = ['name', 'size', 'qty']
 
   constructor(private _adminService: AdminService, public dialog: MatDialog) 
   { 
-
-    this._adminService.ordersInQueue.subscribe(value => {
-      this.localQueue=value;
-    });
-
-    this._adminService.ordersInProgress.subscribe(value => {
-      this.localProgress=value;
-    });
-
     this._adminService.orderDetailsForAll.subscribe(value => {
       this.localOrderDetails=value;
     });
-  }
+    
+    this._adminService.ordersComplete.subscribe(value => {
 
-
-
-
-
-  onMoveToInProgress(index) {
-    this._adminService.removeFromInQueue(index)
-    this.updateDisplayLists(this.localProgress, this.localQueue)
-  }
-
-
-  updateDisplayLists(inProgress, inQueue) 
-  {
-    this.localDisplayListInQueue = []
-    this.localDisplayListInProgress = []
-
-    inProgress.forEach( item => {
-      this.localDisplayListInProgress.push(new MatTableDataSource(item))
-    });
-
-    inQueue.forEach( item => {
-      this.localDisplayListInQueue.push(new MatTableDataSource(item))
+      value.forEach( item => {
+        this.localDisplayListComplete.push(new MatTableDataSource(item))
+      });
     });
   }
 
-  public displayConfirmation(selectedOrder, index): void 
+  public displayConfirmation(selectedOrder): void 
   {
     let orderId = selectedOrder._data.value[0]['orderNum']
     this.dialog.open(AdminConfirmDialogComponent,
@@ -114,17 +85,8 @@ export class AdminLiveOrdersComponent implements OnInit
       disableClose: true,
       data: this.localOrderDetails[0][orderId]
     });
-
-    this.onCompleteOrderReview(index) 
   }
 
-  onCompleteOrderReview(index) {
-    this._adminService.removeFromInProgress(index)
-    this.updateDisplayLists(this.localProgress, this.localQueue)  
-  }
+  ngOnInit(): void {}
 
-
-  ngOnInit(): void {
-    this.updateDisplayLists(this.localProgress, this.localQueue)
-  }
 }

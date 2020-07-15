@@ -26,9 +26,8 @@ export class AdminSidemenuComponent implements OnInit {
   }
 
   changeView(view) {
-    //this.displayBody = view
     this._adminService.setVisableBody(view)
-    console.log(this.displayBody)
+    this._adminService.setDisplaySideMenu(false);
   }
 
   constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService) {}
@@ -41,16 +40,3 @@ export class AdminSidemenuComponent implements OnInit {
   }
 
 }
-
-
-
-// `#menuIcon { 
-//   display: block;
-//   margin-left: auto; 
-//   margin-right: auto;
-// }`,
-// `#test { 
-//   display: block;
-//   margin-left: auto; 
-//   margin-right: auto;
-// }`

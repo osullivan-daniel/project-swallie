@@ -16,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // order-dashboard components
 import { AppComponent } from './app.component';
@@ -39,6 +39,8 @@ import { GuiStyleService } from './services/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
 import { AdminMenuComponent } from './components/admin-dashboard/admin-menu/admin-menu.component';
 import { AdminProductsComponent } from './components/admin-dashboard/admin-products/admin-products.component';
+import { AdminConfirmDialogComponent } from './components/admin-dashboard/admin-confirm-dialog/admin-confirm-dialog.component';
+import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admin-completed-orders/admin-completed-orders.component';
 
 
 
@@ -55,7 +57,9 @@ import { AdminProductsComponent } from './components/admin-dashboard/admin-produ
     AdminSidemenuComponent,
     AdminLiveOrdersComponent,
     AdminMenuComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    AdminConfirmDialogComponent,
+    AdminCompletedOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +77,9 @@ import { AdminProductsComponent } from './components/admin-dashboard/admin-produ
     MatSelectModule,
     MatCheckboxModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule, 
+    ReactiveFormsModule 
   ],
   providers: [
     GuiStyleService,

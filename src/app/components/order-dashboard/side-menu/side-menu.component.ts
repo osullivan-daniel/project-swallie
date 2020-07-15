@@ -24,14 +24,7 @@ import { MatDialog } from '@angular/material/dialog';
     `img { 
       float:right; 
       cursor: pointer; 
-    }`,
-    `mat-sidenav-container {
-      position: fixed;
-      height: 90%;
-      min-height: 90%;
-      width: 100%;
-      min-width: 100%;
-   }`
+    }`
   ]
 })
 

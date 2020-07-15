@@ -1,20 +1,78 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Product }    from '../product';
 
 @Component({
   selector: 'app-admin-products',
-  template: `
-    <p>
-      admin-products works!------------------->>> products
-    </p>
-  `,
+  templateUrl: 'admin-products.component.html',
+  // `
+  //   <p>
+  //     admin-products works!------------------->>> products
+  //   </p>
+  // `,
   styles: [
+    `/* Style inputs with type="text", select elements and textareas */
+    input[type=text], select, textarea {
+      width: 100%; /* Full width */
+      padding: 12px; /* Some padding */ 
+      border: 1px solid #ccc; /* Gray border */
+      border-radius: 7px; /* Rounded borders */
+      box-sizing: border-box; /* Make sure that padding and width stays in place */
+      margin-top: 6px; /* Add a top margin */
+      margin-bottom: 16px; /* Bottom margin */
+    }
+    
+    /* Style the submit button with a specific background color etc */
+    input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+    
+    /* When moving the mouse over the submit button, add a darker green color */
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    
+    /* Add a background color and some padding around the form */
+    .div_test {
+      border-radius: 5px;
+      padding: 25px;
+    }`,
+
+    `.button-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 15px;
+  }`
+
   ]
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent implements OnInit 
+{
+  formCompleted:boolean = true;
+  newProductForm: any;
+  styleList = ["IPA", "DIPA", "TIPA", "Stout"]
 
-  constructor() { }
-
-  ngOnInit(): void {
+  
+  constructor(private formBuilder: FormBuilder) 
+  {
+    this.newProductForm = this.formBuilder.group(new Product(null,null,null,null,null,null));    
   }
 
+  
+  onSubmit(newProduct) 
+  {
+    
+    console.warn('Your order has been submitted', newProduct);
+    console.warn('Your order has been submitted', newProduct.imgUrl);
+
+  }
+
+
+  ngOnInit(): void {}
 }
