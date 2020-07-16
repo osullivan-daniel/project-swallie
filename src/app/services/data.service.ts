@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 
 import { OrderService } from './order.service';
+import { Product } from './product';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +12,14 @@ import { OrderService } from './order.service';
 export class DataService {
 
   availableMenuFromServer: Subject<any> = new Subject<any>();
+
+  availableCatagories = new BehaviorSubject(null);
+  selectedSubMenu = new BehaviorSubject(null);
   standardOptions = new BehaviorSubject(null);
   availableMenu = new BehaviorSubject(null);
-  availableCatagories = new BehaviorSubject(null);
+  productList = new BehaviorSubject(null);
   selectedKey = new BehaviorSubject(null);
-  selectedSubMenu = new BehaviorSubject(null);
+
 
   constructor(private _orderService: OrderService)
   {
@@ -23,12 +28,25 @@ export class DataService {
     this.availableMenu.next(this.createAvailableMenu(this.availableMenuFromServer, this.standardOptions.value));
     this.availableCatagories.next(Object.keys(this.availableMenu.value));
     this._orderService.createOrderObjectForAll(this.availableMenu.value['All']) 
+    this.productList.next(this.getProductObjects(this.availableMenu.value['All']))
   }
 
 
-  getSubMenu(key): void {
+  getSubMenu(key): void 
+  {
     this.selectedKey.next(key);
     this.selectedSubMenu.next(this.availableMenu.value[key]);
+  }
+
+  
+  getProductObjects(inputData: any)
+  {
+    let localProductList = []
+    const keys = Object.keys(inputData)
+    for (const key of keys) {
+      localProductList.push(inputData[key] as Product); 
+    }
+    return localProductList
   }
 
 
@@ -41,6 +59,7 @@ export class DataService {
     const keys = Object.keys(inputData)
     for (const key of keys) {
       allKey = allKey.concat(inputData[key])
+
         for (const item of inputData[key]) {
 
           if (item.size.includes('cans')){

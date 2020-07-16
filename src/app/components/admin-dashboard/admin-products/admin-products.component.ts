@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Product }    from '../product';
+import { Product } from '../../../services/product';
+import { DataService } from '../../../services/data.service';
+
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: 'admin-products.component.html',
-  // `
-  //   <p>
-  //     admin-products works!------------------->>> products
-  //   </p>
-  // `,
   styles: [
     `/* Style inputs with type="text", select elements and textareas */
     input[type=text], select, textarea {
@@ -58,19 +55,22 @@ export class AdminProductsComponent implements OnInit
   newProductForm: any;
   styleList = ["IPA", "DIPA", "TIPA", "Stout"]
 
+  availableProductsLocal: Array<Product> = []
   
-  constructor(private formBuilder: FormBuilder) 
+
+  constructor(private formBuilder: FormBuilder, private _data: DataService) 
   {
-    this.newProductForm = this.formBuilder.group(new Product(null,null,null,null,null,null));    
+    this.newProductForm = this.formBuilder.group(new Product(null,null,null,null,null)); 
+
+    this._data.productList.subscribe(value => {
+      this.availableProductsLocal=value;
+    });  
   }
 
   
   onSubmit(newProduct) 
   {
-    
-    console.warn('Your order has been submitted', newProduct);
-    console.warn('Your order has been submitted', newProduct.imgUrl);
-
+    this.availableProductsLocal.push(newProduct.value as Product);
   }
 
 

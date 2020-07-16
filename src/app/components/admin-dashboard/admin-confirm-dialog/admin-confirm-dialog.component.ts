@@ -6,14 +6,20 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   template: `
   <h3 mat-dialog-title>Order Details</h3>
   <div mat-dialog-content>
-    <p>Table Number::  {{data.name}}</p>
-    <p>Customer Name:: {{data.tableNum}}</p>
+    <p>Table Number::  {{data.tableNum}}</p>
+    <p>Customer Name:: {{data.name}}</p>
   </div>
-  <div mat-dialog-actions>
+  <div mat-dialog-actions class='button-div'>
     <button mat-button [mat-dialog-close]>Ok</button>
   </div>
   `,
   styles: [
+    `.button-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 15px;
+  }`
   ]
 })
 export class AdminConfirmDialogComponent implements OnInit {
