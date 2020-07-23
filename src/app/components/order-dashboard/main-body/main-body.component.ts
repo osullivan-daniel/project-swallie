@@ -77,10 +77,18 @@ export class MainBodyComponent implements OnInit {
 
   public displayupdateCart(selectedItem): void 
   {
-    this.dialog.open(updateOrderDialogComponent, 
+    console.log(selectedItem)
+    let dialogRef = this.dialog.open(updateOrderDialogComponent, 
     { 
       disableClose: true,
-      data: selectedItem.name
+      data: {'name':selectedItem.name,
+             'orderDetails':selectedItem.orderDetails}
+    });
+
+    dialogRef.afterClosed().subscribe(res => 
+    {
+      console.log('afterClose::', res)
+      selectedItem.orderDetails = res
     });
   }
 

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Product } from '../../../services/product';
 import { DataService } from '../../../services/data.service';
-
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: 'admin-products.component.html',
-  styles: [
+  styles: [   
     `/* Style inputs with type="text", select elements and textareas */
     input[type=text], select, textarea {
       width: 100%; /* Full width */
@@ -60,7 +60,7 @@ export class AdminProductsComponent implements OnInit
 
   constructor(private formBuilder: FormBuilder, private _data: DataService) 
   {
-    this.newProductForm = this.formBuilder.group(new Product(null,null,null,null,null)); 
+    this.newProductForm = this.formBuilder.group({'name': '','style': '','abv': '', 'imgUrl': ''}); 
 
     this._data.productList.subscribe(value => {
       this.availableProductsLocal=value;
@@ -70,9 +70,16 @@ export class AdminProductsComponent implements OnInit
   
   onSubmit(newProduct) 
   {
+    // let t1 = newProduct.value as Product
+    // console.log(newProduct.value)
+    let t2 = new Product(uuid(), newProduct.value.name, newProduct.value.style, newProduct.value.abv, newProduct.value.imgUrl)
+    //let test = newProduct.value as Product;
+    console.log(t2)
     this.availableProductsLocal.push(newProduct.value as Product);
   }
 
 
   ngOnInit(): void {}
 }
+
+

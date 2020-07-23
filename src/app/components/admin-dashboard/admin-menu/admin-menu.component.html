@@ -1,31 +1,43 @@
-<mat-nav-list>
-  <mat-list-item id=cardItemList>
-      <mat-nav-list>
-          <mat-list-item id=cardItemList *ngFor="let eachOrder of avilableProducts;">
-              <mat-card>
-                  <mat-table id=tableTest [dataSource]="eachOrder">
-                      <ng-container matColumnDef="size">
-                          <th mat-header-cell *matHeaderCellDef> Size </th>
-                          <td mat-cell *matCellDef="let element"> {{element.size}} </td>
-                      </ng-container>
-                  
-                      <ng-container matColumnDef="price">
-                          <th mat-header-cell *matHeaderCellDef> Price </th>
-                          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-                      </ng-container>
+<!-- <div class=mainDiv *ngFor="let eachItem of availableProductsLocal">
+<mat-card>
+    <mat-card-title>{{eachItem.name}}</mat-card-title>
+    <div class=div_test *ngFor="let eachOrder of sizes">
+            <mat-checkbox>
+                {{eachOrder}}
+            </mat-checkbox>
 
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <label for="price">Price</label>
+            <input type="text" [disabled]="false">
+    </div>
+</mat-card>
+</div> -->
 
-                  </mat-table>
-                  <div class='button-div'>
-                      <button mat-raised-button
-                      id='completeButton'
-                      [disabled]="disableOrderButton"
-                      (click)='displayConfirmation(eachOrder, i)'>Complete</button>
-                  </div>
-              </mat-card>
-          </mat-list-item>
-      </mat-nav-list>
-  </mat-list-item>
-</mat-nav-list>
+<div class=mainDiv *ngFor="let eachItem of availableProductsLocal">
+    <mat-card>
+        <mat-card-title>{{eachItem.name}}</mat-card-title>
+        <mat-table #table [dataSource]="sizeData">
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="size">
+                <td mat-cell *matCellDef="let element"> 
+                    <mat-checkbox
+                    [checked]="element.available"
+                    (change)="selectDialogOptions($event, element.size)">
+                        {{element.size}} 
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- Size Column -->
+            <ng-container matColumnDef="price">
+                <td mat-cell *matCellDef="let element"> 
+                    <label for="price">Price</label>
+                    <input type="text" [disabled]="!element.available" value="{{element.price}}">
+                </td>
+
+            </ng-container>
+
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </mat-table>
+    </mat-card>
+</div>

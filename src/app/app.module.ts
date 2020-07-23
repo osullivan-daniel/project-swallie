@@ -79,7 +79,8 @@ import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admi
     MatCardModule,
     MatTableModule,
     FormsModule, 
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    
   ],
   providers: [
     GuiStyleService,

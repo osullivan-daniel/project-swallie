@@ -10,6 +10,8 @@ export class OrderService
 
   public createOrderObjectForAll (data:any) :void
   {
+    console.log('data::', data)
+
     let i = 0;
     let tmpOrder = [];
     for (const [key, value] of Object.entries(data)) 

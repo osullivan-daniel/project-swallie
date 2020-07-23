@@ -44,6 +44,7 @@ export class SideMenuComponent implements OnInit{
 
     this._menuBody.sideMenuVisibilityChange.subscribe(value => {this.sideMenuVisable=value});    
     this._data.availableCatagories.subscribe(value => {this.availableCatagories = value});
+    console.log(this.availableCatagories)
   };
 
   public changeMenu(key): void {

@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { OrderService } from 'src/app/services/order.service';
+import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
+
 
 @Component({
   selector: 'app-update-order-dialog',
@@ -47,44 +48,36 @@ import { MatTableDataSource } from '@angular/material/table'
   ]
 })
 
-export class updateOrderDialogComponent implements OnInit{
-
-  orderObjectForAll: Array<any>;
-  objectForOptionsSelections: Array<any> = [];
+export class updateOrderDialogComponent implements OnInit
+{
+  localOrder: any;
   orderOptionsForDisplay: any;
 
   availableToOrder = [1, 2, 3];
+  // displayedColumns = ['size', 'qty', 'price'];
   displayedColumns = ['size', 'qty'];
+
   disableOrderButton: boolean = true;
 
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private _orderService: OrderService) {
-    //this._orderService.order.subscribe(value => {this.order=value});
-    this._orderService.orderServiceObjectForAll.subscribe(value => {this.orderObjectForAll=value});
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<updateOrderDialogComponent>) {}
 
 
-  public getObjectForOptionsSelections()
+  public getObjectForOptionsSelections(selectedItem): any
   {
-    for (let each in this.orderObjectForAll) 
-    {
-      if (this.orderObjectForAll[each]['name'] === this.data) 
-      {
-        let id = this.orderObjectForAll[each]['id']-1
+    let objectForOptionsSelections = []
 
-        this.objectForOptionsSelections.push(JSON.parse(JSON.stringify(this.orderObjectForAll[each])))
-      }
+    for (let each in selectedItem) 
+    {
+      console.log(selectedItem[each])
+      objectForOptionsSelections.push(JSON.parse(JSON.stringify(selectedItem[each])))
     }
-    this.orderOptionsForDisplay = new MatTableDataSource(this.objectForOptionsSelections);
+    return new MatTableDataSource(objectForOptionsSelections);
   }
 
   onSave()
   {
-    // re-add
-    for (let each in this.objectForOptionsSelections)
-    {
-      this.orderObjectForAll[this.objectForOptionsSelections[each]['id']-1] = this.objectForOptionsSelections[each]
-    }
+    //this.data.orderDetails = JSON.parse(JSON.stringify(this.localOrder)) 
+    this.dialogRef.close(this.localOrder)
   }
 
   onBack()
@@ -96,18 +89,19 @@ export class updateOrderDialogComponent implements OnInit{
   {
     this.disableOrderButton = false
 
-    for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
+    for (const [key, value] of Object.entries(this.localOrder)) 
     {
       if (value['addToOrder'] === true && value['qty'] === 0)
       {
         this.disableOrderButton = true
       }
     }
+    this.orderOptionsForDisplay = this.getObjectForOptionsSelections(this.localOrder)
   }
 
   public selectDialogOptions(event: any, size: string) 
   {
-    for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
+    for (const [key, value] of Object.entries(this.localOrder)) 
     {
       if (value['size'] === size)
       {
@@ -119,7 +113,7 @@ export class updateOrderDialogComponent implements OnInit{
 
   public selectDropdownValue(size: string, qty: number)
   {
-    for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
+    for (const [key, value] of Object.entries(this.localOrder)) 
     {
       if (value['size'] === size)
       {
@@ -129,7 +123,9 @@ export class updateOrderDialogComponent implements OnInit{
     this.enableDisableOrderButton()
   }
 
-  ngOnInit() {
-    this.getObjectForOptionsSelections()
+  ngOnInit() 
+  {
+    this.localOrder = JSON.parse(JSON.stringify(this.data.orderDetails))
+    this.orderOptionsForDisplay = this.getObjectForOptionsSelections(this.localOrder)
   }
 }
