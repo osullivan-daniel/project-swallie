@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuBodyService } from '../../../services/menu-body.service';
-import { DataService } from '../../../services/data.service';
+//import { DataService } from '../../../services/data.service';
 import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MenuService } from 'src/app/services/menu.service';
 
 
 @Component({
@@ -60,13 +61,13 @@ export class MainBodyComponent implements OnInit {
   availableSelectedMenu; 
   selectedOption;
 
-  constructor(private _menuBody: MenuBodyService, private _data: DataService, public dialog: MatDialog) 
+  constructor(private _menuBody: MenuBodyService, public dialog: MatDialog, private __menuService: MenuService) 
   {
     this._menuBody.menuIconVisibilityChange.subscribe(value => {
       this.displayMenuIcon = value ? 'visible' : 'hidden'
     });
 
-    this._data.selectedSubMenu.subscribe(value => {
+    this.__menuService.selectedSubMenu.subscribe(value => {
       this.selectedSubMenu=value;
     });
   }
@@ -77,7 +78,7 @@ export class MainBodyComponent implements OnInit {
 
   public displayupdateCart(selectedItem): void 
   {
-    console.log(selectedItem)
+    //console.log(selectedItem)
     let dialogRef = this.dialog.open(updateOrderDialogComponent, 
     { 
       disableClose: true,
@@ -87,7 +88,7 @@ export class MainBodyComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => 
     {
-      console.log('afterClose::', res)
+      //console.log('afterClose::', res)
       selectedItem.orderDetails = res
     });
   }

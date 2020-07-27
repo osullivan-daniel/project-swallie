@@ -18,8 +18,6 @@
             (click)="openMenu()"  
             [ngStyle]="{'visibility': this.displayMenuIcon}">
 
-
-
             <app-admin-live-orders *ngIf="displayBody==='live'"></app-admin-live-orders>
             <app-admin-menu *ngIf="displayBody==='menu'"></app-admin-menu>
             <app-admin-products *ngIf="displayBody==='products'"></app-admin-products>

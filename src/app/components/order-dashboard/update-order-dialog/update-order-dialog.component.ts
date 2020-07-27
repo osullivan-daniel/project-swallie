@@ -68,7 +68,7 @@ export class updateOrderDialogComponent implements OnInit
 
     for (let each in selectedItem) 
     {
-      console.log(selectedItem[each])
+      //console.log(selectedItem[each])
       objectForOptionsSelections.push(JSON.parse(JSON.stringify(selectedItem[each])))
     }
     return new MatTableDataSource(objectForOptionsSelections);

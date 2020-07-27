@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -34,7 +35,8 @@ import { AdminLiveOrdersComponent } from './components/admin-dashboard/admin-liv
 import { HeaderComponent } from './components/shared/header/header.component';
 
 // services
-import { DataService } from './services/data.service';
+//import { DataService } from './services/data.service';
+//import { ProductService } from './services/product.service';
 import { GuiStyleService } from './services/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
 import { AdminMenuComponent } from './components/admin-dashboard/admin-menu/admin-menu.component';
@@ -84,9 +86,9 @@ import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admi
   ],
   providers: [
     GuiStyleService,
-    MenuBodyService,
-    DataService
-  ],
+    MenuBodyService
+    //DataService
+  ],    
   bootstrap: [AppComponent],
   entryComponents: [updateOrderDialogComponent]
 })

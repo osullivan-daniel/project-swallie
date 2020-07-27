@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
 import { AdminService } from 'src/app/services/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sidemenu',
@@ -21,6 +22,8 @@ export class AdminSidemenuComponent implements OnInit {
   backgroundColour:string;
   sideMenuVisable:boolean = true;
 
+  constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService, private router: Router) {}
+
   closeMenu() {
     this.sideMenuVisable = false
   }
@@ -30,7 +33,10 @@ export class AdminSidemenuComponent implements OnInit {
     this._adminService.setDisplaySideMenu(false);
   }
 
-  constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService) {}
+  loadOrder(): void {
+    this.router.navigate(['/home']);
+  }
+
 
   ngOnInit(): void {
     this._adminService.displayBody.subscribe(value => {this.displayBody=value});    

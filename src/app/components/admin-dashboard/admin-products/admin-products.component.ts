@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Product } from '../../../services/product';
-import { DataService } from '../../../services/data.service';
+//import { DataService } from '../../../services/data.service';
+import { ProductService } from '../../../services/product.service'
 import { v4 as uuid } from 'uuid';
 
 @Component({
@@ -57,29 +58,22 @@ export class AdminProductsComponent implements OnInit
 
   availableProductsLocal: Array<Product> = []
   
-
-  constructor(private formBuilder: FormBuilder, private _data: DataService) 
+  constructor(private formBuilder: FormBuilder, private _productService: ProductService) 
   {
     this.newProductForm = this.formBuilder.group({'name': '','style': '','abv': '', 'imgUrl': ''}); 
-
-    this._data.productList.subscribe(value => {
-      this.availableProductsLocal=value;
-    });  
   }
 
   
   onSubmit(newProduct) 
   {
-    // let t1 = newProduct.value as Product
-    // console.log(newProduct.value)
-    let t2 = new Product(uuid(), newProduct.value.name, newProduct.value.style, newProduct.value.abv, newProduct.value.imgUrl)
-    //let test = newProduct.value as Product;
-    console.log(t2)
-    this.availableProductsLocal.push(newProduct.value as Product);
+    let newProductObject = new Product(uuid(), newProduct.value.name, newProduct.value.style, newProduct.value.abv, newProduct.value.imgUrl)
+    this._productService.addProduct(newProductObject)
   }
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._productService.getProducts().subscribe(value => this.availableProductsLocal = value);
+  }
 }
 
 
