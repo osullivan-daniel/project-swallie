@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table'
 import { ProductService } from 'src/app/services/product.service';
 import { MenuService } from 'src/app/services/menu.service';
@@ -37,66 +37,82 @@ export class AdminMenuComponent {
 
   availableProductsLocal;
   avilableProducts;
-  // displayedColumns = ['size', 'price']
+  addItemToMenu: any;
+  productList: any = [];
 
-  // defaultInnerValues = {}
 
-  // sizes = ["Can's", "1/2's", "1/3's"]
+  //menuGroup: any;
+  menuGroupArray: any;
+  listWithDetailsTest: any = [];
 
   displayedColumns = ['size', 'price']
-  // sizeData = [{"size": "Can's", "price": "", "available":false}, 
-  //             {"size": "1/2's", "price": "", "available":false}, 
-  //             {"size": "1/3's", "price": "", "available":false}]
 
   constructor(private formBuilder: FormBuilder, 
               private __productService: ProductService,
               private __menuService: MenuService) 
   {
-    // this.newProductForm = this.formBuilder.group(new Product(null,null,null,null,null)); 
+
     this.__productService.getProducts().subscribe(value => {
       this.availableProductsLocal=value;
     });  
 
+    this.menuGroupArray = new FormArray([]);
 
-    console.log('test::', this.availableProductsLocal)
-
-    let listWithDetailsTest = [];
     this.availableProductsLocal.forEach( item => {
       
-      listWithDetailsTest.push({
+      let menuGroup = this.formBuilder.group({
+        0: this.formBuilder.group({"size": item['cans'], 
+                                   "price": new FormControl(
+                                            {value: item['cansPrice'], disabled: !item['cans']},
+                                            [Validators.required, Validators.pattern("^[0-9]*$")])
+        }),
+        1: this.formBuilder.group({"size": item['halves'], 
+                                   "price": new FormControl(
+                                            {value: item['halvesPrice'], disabled: !item['halves']},
+                                            [Validators.required, Validators.pattern("^[0-9]*$")])
+        }),
+        2: this.formBuilder.group({"size": item['thirds'], 
+                                   "price": new FormControl(
+                                            {value: item['thirdsPrice'], disabled: !item['thirds']},
+                                            [Validators.required, Validators.pattern("^[0-9]*$")])
+        })
+      });
+      this.menuGroupArray.push(menuGroup)
+
+      this.listWithDetailsTest.push({
         'name': item.name,
+        'productId': item.id,
         'sizeData': [{"size": "Can's", "price": item['cansPrice'], "available": item['cans']}, 
                      {"size": "1/2's", "price": item['halvesPrice'], "available": item['halves']}, 
-                     {"size": "1/3's", "price": item['thirdsPrice'], "available":item['thirds']}]
+                     {"size": "1/3's", "price": item['thirdsPrice'], "available": item['thirds']}]
       })
-
     });
 
-    this.avilableProducts = listWithDetailsTest;
-    //this.avilableProducts = new MatTableDataSource(this.availableProductsLocal);
+    console.log('this.menuGroupArray::', this.menuGroupArray)
+    console.log('this.listWithDetailsTest::', this.listWithDetailsTest)
   }
-  // (input)='onSubmit(element, eachItem, value)'
-  onSubmit(event: any, element: string, eachItem: any, value: any) 
+
+
+  onSubmit(eachItem)
   {
-    console.log('event:', event)
-    console.log('element:', element)
-    console.log('eachItem:', eachItem)
-    console.log('value:', value)
-    this.__menuService.showMenu()
+    //console.log('this.menuGroup', this.menuGroup)
+    console.log('eachItem', eachItem)
     this.__productService.showProductList()
-
-    // this.availableProductsLocal.push(newProduct.value as Product);
   }
 
-  selectDialogOptions(event: any, element: string, eachItem: any) 
+
+  selectDialogOptions(event: any, element: string, eachItem: any, rowIndex:any) 
   {
     element['available'] = !element['available']
     this.__menuService.showMenu()
     this.__productService.showProductList()
 
-    console.log('element:', element)
-    console.log('eachItem:', eachItem)
+    if (rowIndex.controls.price.status === "DISABLED")
+      rowIndex.controls.price.enable()
+    else
+      rowIndex.controls.price.disable()
   }
+
 
   onSave(element: string) 
   {

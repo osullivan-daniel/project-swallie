@@ -37,15 +37,15 @@ import { v4 as uuid } from 'uuid';
   
       prodList.push(new Product(uuid(), "RIGHT HAND MAN BACK", "IPA", 7.2,
                                "../../assets/img/cans/ipas/right+hand+man+back+can+shot+small.jpg",
-                               true,false,false,3))
+                               false,true,false,null,3))
                                
       prodList.push(new Product(uuid(), "SCREWBALL", "IPA", 5.1,
                                 "../../assets/img/cans/ipas/screwball-can-shot.jpg",
-                                false,true,false,null,3))
+                                false,true,false,null,2.75))
   
       prodList.push(new Product(uuid(), "FOREVER AGO", "IPA", 6,
                                 "../../assets/img/cans/ipas/forever+ago+can+shot+small.jpg",
-                                false,true,false,null,3))
+                                false,true,false,null,3.25))
   
       prodList.push(new Product(uuid(), "HR", "TIPA", 10,
                                 "../../assets/img/cans/tipas/HR-can-shot-small_180x.webp",
@@ -53,15 +53,15 @@ import { v4 as uuid } from 'uuid';
   
       prodList.push(new Product(uuid(), "15", "Stout", 9.7,
                                 "../../assets/img/cans/stouts/15+can+shot+small.jpg",
-                                true,false,false,4))
+                                true,false,false,3.75))
                                 
       prodList.push(new Product(uuid(), "SOTERIOLOGY", "Stout", 11.7,
                                 "../../assets/img/cans/stouts/soteriology+can+shot+small.jpg",
-                                true,false,true,3.5,null,3))
+                                true,false,true,3.55,null,3))
   
       prodList.push(new Product(uuid(), "YOU'RE NOT GETTING ANY", "Stout", 12,
                                 "../../assets/img/cans/stouts/youre+not+getting+any+can+shot+small.jpg",
-                                true,true,false,3.5,4))
+                                true,true,false,3.5,4.25))
       
       return prodList
     }

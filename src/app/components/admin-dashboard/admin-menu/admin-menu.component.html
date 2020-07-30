@@ -1,56 +1,51 @@
-<!-- <div class=mainDiv *ngFor="let eachItem of availableProductsLocal">
-<mat-card>
-    <mat-card-title>{{eachItem.name}}</mat-card-title>
-    <div class=div_test *ngFor="let eachOrder of sizes">
-            <mat-checkbox>
-                {{eachOrder}}
-            </mat-checkbox>
+<div class=mainDiv>
+    <div *ngFor="let eachItem of listWithDetailsTest let i=index">
+        <mat-card>
+            <form [formGroup]="menuGroupArray.controls[i]" (ngSubmit)="onSubmit(menuGroupArray[i])">
+                <!-- <form [formControl]="menuGroup.controls[i]"> -->
+                    <mat-card-title>{{eachItem.name}}</mat-card-title>
+                    <mat-table #table [dataSource]=eachItem.sizeData>
+                        <!-- *matCellDef="let row; let index = index" [formGroupName]="index" -->
 
-            <label for="price">Price</label>
-            <input type="text" [disabled]="false">
+                        <!-- size Column -->
+                        <ng-container matColumnDef="size">
+                            <td mat-cell *matCellDef="let element; let rowIndex = index" [formGroupName]="rowIndex">
+                                <mat-checkbox 
+                                formControlName="size" 
+                                [checked]="element.available"
+                                (change)="selectDialogOptions($event, 
+                                                              element, 
+                                                              eachItem, 
+                                                              menuGroupArray.controls[i].controls[rowIndex])">
+                                {{element.size}} 
+                                </mat-checkbox>
+                            </td>
+                        </ng-container>
+                            
+                        <!-- price Column -->
+                        <ng-container matColumnDef="price">
+                            <td mat-cell *matCellDef="let element; let rowIndex = index" [formGroupName]="rowIndex">
+                                <label for="price">Price</label>
+                                <input type="text" 
+                                    value="{{element.price}}"
+                                    formControlName="price">
+                            </td>
+                        </ng-container>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    </mat-table>
+
+
+
+                    <div class='button-div'>
+                        <button mat-raised-button
+                                id='update'
+                                [style.visibility]="false ? 'hidden': 'visible'">
+                                Update Product Avalability
+                        </button>
+                    </div>     
+                <!-- </form> -->
+                </form>
+        </mat-card>
     </div>
-</mat-card>
-</div> -->
-
-<div class=mainDiv *ngFor="let eachItem of avilableProducts">
-    <mat-card>
-        <mat-card-title>{{eachItem.name}}</mat-card-title>
-        <mat-table #table [dataSource]=eachItem.sizeData>
-
-            <!-- size Column -->
-            <ng-container matColumnDef="size">
-                <td mat-cell *matCellDef="let element"> 
-                    <mat-checkbox [checked]="element.available"
-                                  (change)="selectDialogOptions($event, element, eachItem)">
-                                  {{element.size}} 
-                    </mat-checkbox>
-                </td>
-            </ng-container>
-
-            <!-- price Column -->
-            <ng-container matColumnDef="price">
-                <td mat-cell *matCellDef="let element"> 
-                    <label for="price">Price</label>
-                    <input type="text" 
-                           [disabled]="!element.available" 
-                           value="{{element.price}}">
-                </td>
-            </ng-container>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </mat-table>
-
-        <div class='button-div'>
-            <button mat-raised-button
-                    id='update'
-                    [style.visibility]="false ? 'hidden': 'visible'"
-                    (click)='onSave(eachItem)'>
-                    Update Product Avalability
-            </button>
-        </div>
-
-    </mat-card>
 </div>
-
-
-
-<!-- (input)='onSubmit($event, element, eachItem, value)' -->
