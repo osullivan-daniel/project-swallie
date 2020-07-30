@@ -52,14 +52,25 @@ export class updateOrderDialogComponent implements OnInit
 {
   localOrder: any;
   orderOptionsForDisplay: any;
-
-  availableToOrder = [1, 2, 3];
-  // displayedColumns = ['size', 'qty', 'price'];
-  displayedColumns = ['size', 'qty'];
-
   disableOrderButton: boolean = true;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<updateOrderDialogComponent>) {}
+  availableToOrder = [1, 2, 3];
+  displayedColumns = ['size', 'qty', 'price'];
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) public __dialogData: any, private dialogRef: MatDialogRef<updateOrderDialogComponent>) {}
+
+
+  onSave()
+  {
+    this.dialogRef.close(this.localOrder)
+  }
+
+
+  onBack()
+  {
+    this.dialogRef.close(false)
+  }
 
 
   public getObjectForOptionsSelections(selectedItem): any
@@ -68,22 +79,11 @@ export class updateOrderDialogComponent implements OnInit
 
     for (let each in selectedItem) 
     {
-      //console.log(selectedItem[each])
       objectForOptionsSelections.push(JSON.parse(JSON.stringify(selectedItem[each])))
     }
     return new MatTableDataSource(objectForOptionsSelections);
   }
 
-  onSave()
-  {
-    //this.data.orderDetails = JSON.parse(JSON.stringify(this.localOrder)) 
-    this.dialogRef.close(this.localOrder)
-  }
-
-  onBack()
-  {
-    // Do nothing - we will not update objectForOptionsSelections
-  }
 
   public enableDisableOrderButton()
   {
@@ -99,6 +99,7 @@ export class updateOrderDialogComponent implements OnInit
     this.orderOptionsForDisplay = this.getObjectForOptionsSelections(this.localOrder)
   }
 
+
   public selectDialogOptions(event: any, size: string) 
   {
     for (const [key, value] of Object.entries(this.localOrder)) 
@@ -110,6 +111,7 @@ export class updateOrderDialogComponent implements OnInit
     }
     this.enableDisableOrderButton()
   }
+
 
   public selectDropdownValue(size: string, qty: number)
   {
@@ -123,9 +125,11 @@ export class updateOrderDialogComponent implements OnInit
     this.enableDisableOrderButton()
   }
 
+
   ngOnInit() 
   {
-    this.localOrder = JSON.parse(JSON.stringify(this.data.orderDetails))
+    console.log(this.__dialogData)
+    this.localOrder = JSON.parse(JSON.stringify(this.__dialogData.orderDetails))
     this.orderOptionsForDisplay = this.getObjectForOptionsSelections(this.localOrder)
   }
 }

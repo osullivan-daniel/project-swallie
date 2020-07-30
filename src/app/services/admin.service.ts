@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { LiteralMapEntry } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class AdminService
   ordersComplete = new BehaviorSubject(null);
   ordersInProgress = new BehaviorSubject(null);
   orderDetailsForAll = new BehaviorSubject(null);
+  currentOrderNumber = new BehaviorSubject(4);
 
 
   orderDetails = {1:{'tableNum': 1, 'name': 'Tom'},
@@ -42,7 +44,7 @@ export class AdminService
   
   constructor() 
   {
-    // these are for local manipulation before 'brodacast'
+    // these are for local manipulation before 'broadcast'
     this.localProgress.push(this.exampleOrder)
     this.localProgress.push(this.exampleOrder3)
     this.localProgress.push(this.exampleOrder2)
@@ -56,6 +58,21 @@ export class AdminService
     this.orderDetailsForAll.next(this.localOrderDetails)
   }
 
+
+  updateOrderNum(num)
+  {
+    this.currentOrderNumber.next(num)
+  }
+
+  updateOrderQue(orderQue)
+  {
+    this.ordersInQueue.next(orderQue)
+  }
+
+  updateOrderDetails(orderDetails)
+  {
+    this.orderDetailsForAll.next(orderDetails)
+  }
 
   setVisableBody(body:string) 
   {

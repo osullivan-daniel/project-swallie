@@ -4,6 +4,7 @@ import { MenuBodyService } from '../../../services/menu-body.service';
 import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MenuService } from 'src/app/services/menu.service';
+import { ProductService } from 'src/app/services/product.service';
 
 
 @Component({
@@ -61,8 +62,10 @@ export class MainBodyComponent implements OnInit {
   availableSelectedMenu; 
   selectedOption;
 
-  constructor(private _menuBody: MenuBodyService, public dialog: MatDialog, private __menuService: MenuService) 
-  {
+  constructor(private _menuBody: MenuBodyService, 
+              public dialog: MatDialog, 
+              private __menuService: MenuService)
+    {
     this._menuBody.menuIconVisibilityChange.subscribe(value => {
       this.displayMenuIcon = value ? 'visible' : 'hidden'
     });
@@ -88,9 +91,11 @@ export class MainBodyComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => 
     {
-      //console.log('afterClose::', res)
-      selectedItem.orderDetails = res
+      if (!(res === false))
+        selectedItem.orderDetails = res
     });
+
+    this.__menuService.showMenu()
   }
 
   ngOnInit(): void {

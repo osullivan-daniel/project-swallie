@@ -77,17 +77,16 @@ export class SideMenuComponent implements OnInit{
 
   public displayCart(): void 
   {
-    
 
     let dialogRef = this.dialog.open(OrderDialogComponent, 
     { 
       disableClose: true,
-      data: {}
+      data: this.__menuService.getAvaliableMenuAll()
     });
 
     dialogRef.afterClosed().subscribe(res => 
     {
-      if (!(res === 'false'))
+      if (!(res === false))
       {
       }
     });

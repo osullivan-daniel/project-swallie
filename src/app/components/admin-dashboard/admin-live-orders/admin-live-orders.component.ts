@@ -68,7 +68,6 @@ export class AdminLiveOrdersComponent implements OnInit
 
   constructor(private _adminService: AdminService, public dialog: MatDialog) 
   { 
-
     this._adminService.ordersInQueue.subscribe(value => {
       this.localQueue=value;
     });
@@ -81,9 +80,6 @@ export class AdminLiveOrdersComponent implements OnInit
       this.localOrderDetails=value;
     });
   }
-
-
-
 
 
   onMoveToInProgress(index) {
@@ -106,6 +102,7 @@ export class AdminLiveOrdersComponent implements OnInit
     });
   }
 
+
   public displayConfirmation(selectedOrder, index): void 
   {
     let orderId = selectedOrder._data.value[0]['orderNum']
@@ -118,6 +115,7 @@ export class AdminLiveOrdersComponent implements OnInit
     this.onCompleteOrderReview(index) 
   }
 
+  
   onCompleteOrderReview(index) {
     this._adminService.removeFromInProgress(index)
     this.updateDisplayLists(this.localProgress, this.localQueue)  

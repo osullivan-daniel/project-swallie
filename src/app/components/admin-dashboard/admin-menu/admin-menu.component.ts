@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table'
 import { ProductService } from 'src/app/services/product.service';
-//import { DataService } from 'src/app/services/data.service';
+import { MenuService } from 'src/app/services/menu.service';
 
 
 @Component({
@@ -33,7 +33,7 @@ import { ProductService } from 'src/app/services/product.service';
     }`
   ]
 })
-export class AdminMenuComponent implements OnInit {
+export class AdminMenuComponent {
 
   availableProductsLocal;
   avilableProducts;
@@ -44,40 +44,62 @@ export class AdminMenuComponent implements OnInit {
   // sizes = ["Can's", "1/2's", "1/3's"]
 
   displayedColumns = ['size', 'price']
-  sizeData = [{"size": "Can's", "price": "", "available":false}, 
-              {"size": "1/2's", "price": "", "available":false}, 
-              {"size": "1/3's", "price": "", "available":false}]
+  // sizeData = [{"size": "Can's", "price": "", "available":false}, 
+  //             {"size": "1/2's", "price": "", "available":false}, 
+  //             {"size": "1/3's", "price": "", "available":false}]
 
-  constructor(private formBuilder: FormBuilder, private __productService: ProductService) 
+  constructor(private formBuilder: FormBuilder, 
+              private __productService: ProductService,
+              private __menuService: MenuService) 
   {
     // this.newProductForm = this.formBuilder.group(new Product(null,null,null,null,null)); 
     this.__productService.getProducts().subscribe(value => {
       this.availableProductsLocal=value;
     });  
 
-    this.avilableProducts = new MatTableDataSource(this.availableProductsLocal);
-  }
 
-  onSubmit(newProduct) 
+    console.log('test::', this.availableProductsLocal)
+
+    let listWithDetailsTest = [];
+    this.availableProductsLocal.forEach( item => {
+      
+      listWithDetailsTest.push({
+        'name': item.name,
+        'sizeData': [{"size": "Can's", "price": item['cansPrice'], "available": item['cans']}, 
+                     {"size": "1/2's", "price": item['halvesPrice'], "available": item['halves']}, 
+                     {"size": "1/3's", "price": item['thirdsPrice'], "available":item['thirds']}]
+      })
+
+    });
+
+    this.avilableProducts = listWithDetailsTest;
+    //this.avilableProducts = new MatTableDataSource(this.availableProductsLocal);
+  }
+  // (input)='onSubmit(element, eachItem, value)'
+  onSubmit(event: any, element: string, eachItem: any, value: any) 
   {
+    console.log('event:', event)
+    console.log('element:', element)
+    console.log('eachItem:', eachItem)
+    console.log('value:', value)
+    this.__menuService.showMenu()
+    this.__productService.showProductList()
+
     // this.availableProductsLocal.push(newProduct.value as Product);
   }
 
-  public selectDialogOptions(event: any, size: string) 
+  selectDialogOptions(event: any, element: string, eachItem: any) 
   {
-    //console.log(event)
-    // for (const [key, value] of Object.entries(this.objectForOptionsSelections)) 
-    // {
-    //   if (value['size'] === size)
-    //   {
-    //     value['addToOrder'] = event.checked
-    //   }
-    // }
-    // this.enableDisableOrderButton()
+    element['available'] = !element['available']
+    this.__menuService.showMenu()
+    this.__productService.showProductList()
+
+    console.log('element:', element)
+    console.log('eachItem:', eachItem)
   }
 
-
-  ngOnInit(): void {
-    //console.log(this.avilableProducts)
+  onSave(element: string) 
+  {
+    console.log('element:', element)
   }
 }
