@@ -1,0 +1,31 @@
+<div class=div_test>
+    <form [formGroup]="newProductForm" (ngSubmit)="onSubmit(newProductForm)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" formControlName="name" required>
+        </div>
+          <div class="form-group">
+            <label for="style">Style</label>
+            <input type="text" formControlName="style" required
+                    list="beerStyles">
+                  <datalist id="beerStyles">
+                    <option *ngFor="let option of styleList" [value]="option">{{option}}</option>
+                  </datalist>
+        </div>
+            <div class="form-group">
+            <label for="abv">ABV</label>
+            <input type="number" formControlName="abv" required>
+        </div>
+      
+        <div class="form-group">
+            <label for="imgUrl">imgUrl</label>
+            <input type="text" formControlName="imgUrl" required>
+        </div>
+    
+        <div class='button-div'>
+          <button mat-raised-button
+                  id='submitNewProduct'
+                  [disabled]="!newProductForm.valid">Add Product</button>
+        </div>
+    </form>
+</div>

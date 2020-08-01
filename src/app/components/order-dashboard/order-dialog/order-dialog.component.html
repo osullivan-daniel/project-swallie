@@ -25,13 +25,17 @@
                 <mat-icon id='deleteIcon' class="icon" (click)='removeItem(element)'>delete</mat-icon>
             </a> 
         </td>
-      </ng-container>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
 </mat-table>
+<p>Total £{{total}}</p>
 <div class='button-div'>
-    <button mat-raised-button mat-dialog-close id="submit" mat-dialog-close=true>Submit Order</button>
-    <button mat-raised-button mat-dialog-close id="back" mat-dialog-close=false>Back</button>
+    <button mat-raised-button mat-dialog-close 
+        id='submit'
+        (click)='onSave()'>Submit Order</button>
+    <button mat-raised-button mat-dialog-close
+        id='back'
+        (click)='onBack()'>Back</button>
 </div>

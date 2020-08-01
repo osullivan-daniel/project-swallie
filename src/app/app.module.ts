@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,29 +17,51 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-// components
+// order-dashboard components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { updateOrderDialogComponent } from './components/update-order-dialog/update-order-dialog.component';
+
+import { MainBodyComponent } from './components/order-dashboard/main-body/main-body.component';
+import { SideMenuComponent } from './components/order-dashboard/side-menu/side-menu.component';
+import { OrderDialogComponent } from './components/order-dashboard/order-dialog/order-dialog.component';
+import { updateOrderDialogComponent } from './components/order-dashboard/update-order-dialog/update-order-dialog.component';
+
+// admin-dashboard components
+import { AdminMainComponent } from './components/admin-dashboard/admin-main/admin-main.component';
+import { AdminSidemenuComponent } from './components/admin-dashboard/admin-sidemenu/admin-sidemenu.component';
+import { AdminLiveOrdersComponent } from './components/admin-dashboard/admin-live-orders/admin-live-orders.component';
+// shared
+import { HeaderComponent } from './components/shared/header/header.component';
 
 // services
+//import { DataService } from './services/data.service';
+//import { ProductService } from './services/product.service';
 import { GuiStyleService } from './services/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
-import { DataService } from './services/data.service';
-import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
+import { AdminMenuComponent } from './components/admin-dashboard/admin-menu/admin-menu.component';
+import { AdminProductsComponent } from './components/admin-dashboard/admin-products/admin-products.component';
+import { AdminConfirmDialogComponent } from './components/admin-dashboard/admin-confirm-dialog/admin-confirm-dialog.component';
+import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admin-completed-orders/admin-completed-orders.component';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
+    MainBodyComponent,
     SideMenuComponent,
     updateOrderDialogComponent,
     OrderDialogComponent,
+    AdminMainComponent,
+    AdminSidemenuComponent,
+    AdminLiveOrdersComponent,
+    AdminMenuComponent,
+    AdminProductsComponent,
+    AdminConfirmDialogComponent,
+    AdminCompletedOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,13 +79,16 @@ import { OrderDialogComponent } from './components/order-dialog/order-dialog.com
     MatSelectModule,
     MatCheckboxModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    
   ],
   providers: [
     GuiStyleService,
-    MenuBodyService,
-    DataService
-  ],
+    MenuBodyService
+    //DataService
+  ],    
   bootstrap: [AppComponent],
   entryComponents: [updateOrderDialogComponent]
 })

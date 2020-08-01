@@ -1,10 +1,11 @@
+<app-header></app-header>
 <mat-sidenav-container class="navContainer" fixedInViewport="true">
 
     <mat-sidenav [ngStyle]="{'background-color': this.backgroundColour}" 
                     [(opened)]="sideMenuVisable" disableClose
                     mode="side">
     
-    <img id="menuIcon" src="assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
+    <img id="menuIcon" src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
 
     <mat-nav-list>
         <mat-list-item id="matListItems" 
@@ -17,11 +18,16 @@
                        [ngStyle]="{'color': this.textColour}"
                        (click)="displayCart()">
                        Cart
-                    </mat-list-item>
+        </mat-list-item>
+        <mat-list-item id="matListItems"                         
+            [ngStyle]="{'color': this.textColour}"
+            (click)="loadAdmin()">
+            Admin
+        </mat-list-item>
     </mat-nav-list>
     
 </mat-sidenav>
     <mat-sidenav-content>
-        <app-home></app-home>
+        <app-main-body></app-main-body>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GuiStyleService } from '../../services/gui-style.service';
+import { GuiStyleService } from '../../../services/gui-style.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ import { GuiStyleService } from '../../services/gui-style.service';
 
       <a class="navbar-item">
         <!-- make configurable!!! -->
-        <img src="assets/img/BoundaryLogo_Large_White_300x.png">
+        <img src="../assets/img/BoundaryLogo_Large_White_300x.png">
       </a>
     </div>
   </nav>

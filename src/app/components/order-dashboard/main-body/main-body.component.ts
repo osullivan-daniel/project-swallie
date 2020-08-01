@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuBodyService } from '../../services/menu-body.service';
-import { DataService } from '../../services/data.service';
+import { MenuBodyService } from '../../../services/menu-body.service';
+//import { DataService } from '../../../services/data.service';
 import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MenuService } from 'src/app/services/menu.service';
+import { ProductService } from 'src/app/services/product.service';
 
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-main-body',
   template: `
           <div class="container" id="example-container">
               <img id="menuIcon" src="../../assets/icons/menu-black-36dp.svg" 
@@ -50,7 +52,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 
-export class HomeComponent implements OnInit {
+export class MainBodyComponent implements OnInit {
+  
   displayMenuIcon:string;
   backgroundColour:string;
   order: any = {};
@@ -59,13 +62,15 @@ export class HomeComponent implements OnInit {
   availableSelectedMenu; 
   selectedOption;
 
-  constructor(private _menuBody: MenuBodyService, private _data: DataService, public dialog: MatDialog) 
-  {
+  constructor(private _menuBody: MenuBodyService, 
+              public dialog: MatDialog, 
+              private __menuService: MenuService)
+    {
     this._menuBody.menuIconVisibilityChange.subscribe(value => {
       this.displayMenuIcon = value ? 'visible' : 'hidden'
     });
 
-    this._data.selectedSubMenu.subscribe(value => {
+    this.__menuService.selectedSubMenu.subscribe(value => {
       this.selectedSubMenu=value;
     });
   }
@@ -76,10 +81,18 @@ export class HomeComponent implements OnInit {
 
   public displayupdateCart(selectedItem): void 
   {
-    this.dialog.open(updateOrderDialogComponent, 
+    //console.log(selectedItem)
+    let dialogRef = this.dialog.open(updateOrderDialogComponent, 
     { 
       disableClose: true,
-      data: selectedItem.name
+      data: {'name':selectedItem.name,
+             'orderDetails':selectedItem.orderDetails}
+    });
+
+    dialogRef.afterClosed().subscribe(res => 
+    {
+      if (!(res === false))
+        selectedItem.orderDetails = res
     });
   }
 

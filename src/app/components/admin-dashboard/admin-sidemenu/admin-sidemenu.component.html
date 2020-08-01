@@ -1,0 +1,26 @@
+<mat-nav-list>
+    <mat-list-item id="matListItems"                         
+                    [ngStyle]="{'color': this.textColour}"
+                    (click)="changeView('live')">
+                    Live Orders</mat-list-item>
+    
+    <mat-list-item id="matListItems"                         
+                    [ngStyle]="{'color': this.textColour}"
+                    (click)="changeView('completed')">
+                    Completed Orders</mat-list-item>
+
+    <mat-list-item id="matListItems"                         
+                    [ngStyle]="{'color': this.textColour}"
+                    (click)="changeView('menu')">
+                    Menu</mat-list-item>
+
+    <mat-list-item id="matListItems"                         
+                    [ngStyle]="{'color': this.textColour}"
+                    (click)="changeView('products')">
+                    Add Products</mat-list-item>
+    
+    <mat-list-item id="matListItems"                         
+                    [ngStyle]="{'color': this.textColour}"
+                    (click)="loadOrder()">
+                    Order</mat-list-item>
+</mat-nav-list>
