@@ -1,7 +1,7 @@
 <div class=mainDiv>
     <div *ngFor="let eachItem of listWithDetailsTest let i=index">
         <mat-card>
-            <form [formGroup]="menuGroupArray.controls[i]" (ngSubmit)="onSubmit(menuGroupArray[i])">
+            <form [formGroup]="menuGroupArray.controls[i]" (ngSubmit)="onSubmit(eachItem)">
                 <!-- <form [formControl]="menuGroup.controls[i]"> -->
                     <mat-card-title>{{eachItem.name}}</mat-card-title>
                     <mat-table #table [dataSource]=eachItem.sizeData>
@@ -10,14 +10,12 @@
                         <!-- size Column -->
                         <ng-container matColumnDef="size">
                             <td mat-cell *matCellDef="let element; let rowIndex = index" [formGroupName]="rowIndex">
-                                <mat-checkbox 
-                                formControlName="size" 
-                                [checked]="element.available"
-                                (change)="selectDialogOptions($event, 
-                                                              element, 
-                                                              eachItem, 
-                                                              menuGroupArray.controls[i].controls[rowIndex])">
-                                {{element.size}} 
+                                <mat-checkbox formControlName="size" 
+                                              [checked]="element.available"
+                                              (change)="selectDialogOptions(eachItem, element, 
+                                                        menuGroupArray.controls[i].controls[rowIndex],
+                                                        menuGroupArray.controls[i])">
+                                              {{element.size}} 
                                 </mat-checkbox>
                             </td>
                         </ng-container>
@@ -26,11 +24,15 @@
                         <ng-container matColumnDef="price">
                             <td mat-cell *matCellDef="let element; let rowIndex = index" [formGroupName]="rowIndex">
                                 <label for="price">Price</label>
-                                <input type="text" 
-                                    value="{{element.price}}"
-                                    formControlName="price">
+                                <input type="number" 
+                                       value="{{element.price}}"
+                                       formControlName="price"
+                                       (input)="enterText(eachItem, element, 
+                                                menuGroupArray.controls[i].controls[rowIndex],
+                                                menuGroupArray.controls[i])">
                             </td>
                         </ng-container>
+                        
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                     </mat-table>
@@ -40,7 +42,7 @@
                     <div class='button-div'>
                         <button mat-raised-button
                                 id='update'
-                                [style.visibility]="false ? 'hidden': 'visible'">
+                                [style.visibility]="eachItem.updateButtonVisable ? 'visible': 'hidden'">
                                 Update Product Avalability
                         </button>
                     </div>     

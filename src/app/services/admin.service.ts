@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LiteralMapEntry } from '@angular/compiler/src/output/output_ast';
+import { Order } from 'src/app/services/order';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -30,26 +31,24 @@ export class AdminService
                  3:{'tableNum': 8, 'name': 'Thomas'},
                  4:{'tableNum': 9, 'name': 'Mary'}}
 
-  exampleOrder =  [{'name': "BLACK IS THE COLOUR", 'size': "cans", 'qty': 1, 'addToOrder': true, 'orderNum':1}]
+  exampleOrder =  [{'name': "BLACK IS THE COLOUR", 'size': "cans", 'qty': 1, 'addToOrder': true,}]
 
-  exampleOrder1 = [{'name': "YOU'RE NOT GETTING ANY", 'size': "cans", 'qty': 3, 'addToOrder': true, 'orderNum':2},
-              {'name': "YOU'RE NOT GETTING ANY", 'size': "1/2's", 'qty': 1, 'addToOrder': true, 'orderNum':2}]
+  exampleOrder1 = [{'name': "YOU'RE NOT GETTING ANY", 'size': "cans", 'qty': 3, 'addToOrder': true},
+              {'name': "YOU'RE NOT GETTING ANY", 'size': "1/2's", 'qty': 1, 'addToOrder': true}]
 
-  exampleOrder2 = [{'name': "APA", 'size': "1/2's", 'qty': 2, 'addToOrder': true, 'orderNum':3}]
+  exampleOrder2 = [{'name': "APA", 'size': "1/2's", 'qty': 2, 'addToOrder': true}]
 
-  exampleOrder3 = [{'name': "BLACK IS THE COLOUR", 'size': "cans", 'qty': 2, 'addToOrder': true, 'orderNum':4},
-              {'name': "YOU'RE NOT GETTING ANY", 'size': "cans", 'qty': 2, 'addToOrder': true, 'orderNum':4},
-              {'name': "YOU'RE NOT GETTING ANY", 'size': "1/2's", 'qty': 1, 'addToOrder': true, 'orderNum':4}]
+  exampleOrder3 = [{'name': "BLACK IS THE COLOUR", 'size': "cans", 'qty': 2, 'addToOrder': true},
+              {'name': "YOU'RE NOT GETTING ANY", 'size': "cans", 'qty': 2, 'addToOrder': true},
+              {'name': "YOU'RE NOT GETTING ANY", 'size': "1/2's", 'qty': 1, 'addToOrder': true}]
 
-  
   constructor() 
   {
     // these are for local manipulation before 'broadcast'
-    this.localProgress.push(this.exampleOrder)
-    this.localProgress.push(this.exampleOrder3)
-    this.localProgress.push(this.exampleOrder2)
-    this.localQueue.push(this.exampleOrder1)
-    this.localOrderDetails.push(this.orderDetails)
+    this.localComplete.push(new Order('8', 'Tom', moment().format('MMMM Do YYYY, HH:mm:ss'), this.exampleOrder))
+    this.localProgress.push(new Order('3', 'James', moment().format('MMMM Do YYYY, HH:mm:ss'), this.exampleOrder3))
+    this.localProgress.push(new Order('7', 'Mary', moment().format('MMMM Do YYYY, HH:mm:ss'), this.exampleOrder2))
+    this.localQueue.push(new Order('4', 'Timmy', moment().format('MMMM Do YYYY, HH:mm:ss'), this.exampleOrder1))
     
     // These are for all subscribers
     this.ordersInQueue.next(this.localQueue)
@@ -59,20 +58,19 @@ export class AdminService
   }
 
 
-  updateOrderNum(num)
-  {
-    this.currentOrderNumber.next(num)
-  }
-
   updateOrderQue(orderQue)
   {
-    this.ordersInQueue.next(orderQue)
+    let que = this.ordersInQueue.value
+    que.push(orderQue)
+    this.ordersInQueue.next(que)
   }
+
 
   updateOrderDetails(orderDetails)
   {
     this.orderDetailsForAll.next(orderDetails)
   }
+
 
   setVisableBody(body:string) 
   {

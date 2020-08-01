@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   <h3 mat-dialog-title>Order Details</h3>
   <div mat-dialog-content>
     <p>Table Number::  {{data.tableNum}}</p>
-    <p>Customer Name:: {{data.name}}</p>
+    <p>Customer Name:: {{data.custName}}</p>
   </div>
   <div mat-dialog-actions class='button-div'>
     <button mat-button [mat-dialog-close]>Ok</button>

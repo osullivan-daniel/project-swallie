@@ -16,7 +16,7 @@ export class AppComponent
   title = 'project-swallie';
 
   constructor(private __productService: ProductService, private __menuService: MenuService,){
-    console.log('product service')
+    //console.log('product service')
     __productService.load()
     __menuService.load(__productService.getProducts())
   }

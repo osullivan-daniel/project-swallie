@@ -80,59 +80,25 @@ export class OrderDialogComponent implements OnInit {
     let reset: Array<string> = [];
     for(const each of this.orderObjectForDisplay.data)
     {
-      console.log(each['name'])
       reset.push(each['name'])
-      // const clone = Object.assign( {}, each );
-      // itemList.push(Object.setPrototypeOf( clone, Product.prototype ));
     }
-    //let orderData = JSON.parse(JSON.stringify(this.orderObjectForDisplay.data))
 
     this.__menuService.resetProducts(reset)
     let orderData = JSON.parse(JSON.stringify(this.orderObjectForDisplay.data))
     
-    // TODO:: if i ever need items to be type Product
-    //let itemList = []
-    // for(const each of this.orderObjectForDisplay.data)
-    // {
-    //   const clone = Object.assign( {}, each );
-    //   itemList.push(Object.setPrototypeOf( clone, Product.prototype ));
-    // }
-    // console.log(itemList)
+
 
     let newOrderObject = new Order('1', 'Daniel', moment().format('MMMM Do YYYY, HH:mm:ss'), orderData)
-
-
-    // let orderQue = this.__adminService.ordersInQueue.value
-    // let orderNum = this.__adminService.currentOrderNumber.value
-    // let orderDetails = this.__adminService.orderDetailsForAll.value
-
-    // let order = JSON.parse(JSON.stringify(this.orderObjectForDisplay.data))
-    
+    console.log(newOrderObject)
 
 
     for (const each of this.orderObjectForDisplay.data) 
     {
-      console.log(each)
       each['addToOrder'] = false
       each['qty'] = 0
-      //value['orderNum'] = orderNum
     }
 
-    //console.log(order)
-
-
-    // //console.log(orderQue)
-    // orderQue.push(order)
-    // //console.log(orderQue)
-
-
-    // //console.log(orderNum)
-    // //console.log(orderDetails)
-
-    // this.__adminService.updateOrderQue(orderQue)
-    // this.__adminService.updateOrderDetails(orderDetails)
-    // this.__adminService.updateOrderNum(orderNum+1)
-
+    this.__adminService.updateOrderQue(newOrderObject)
     this.dialogRef.close()
   }
 

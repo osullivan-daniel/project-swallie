@@ -2,9 +2,9 @@
 <mat-nav-list>
     <mat-list-item id=cardItemList>
         <mat-nav-list>
-            <mat-list-item id=cardItemList *ngFor="let eachOrder of localDisplayListInProgress; let i = index">
+            <mat-list-item id=cardItemList *ngFor="let eachOrder of localProgress; let i = index">
                 <mat-card>
-                    <mat-table id=tableTest [dataSource]="eachOrder">
+                    <mat-table id=tableTest [dataSource]="eachOrder.order">
 
                         <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -42,9 +42,9 @@
 <mat-nav-list>
     <mat-list-item>
         <mat-nav-list>
-            <mat-list-item id=cardItemList *ngFor="let eachOrder of localDisplayListInQueue; let i = index">
+            <mat-list-item id=cardItemList *ngFor="let eachOrder of localQueue; let i = index">
                 <mat-card>
-                    <mat-table [dataSource]="eachOrder">
+                    <mat-table [dataSource]="eachOrder.order">
 
                         <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -69,7 +69,7 @@
                         <button mat-raised-button
                         id='completeButton'
                         [disabled]="disableOrderButton"
-                        (click)='onMoveToInProgress(i)'>Move To In Progress</button>
+                        (click)='onMoveToInProgress(i, eachOrder)'>Move To In Progress</button>
                     </div>
 
                 </mat-card>

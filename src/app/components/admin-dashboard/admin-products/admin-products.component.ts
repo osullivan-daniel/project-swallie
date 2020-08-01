@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
   templateUrl: 'admin-products.component.html',
   styles: [   
     `/* Style inputs with type="text", select elements and textareas */
-    input[type=text], select, textarea {
+    input[type=text], input[type=number], select, textarea {
       width: 100%; /* Full width */
       padding: 12px; /* Some padding */ 
       border: 1px solid #ccc; /* Gray border */
@@ -54,7 +54,7 @@ export class AdminProductsComponent implements OnInit
 {
   formCompleted:boolean = true;
   newProductForm: any;
-  styleList = ["IPA", "DIPA", "TIPA", "Stout"]
+  styleList = ["IPA", "TIPA", "Stout"]
 
   availableProductsLocal: Array<Product> = []
   
@@ -68,6 +68,7 @@ export class AdminProductsComponent implements OnInit
   {
     let newProductObject = new Product(uuid(), newProduct.value.name, newProduct.value.style, newProduct.value.abv, newProduct.value.imgUrl)
     this._productService.addProduct(newProductObject)
+    this.newProductForm.reset();
   }
 
 

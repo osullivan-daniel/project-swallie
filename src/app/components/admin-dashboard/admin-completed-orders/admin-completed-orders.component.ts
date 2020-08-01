@@ -55,38 +55,28 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
     }`
   ]
 })
-export class AdminCompletedOrdersComponent implements OnInit {
-
-  //localComplete: Array<any> = []
-  localOrderDetails: Array<any> = []
-  localDisplayListComplete: Array<any> = [];
+export class AdminCompletedOrdersComponent
+{
+  localComplete: Array<any> = []
 
   displayedColumns = ['name', 'size', 'qty']
 
   constructor(private _adminService: AdminService, public dialog: MatDialog) 
-  { 
-    this._adminService.orderDetailsForAll.subscribe(value => {
-      this.localOrderDetails=value;
-    });
-    
+  {
     this._adminService.ordersComplete.subscribe(value => {
-
-      value.forEach( item => {
-        this.localDisplayListComplete.push(new MatTableDataSource(item))
-      });
+      this.localComplete=value;
     });
   }
 
   public displayConfirmation(selectedOrder): void 
   {
-    let orderId = selectedOrder._data.value[0]['orderNum']
+    console.log(selectedOrder)
+    
     this.dialog.open(AdminConfirmDialogComponent,
     { 
       disableClose: true,
-      data: this.localOrderDetails[0][orderId]
+      data: {'tableNum': selectedOrder.tableNumber,
+             'custName': selectedOrder.customerName}
     });
   }
-
-  ngOnInit(): void {}
-
 }

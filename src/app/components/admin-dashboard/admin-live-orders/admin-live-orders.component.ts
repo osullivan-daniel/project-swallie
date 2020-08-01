@@ -56,13 +56,10 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
   ]
 })
 
-export class AdminLiveOrdersComponent implements OnInit 
+export class AdminLiveOrdersComponent
 {
   localQueue: Array<any> = []
   localProgress: Array<any> = []
-  localOrderDetails: Array<any> = []
-  localDisplayListInProgress: Array<any> = [];
-  localDisplayListInQueue: Array<any> = [];
 
   displayedColumns = ['name', 'size', 'qty']
 
@@ -75,54 +72,28 @@ export class AdminLiveOrdersComponent implements OnInit
     this._adminService.ordersInProgress.subscribe(value => {
       this.localProgress=value;
     });
-
-    this._adminService.orderDetailsForAll.subscribe(value => {
-      this.localOrderDetails=value;
-    });
   }
 
 
-  onMoveToInProgress(index) {
+  onMoveToInProgress(index) {    
     this._adminService.removeFromInQueue(index)
-    this.updateDisplayLists(this.localProgress, this.localQueue)
-  }
-
-
-  updateDisplayLists(inProgress, inQueue) 
-  {
-    this.localDisplayListInQueue = []
-    this.localDisplayListInProgress = []
-
-    inProgress.forEach( item => {
-      this.localDisplayListInProgress.push(new MatTableDataSource(item))
-    });
-
-    inQueue.forEach( item => {
-      this.localDisplayListInQueue.push(new MatTableDataSource(item))
-    });
   }
 
 
   public displayConfirmation(selectedOrder, index): void 
   {
-    let orderId = selectedOrder._data.value[0]['orderNum']
-    this.dialog.open(AdminConfirmDialogComponent,
+    console.log(selectedOrder)
+    
+    let dialogRef = this.dialog.open(AdminConfirmDialogComponent,
     { 
       disableClose: true,
-      data: this.localOrderDetails[0][orderId]
+      data: {'tableNum': selectedOrder.tableNumber,
+             'custName': selectedOrder.customerName}
     });
 
-    this.onCompleteOrderReview(index) 
-  }
-
-  
-  onCompleteOrderReview(index) {
-    this._adminService.removeFromInProgress(index)
-    this.updateDisplayLists(this.localProgress, this.localQueue)  
-  }
-
-
-  ngOnInit(): void {
-    this.updateDisplayLists(this.localProgress, this.localQueue)
+    dialogRef.afterClosed().subscribe(res => 
+    {
+      this._adminService.removeFromInProgress(index)
+    });
   }
 }

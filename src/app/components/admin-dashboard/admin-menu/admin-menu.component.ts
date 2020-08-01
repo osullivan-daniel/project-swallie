@@ -13,8 +13,7 @@ import { MenuService } from 'src/app/services/menu.service';
     `.mainDiv {justify-content: space-between;}`,
     `mat-card {margin: 15px;}`,
 
-    `/* Style inputs with type="text", select elements and textareas */
-    input[type=text], select, textarea {
+    `input[type=number], select, textarea {
       width: 25%;
       padding: 6px; /* Some padding */ 
       border: 1px solid #ccc; /* Gray border */
@@ -23,8 +22,7 @@ import { MenuService } from 'src/app/services/menu.service';
       margin-top: 6px; /* Add a top margin */
       margin-bottom: 6px; /* Bottom margin */
     }`,
-    `/* Style inputs with type="text", select elements and textareas */
-    mat-checkbox {
+    `mat-checkbox {
       width: 25%;
       padding: 8px; /* Some padding */ 
       box-sizing: border-box; /* Make sure that padding and width stays in place */
@@ -63,59 +61,90 @@ export class AdminMenuComponent {
       let menuGroup = this.formBuilder.group({
         0: this.formBuilder.group({"size": item['cans'], 
                                    "price": new FormControl(
-                                            {value: item['cansPrice'], disabled: !item['cans']},
-                                            [Validators.required, Validators.pattern("^[0-9]*$")])
+                                            {value: item['cansPrice'], disabled: !item['cans']})
         }),
         1: this.formBuilder.group({"size": item['halves'], 
                                    "price": new FormControl(
-                                            {value: item['halvesPrice'], disabled: !item['halves']},
-                                            [Validators.required, Validators.pattern("^[0-9]*$")])
+                                            {value: item['halvesPrice'], disabled: !item['halves']})
         }),
         2: this.formBuilder.group({"size": item['thirds'], 
                                    "price": new FormControl(
-                                            {value: item['thirdsPrice'], disabled: !item['thirds']},
-                                            [Validators.required, Validators.pattern("^[0-9]*$")])
+                                            {value: item['thirdsPrice'], disabled: !item['thirds']})
         })
       });
       this.menuGroupArray.push(menuGroup)
 
       this.listWithDetailsTest.push({
         'name': item.name,
-        'productId': item.id,
+        'productId': item.productId,
+        'updateButtonVisable': false, 
         'sizeData': [{"size": "Can's", "price": item['cansPrice'], "available": item['cans']}, 
                      {"size": "1/2's", "price": item['halvesPrice'], "available": item['halves']}, 
                      {"size": "1/3's", "price": item['thirdsPrice'], "available": item['thirds']}]
       })
     });
-
-    console.log('this.menuGroupArray::', this.menuGroupArray)
-    console.log('this.listWithDetailsTest::', this.listWithDetailsTest)
   }
 
 
-  onSubmit(eachItem)
+  onSubmit(item)
   {
-    //console.log('this.menuGroup', this.menuGroup)
-    console.log('eachItem', eachItem)
-    this.__productService.showProductList()
+    item.updateButtonVisable = false;
+    let product = this.__productService.getProductById(item.productId)
+
+    item.sizeData.forEach(each => {
+      if(each.size === "Can's")
+      {
+        product.cans = each.available
+        product.cansPrice = each.price
+      }
+      else if(each.size === "1/2's")
+      {
+        product.halves = each.available
+        product.halvesPrice = each.price
+      }
+      else if(each.size === "1/3's")
+      {
+        product.thirds = each.available
+        product.thirdsPrice = each.price
+      }
+    });
+
+    this.__menuService.load(this.__productService.getProducts())
   }
 
 
-  selectDialogOptions(event: any, element: string, eachItem: any, rowIndex:any) 
+  selectDialogOptions(item: any, row: any, rowObject:any, formGroup:any) 
   {
-    element['available'] = !element['available']
-    this.__menuService.showMenu()
-    this.__productService.showProductList()
+    row['available'] = !row['available']
 
-    if (rowIndex.controls.price.status === "DISABLED")
-      rowIndex.controls.price.enable()
+    if (rowObject.controls.price.status === "DISABLED")
+      rowObject.controls.price.enable()
     else
-      rowIndex.controls.price.disable()
+      rowObject.controls.price.disable()
+
+    item.updateButtonVisable = this.checkUpdateProductButton(item.sizeData)
   }
 
 
-  onSave(element: string) 
+  enterText(item: any, row: any, rowObject: any, formGroup:any)
   {
-    console.log('element:', element)
+    row['price'] = rowObject.controls.price.value
+    item.updateButtonVisable = this.checkUpdateProductButton(item.sizeData)
+  }
+
+
+  checkUpdateProductButton(input: any): boolean
+  {
+    let visable = true
+    input.forEach(item => {
+      if (item.available == true)
+      {
+        if (item.price == null || item.price == 0)
+        {
+          visable = false
+        }
+      }
+    })
+    return visable
   }
 }

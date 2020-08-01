@@ -94,8 +94,6 @@ export class MainBodyComponent implements OnInit {
       if (!(res === false))
         selectedItem.orderDetails = res
     });
-
-    this.__menuService.showMenu()
   }
 
   ngOnInit(): void {

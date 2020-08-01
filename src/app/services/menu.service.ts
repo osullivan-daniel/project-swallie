@@ -20,13 +20,7 @@ import { Product } from './product'
       prodList.subscribe(value => {
         console.log('Menu load')
         this.availableMenu.next(this.genMenuFromProducts(value));
-        console.log(this.availableMenu.value)
       });
-    }
-
-    showMenu()
-    {
-      console.log('show menu', this.availableMenu.value)
     }
 
     getAvaliableMenuAll()
@@ -61,8 +55,17 @@ import { Product } from './product'
     genMenuFromProducts(prodList: Array<Product>): any
     {
       let createMenu = {}
+      let availableProdList: Array<Product> = []
 
       prodList.forEach(function(each) 
+      {
+        if(!(each.cans === false && each.halves === false && each.thirds === false))
+        {
+          availableProdList.push(each)
+        }
+      });
+
+      availableProdList.forEach(function(each) 
       {
         if (!(each.style in createMenu))
         {
@@ -150,9 +153,7 @@ import { Product } from './product'
     }
 
     resetProducts(listOfItemsToReset)
-    {
-      console.log(this.availableMenu.value['All'])
-    
+    {    
       let prodList = [] 
       for (const [key, value] of Object.entries(this.availableMenu.value['All'])) 
       {
@@ -165,7 +166,6 @@ import { Product } from './product'
           });
         }
       } 
-      console.log(this.availableMenu.value['All'])
     }
 
   }

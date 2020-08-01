@@ -16,11 +16,6 @@ import { v4 as uuid } from 'uuid';
   
     constructor(){}
 
-    showProductList()
-    {
-      console.log('show productList', this.productList.value)
-    }
-
     getProducts()
     {
         return this.productList.asObservable();
@@ -82,10 +77,21 @@ import { v4 as uuid } from 'uuid';
       this.productList.next(prodList);
     }
 
+    getProductById(id: string): Product
+    {
+      let returnItem = null
+      this.productList.value.forEach( item => {
+        if (id == item.productId)
+        {
+          returnItem = item
+        }
+      });
+      return returnItem
+    }
+
     load()
     {
       console.log('On load')
       this.productList.next(this.updateAvailableProductsFromServer());
-      console.log(this.productList.value)
     }
   }
