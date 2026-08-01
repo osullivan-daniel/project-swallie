@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select'
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -74,7 +73,6 @@ import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admi
         MatListModule,
         MatDialogModule,
         BrowserAnimationsModule,
-        FlexLayoutModule,
         MatRadioModule,
         MatSelectModule,
         MatCheckboxModule,

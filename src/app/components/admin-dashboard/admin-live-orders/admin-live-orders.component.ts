@@ -24,7 +24,7 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
     .mat-footer-row,
     .mat-header-row,
     .mat-row {
-        display: inline-flex;
+        display: flex;
         min-width: 90%;
     }
     `,
