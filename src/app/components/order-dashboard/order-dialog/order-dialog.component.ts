@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog'
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table'
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog'
+import { MatTableDataSource } from '@angular/material/table'
 import { AdminService } from 'src/app/services/admin.service';
 import { Product } from 'src/app/services/product';
 import { Order } from 'src/app/services/order';
