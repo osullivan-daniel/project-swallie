@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormArray, UntypedFormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table'
 import { ProductService } from 'src/app/services/product.service';
 import { MenuService } from 'src/app/services/menu.service';
@@ -45,7 +45,7 @@ export class AdminMenuComponent {
 
   displayedColumns = ['size', 'price']
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: UntypedFormBuilder, 
               private __productService: ProductService,
               private __menuService: MenuService) 
   {
@@ -54,21 +54,21 @@ export class AdminMenuComponent {
       this.availableProductsLocal=value;
     });  
 
-    this.menuGroupArray = new FormArray([]);
+    this.menuGroupArray = new UntypedFormArray([]);
 
     this.availableProductsLocal.forEach( item => {
       
       let menuGroup = this.formBuilder.group({
         0: this.formBuilder.group({"size": item['cans'], 
-                                   "price": new FormControl(
+                                   "price": new UntypedFormControl(
                                             {value: item['cansPrice'], disabled: !item['cans']})
         }),
         1: this.formBuilder.group({"size": item['halves'], 
-                                   "price": new FormControl(
+                                   "price": new UntypedFormControl(
                                             {value: item['halvesPrice'], disabled: !item['halves']})
         }),
         2: this.formBuilder.group({"size": item['thirds'], 
-                                   "price": new FormControl(
+                                   "price": new UntypedFormControl(
                                             {value: item['thirdsPrice'], disabled: !item['thirds']})
         })
       });

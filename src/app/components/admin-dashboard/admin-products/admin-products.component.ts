@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Product } from '../../../services/product';
 //import { DataService } from '../../../services/data.service';
 import { ProductService } from '../../../services/product.service'
@@ -58,7 +58,7 @@ export class AdminProductsComponent implements OnInit
 
   availableProductsLocal: Array<Product> = []
   
-  constructor(private formBuilder: FormBuilder, private _productService: ProductService) 
+  constructor(private formBuilder: UntypedFormBuilder, private _productService: ProductService) 
   {
     this.newProductForm = this.formBuilder.group({'name': '','style': '','abv': '', 'imgUrl': ''}); 
   }
