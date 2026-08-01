@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
-import { MatTableDataSource } from '@angular/material/table'
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table'
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
 
 @Component({

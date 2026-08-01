@@ -4,7 +4,7 @@ import { GuiStyleService } from '../../../services/gui-style.service';
 import { MenuBodyService } from '../../../services/menu-body.service';
 //import { DataService } from '../../../services/data.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Router } from '@angular/router';
 import { MenuService } from 'src/app/services/menu.service';
 
