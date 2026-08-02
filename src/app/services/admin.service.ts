@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Order } from 'src/app/services/order';
-import * as moment from 'moment';
+import { format } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -45,10 +45,10 @@ export class AdminService
   constructor() 
   {
     // these are for local manipulation before 'broadcast'
-    this.localComplete.push(new Order('8', 'Tom', moment().format('MMMM Do YYYY, HH:mm:ss'), this.exampleOrder))
-    this.localProgress.push(new Order('3', 'James', moment().format('MMMM Do YYYY, HH:mm:ss'), this.exampleOrder3))
-    this.localProgress.push(new Order('7', 'Mary', moment().format('MMMM Do YYYY, HH:mm:ss'), this.exampleOrder2))
-    this.localQueue.push(new Order('4', 'Timmy', moment().format('MMMM Do YYYY, HH:mm:ss'), this.exampleOrder1))
+    this.localComplete.push(new Order('8', 'Tom', format(new Date(), 'MMMM do yyyy, HH:mm:ss'), this.exampleOrder))
+    this.localProgress.push(new Order('3', 'James', format(new Date(), 'MMMM do yyyy, HH:mm:ss'), this.exampleOrder3))
+    this.localProgress.push(new Order('7', 'Mary', format(new Date(), 'MMMM do yyyy, HH:mm:ss'), this.exampleOrder2))
+    this.localQueue.push(new Order('4', 'Timmy', format(new Date(), 'MMMM do yyyy, HH:mm:ss'), this.exampleOrder1))
     
     // These are for all subscribers
     this.ordersInQueue.next(this.localQueue)

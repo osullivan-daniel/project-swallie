@@ -5,8 +5,9 @@ import { MatTableDataSource } from '@angular/material/table'
 import { AdminService } from 'src/app/services/admin.service';
 import { Product } from 'src/app/services/product';
 import { Order } from 'src/app/services/order';
-import * as moment from 'moment';
 import { MenuService } from 'src/app/services/menu.service';
+import { format } from 'date-fns';
+
 
 @Component({
   selector: 'app-order-dialog',
@@ -41,7 +42,7 @@ export class OrderDialogComponent implements OnInit {
     
 
 
-    let newOrderObject = new Order('1', 'Daniel', moment().format('MMMM Do YYYY, HH:mm:ss'), orderData)
+    let newOrderObject = new Order('1', 'Daniel', format(new Date(), 'MMMM do yyyy, HH:mm:ss'), orderData)
     console.log(newOrderObject)
 
 
