@@ -1,0 +1,13 @@
+<div class="container" id="example-container">
+	<img id="menuIcon" src="../../assets/icons/menu-black-36dp.svg" (click)="changeMenu()" [ngStyle]="{ visibility: this.displayMenuIcon }" />
+
+	<h1 id="appHomeTitle">{{ selectedOption }}</h1>
+
+	<div class="flexDiv">
+		<div *ngFor="let key of selectedSubMenu">
+			<img id="clickableCanImage" src="{{ key.img }}" (click)="displayupdateCart(key)" />
+			<p class="productName">{{ key.name }}</p>
+			<p class="productName">{{ key.APV }}%</p>
+		</div>
+	</div>
+</div>

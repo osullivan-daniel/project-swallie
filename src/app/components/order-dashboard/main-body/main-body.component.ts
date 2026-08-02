@@ -9,46 +9,8 @@ import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-main-body',
-  template: `
-          <div class="container" id="example-container">
-              <img id="menuIcon" src="../../assets/icons/menu-black-36dp.svg" 
-              (click)="changeMenu()"  
-              [ngStyle]="{'visibility': this.displayMenuIcon}">
-
-              <h1 id="appHomeTitle">{{selectedOption}}</h1>
-
-              <div class=flexDiv>
-                <div *ngFor="let key of selectedSubMenu">
-
-                <img id=clickableCanImage src={{key.img}} (click)="displayupdateCart(key)">
-                <p class=productName>{{key.name}}</p>
-                <p class=productName>{{key.APV}}%</p>
-                </div>
-              </div>
-          </div>
-  `,
-  styles: [
-    '#appHomeTitle { font-weight: bold; text-align: center;}',
-    
-    '.productName { font-weight: bold; text-align: center; text-overflow: ellipsis; width: 180px;}',
-    
-    `.flexDiv { 
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          justify-content: center;
-    }`,
-
-    `#menuIcon {
-          position: fixed;
-          cursor: pointer; 
-    }`,
-     
-    `#clickableCanImage {
-          height: 270px;
-          width: 180px;
-    }`
-  ]
+  templateUrl: 'main-body.component.html',
+  styleUrls: ['main-body.component.css']
 })
 
 

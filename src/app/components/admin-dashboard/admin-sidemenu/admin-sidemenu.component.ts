@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sidemenu',
-  templateUrl: 'admin-sidemenu.component.html',
-  styleUrls:['admin-sidemenu.component.css'] 
+  templateUrl: 'admin-sidemenu.component.html'
 })
 
 export class AdminSidemenuComponent implements OnInit {
