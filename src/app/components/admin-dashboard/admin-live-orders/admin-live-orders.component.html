@@ -1,83 +1,78 @@
 <h2>In Progress</h2>
 <mat-nav-list>
-    <div id=cardItemList>
-        <mat-nav-list>
-            <div class="card-item-list" id=cardItemList *ngFor="let eachOrder of localProgress; let i = index">
-                <mat-card class="swally-card">
-                    <mat-table id=tableTest [dataSource]="eachOrder.order">
-
-                        <ng-container matColumnDef="name">
-                            <th mat-header-cell *matHeaderCellDef> Name </th>
-                            <td mat-cell *matCellDef="let element">
-                                <span class="order-name">{{element.name}}</span>
-                            </td>
-                        </ng-container>
-                    
-                        <ng-container matColumnDef="size">
-                            <th mat-header-cell *matHeaderCellDef> Size </th>
-                            <td mat-cell *matCellDef="let element"> {{element.size}} </td>
-                        </ng-container>
-                    
-                        <ng-container matColumnDef="qty">
-                            <th mat-header-cell *matHeaderCellDef> Qty </th>
-                            <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                    </mat-table>
-                    <div class='button-div'>
-                        <button mat-raised-button
-                        id='completeButton'
-                        [disabled]="disableOrderButton"
-                        (click)='displayConfirmation(eachOrder, i)'>Complete</button>
-                    </div>
-                </mat-card>
+  <div id=cardItemList>
+    <mat-nav-list>
+      @for (eachOrder of localProgress; track eachOrder; let i = $index) {
+        <div class="card-item-list" id=cardItemList>
+          <mat-card class="swally-card">
+            <mat-table id=tableTest [dataSource]="eachOrder.order">
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="order-name">{{element.name}}</span>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="size">
+                <th mat-header-cell *matHeaderCellDef> Size </th>
+                <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+              </ng-container>
+              <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef> Qty </th>
+                <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </mat-table>
+            <div class='button-div'>
+              <button mat-raised-button
+                id='completeButton'
+                [disabled]="disableOrderButton"
+              (click)='displayConfirmation(eachOrder, i)'>Complete</button>
             </div>
-        </mat-nav-list>
-    </div>
+          </mat-card>
+        </div>
+      }
+    </mat-nav-list>
+  </div>
 </mat-nav-list>
 
 <h2>Queue</h2>
 
 <mat-nav-list>
-    <div>
-        <mat-nav-list>
-            <div class="card-item-list" id="cardItemList" *ngFor="let eachOrder of localQueue; let i = index">
-                <mat-card class="swally-card">
-                    <mat-table [dataSource]="eachOrder.order">
-
-                        <ng-container matColumnDef="name">
-                            <th mat-header-cell *matHeaderCellDef> Name </th>
-                            <td mat-cell *matCellDef="let element">
-                                <span class="order-name">{{element.name}}</span>
-                            </td>
-                        </ng-container>
-                    
-                        <ng-container matColumnDef="size">
-                            <th mat-header-cell *matHeaderCellDef> Size </th>
-                            <td mat-cell *matCellDef="let element"> {{element.size}} </td>
-                        </ng-container>
-                    
-                        <ng-container matColumnDef="qty">
-                            <th mat-header-cell *matHeaderCellDef> Qty </th>
-                            <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                    </mat-table>
-                    <div class='button-div' *ngIf="i===0">
-                        <button mat-raised-button
-                        id='completeButton'
-                        [disabled]="disableOrderButton"
-                        (click)='onMoveToInProgress(i, eachOrder)'>Move To In Progress</button>
-                    </div>
-
-                </mat-card>
-            </div>
-        </mat-nav-list>
-    </div>
+  <div>
+    <mat-nav-list>
+      @for (eachOrder of localQueue; track eachOrder; let i = $index) {
+        <div class="card-item-list" id="cardItemList">
+          <mat-card class="swally-card">
+            <mat-table [dataSource]="eachOrder.order">
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="order-name">{{element.name}}</span>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="size">
+                <th mat-header-cell *matHeaderCellDef> Size </th>
+                <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+              </ng-container>
+              <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef> Qty </th>
+                <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </mat-table>
+            @if (i===0) {
+              <div class='button-div'>
+                <button mat-raised-button
+                  id='completeButton'
+                  [disabled]="disableOrderButton"
+                (click)='onMoveToInProgress(i, eachOrder)'>Move To In Progress</button>
+              </div>
+            }
+          </mat-card>
+        </div>
+      }
+    </mat-nav-list>
+  </div>
 </mat-nav-list>

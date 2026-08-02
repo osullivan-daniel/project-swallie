@@ -1,19 +1,21 @@
 <app-header></app-header>
 <mat-sidenav-container class="navContainer" fixedInViewport="true">
-	<mat-sidenav [ngStyle]="{ 'background-color': this.backgroundColour }" [(opened)]="sideMenuVisable" disableClose mode="side">
-		<div class="close-menu">
-			<img src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" alt="Close menu" />
-		</div>
+  <mat-sidenav [ngStyle]="{ 'background-color': this.backgroundColour }" [(opened)]="sideMenuVisable" disableClose mode="side">
+    <div class="close-menu">
+      <img src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" alt="Close menu" />
+    </div>
 
-		<mat-nav-list class="swally-menu-style" [ngStyle]="{ '--mdc-list-list-item-label-text-color': textColour, '--mdc-list-list-item-hover-label-text-color': textColour, '--mdc-list-list-item-focus-label-text-color': textColour }">
-			<mat-list-item *ngFor="let key of availableCatagories" (click)="changeMenu(key)">
-				{{ key }}
-			</mat-list-item>
-			<mat-list-item (click)="displayCart()"> Cart </mat-list-item>
-			<mat-list-item (click)="loadAdmin()"> Admin </mat-list-item>
-		</mat-nav-list>
-	</mat-sidenav>
-	<mat-sidenav-content>
-		<app-main-body></app-main-body>
-	</mat-sidenav-content>
+    <mat-nav-list class="swally-menu-style" [ngStyle]="{ '--mdc-list-list-item-label-text-color': textColour, '--mdc-list-list-item-hover-label-text-color': textColour, '--mdc-list-list-item-focus-label-text-color': textColour }">
+      @for (key of availableCatagories; track key) {
+        <mat-list-item (click)="changeMenu(key)">
+          {{ key }}
+        </mat-list-item>
+      }
+      <mat-list-item (click)="displayCart()"> Cart </mat-list-item>
+      <mat-list-item (click)="loadAdmin()"> Admin </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-main-body></app-main-body>
+  </mat-sidenav-content>
 </mat-sidenav-container>

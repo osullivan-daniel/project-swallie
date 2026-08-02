@@ -2,17 +2,21 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-		"baseUrl": "./",
-		"outDir": "./dist/out-tsc",
-		"sourceMap": true,
-		"esModuleInterop": true,
-		"declaration": false,
-		"experimentalDecorators": true,
-		"moduleResolution": "node",
-		"importHelpers": true,
-		"target": "ES2022",
-		"module": "es2020",
-		"lib": ["ES2022", "ES2022.Intl", "DOM"],
-		"useDefineForClassFields": false
-	}
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "lib": [
+      "ES2022",
+      "ES2022.Intl",
+      "DOM"
+    ],
+    "useDefineForClassFields": false
+  }
 }
