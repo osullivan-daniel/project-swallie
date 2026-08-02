@@ -7,53 +7,7 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
 @Component({
   selector: 'app-admin-live-orders',
   templateUrl: 'admin-live-orders.component.html',
-  styles: [
-    `#menuIcon {
-      cursor: pointer; 
-    }`,
-
-    `#tableTest {
-      width: 100%;
-     }`,
-     
-    `#cardItemList {
-      height: auto;
-    }`,
-
-    `
-    .mat-footer-row,
-    .mat-header-row,
-    .mat-row {
-        display: flex;
-        min-width: 90%;
-    }
-    `,
-    `.mat-column-name {
-      flex: 0 0 50% !important;
-      width: 50% !important;
-    }`,
-
-    `.mat-column-size {
-      flex: 0 0 25% !important;
-      width: 25% !important;
-    }`,
-
-    `.mat-column-qty {
-      flex: 0 0 25% !important;
-      width: 25% !important;
-    }`,
-
-    `::ng-deep .mat-list-item-content {
-      display: block !important;
-    }`,
-
-    `.button-div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-top: 15px;
-    }`
-  ]
+  styleUrls: ['./admin-live-orders.component.css']
 })
 
 export class AdminLiveOrdersComponent

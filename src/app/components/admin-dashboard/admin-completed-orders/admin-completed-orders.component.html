@@ -3,7 +3,7 @@
     <mat-list-item id=cardItemList>
         <mat-nav-list>
             <mat-list-item id=cardItemList *ngFor="let eachOrder of localComplete; let i = index">
-                <mat-card>
+                <mat-card class="swally-card">
                     <mat-table id=tableTest [dataSource]="eachOrder.order">
 
                         <ng-container matColumnDef="name">

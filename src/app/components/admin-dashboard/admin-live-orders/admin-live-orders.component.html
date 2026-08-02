@@ -1,9 +1,9 @@
 <h2>In Progress</h2>
 <mat-nav-list>
-    <mat-list-item id=cardItemList>
+    <div id=cardItemList>
         <mat-nav-list>
-            <mat-list-item id=cardItemList *ngFor="let eachOrder of localProgress; let i = index">
-                <mat-card>
+            <div class="card-item-list" id=cardItemList *ngFor="let eachOrder of localProgress; let i = index">
+                <mat-card class="swally-card">
                     <mat-table id=tableTest [dataSource]="eachOrder.order">
 
                         <ng-container matColumnDef="name">
@@ -32,18 +32,18 @@
                         (click)='displayConfirmation(eachOrder, i)'>Complete</button>
                     </div>
                 </mat-card>
-            </mat-list-item>
+            </div>
         </mat-nav-list>
-    </mat-list-item>
+    </div>
 </mat-nav-list>
 
 <h2>Queue</h2>
 
 <mat-nav-list>
-    <mat-list-item>
+    <div>
         <mat-nav-list>
-            <mat-list-item id=cardItemList *ngFor="let eachOrder of localQueue; let i = index">
-                <mat-card>
+            <div class="card-item-list" id="cardItemList" *ngFor="let eachOrder of localQueue; let i = index">
+                <mat-card class="swally-card">
                     <mat-table [dataSource]="eachOrder.order">
 
                         <ng-container matColumnDef="name">
@@ -73,7 +73,7 @@
                     </div>
 
                 </mat-card>
-            </mat-list-item>
+            </div>
         </mat-nav-list>
-    </mat-list-item>
+    </div>
 </mat-nav-list>

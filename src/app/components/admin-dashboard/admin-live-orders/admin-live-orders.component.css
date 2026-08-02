@@ -1,0 +1,42 @@
+.card-item-list {
+    width: 100%;
+    padding: 10px 16px;
+    box-sizing: border-box;
+}
+
+.mat-footer-row,
+.mat-mdc-footer-row,
+.mat-header-row,
+.mat-mdc-header-row,
+.mat-row,
+.mat-mdc-row {
+    width: 100% !important;
+    display: flex !important;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+    flex: 1 1 auto;
+}
+    
+.mat-column-name {
+    flex: 1 1 50% !important;
+    width: 50% !important;
+}
+
+.mat-column-size {
+    flex: 1 1 25% !important;
+    width: 25% !important;
+}
+
+.mat-column-qty {
+    flex: 1 1 25% !important;
+    width: 25% !important;
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
