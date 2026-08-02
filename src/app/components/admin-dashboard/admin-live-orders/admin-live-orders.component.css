@@ -18,10 +18,24 @@
 .mat-mdc-header-cell {
     flex: 1 1 auto;
 }
-    
+
 .mat-column-name {
     flex: 1 1 50% !important;
     width: 50% !important;
+    min-width: 0;
+}
+
+/* Keep item names readable on narrow screens: wrap only between words and
+   show at most two lines instead of Material's single-line ellipsis. */
+.order-name {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .mat-column-size {
@@ -39,4 +53,14 @@
     justify-content: center;
     align-items: center;
     padding-top: 15px;
+}
+
+.swally-card {
+    min-width: min-content;
+    width: 100% !important;;
+    box-sizing: border-box !important;;
+    padding: 16px !important;;
+    margin-bottom: 16px !important;;
+    border: 1px solid #ddd !important;;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.15) !important;;
 }

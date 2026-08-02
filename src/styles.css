@@ -3,6 +3,7 @@
 @import 'assets/css/modules/_fonts.css';
 
 .swally-card {
+    min-width: min-content;
     width: 100% !important;;
     box-sizing: border-box !important;;
     padding: 16px !important;;
