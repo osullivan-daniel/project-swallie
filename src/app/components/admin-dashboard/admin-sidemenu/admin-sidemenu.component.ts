@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-admin-sidemenu',
     templateUrl: 'admin-sidemenu.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

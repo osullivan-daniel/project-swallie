@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ProductService } from './services/product.service'
 import { MenuService } from './services/menu.service'
 
@@ -8,6 +8,7 @@ import { MenuService } from './services/menu.service'
 <router-outlet></router-outlet>
 `,
     styleUrls: [],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

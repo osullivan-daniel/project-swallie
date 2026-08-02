@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -21,6 +21,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
       padding-top: 15px;
   }`
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdminConfirmDialogComponent implements OnInit {

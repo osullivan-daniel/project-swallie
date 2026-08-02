@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MenuBodyService } from '../../../services/menu-body.service';
 //import { DataService } from '../../../services/data.service';
 import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
@@ -11,6 +11,7 @@ import { MenuService } from 'src/app/services/menu.service';
     selector: 'app-main-body',
     templateUrl: 'main-body.component.html',
     styleUrls: ['main-body.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

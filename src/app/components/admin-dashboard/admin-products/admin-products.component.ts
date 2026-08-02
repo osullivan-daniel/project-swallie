@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { Product } from '../../../services/product';
 //import { DataService } from '../../../services/data.service';
@@ -47,6 +47,7 @@ import { v4 as uuid } from 'uuid';
       padding-top: 15px;
   }`
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdminProductsComponent implements OnInit 

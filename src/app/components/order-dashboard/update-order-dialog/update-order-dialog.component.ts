@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table'
     selector: 'app-update-order-dialog',
     templateUrl: 'update-order-dialog.component.html',
     styleUrls: ['update-order-dialog.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

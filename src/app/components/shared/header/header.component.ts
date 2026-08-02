@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
 
 @Component({
@@ -19,6 +19,7 @@ import { GuiStyleService } from '../../../services/gui-style.service';
     styles: [
         'div { height: 100px; width: 100%; }'
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class HeaderComponent implements OnInit {

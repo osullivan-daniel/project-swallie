@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -35,6 +35,7 @@ import { AdminService } from 'src/app/services/admin.service';
     margin-left: 75%  
   }`,
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdminMainComponent implements OnInit {

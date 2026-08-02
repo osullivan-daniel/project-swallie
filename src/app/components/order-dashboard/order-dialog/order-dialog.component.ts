@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
@@ -13,6 +13,7 @@ import { format } from 'date-fns';
     selector: 'app-order-dialog',
     templateUrl: 'order-dialog.component.html',
     styleUrls: ['order-dialog.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class OrderDialogComponent implements OnInit {

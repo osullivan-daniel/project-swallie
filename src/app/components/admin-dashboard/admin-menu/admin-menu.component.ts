@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormArray, UntypedFormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table'
 import { ProductService } from 'src/app/services/product.service';
@@ -29,6 +29,7 @@ import { MenuService } from 'src/app/services/menu.service';
       margin-bottom: 6px; /* Bottom margin */
     }`
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdminMenuComponent {

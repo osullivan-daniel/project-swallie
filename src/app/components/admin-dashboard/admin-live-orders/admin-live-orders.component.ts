@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { MatTableDataSource } from '@angular/material/table'
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
     selector: 'app-admin-live-orders',
     templateUrl: 'admin-live-orders.component.html',
     styleUrls: ['./admin-live-orders.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

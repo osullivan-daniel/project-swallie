@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';  // Breakpoints?
 import { GuiStyleService } from '../../../services/gui-style.service';
 import { MenuBodyService } from '../../../services/menu-body.service';
@@ -13,6 +13,7 @@ import { MenuService } from 'src/app/services/menu.service';
     selector: 'app-side-menu',
     templateUrl: 'side-menu.component.html',
     styleUrls: ['side-menu.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 
