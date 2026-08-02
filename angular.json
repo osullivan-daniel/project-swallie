@@ -94,18 +94,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "project-swallie:build"
+            "buildTarget": "project-swallie:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "project-swallie:build:production"
+              "buildTarget": "project-swallie:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "project-swallie:build"
+            "buildTarget": "project-swallie:build"
           }
         }
       }
