@@ -1,47 +1,36 @@
-<h2 id='dialogHeader'>{{__dialogData.name}}</h2>
+<h2 id="dialogHeader">{{ __dialogData.name }}</h2>
 
-        <mat-table #table class="update-order-table" [dataSource]="orderOptionsForDisplay">
-        
-            <ng-container matColumnDef="size">
-                <th mat-header-cell *matHeaderCellDef> Size </th>
-                <td mat-cell *matCellDef="let element"> 
-                    <mat-checkbox 
-                        [checked]="element.addToOrder"
-                        (change)="selectDialogOptions($event, element.size)">
-                        {{element.size}}
-                    </mat-checkbox>
-                </td>
-            </ng-container>
-        
-            <ng-container matColumnDef="qty">
-                <th mat-header-cell *matHeaderCellDef> Qty </th>
-                <td mat-cell *matCellDef="let element"> 
-                    <mat-select id='quantitySelect' [disabled]="!element.addToOrder" [value]="element.qty">
-                        <mat-option *ngFor="let num of availableToOrder" 
-                                    [value]=num
-                                    (click)="selectDropdownValue(element.size, num)">
-                                    {{ num }}
-                        </mat-option>
-                    </mat-select>
-                </td>
-            </ng-container>
+<mat-table class="update-order-table" [dataSource]="orderOptionsForDisplay">
+	<ng-container matColumnDef="size">
+		<th mat-header-cell *matHeaderCellDef>Size</th>
+		<td mat-cell *matCellDef="let element">
+			<mat-checkbox [checked]="element.addToOrder" (change)="selectDialogOptions($event, element.size)">
+				{{ element.size }}
+			</mat-checkbox>
+		</td>
+	</ng-container>
 
-            <ng-container matColumnDef="price">
-                <th mat-header-cell *matHeaderCellDef> Price </th>
-                <td mat-cell *matCellDef="let element"> 
-                    <p>£{{element.price}} each</p>
-                </td>
-            </ng-container>
-        
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        
+	<ng-container matColumnDef="qty">
+		<th mat-header-cell *matHeaderCellDef>Qty</th>
+		<td mat-cell *matCellDef="let element">
+			<mat-select id="quantitySelect" [disabled]="!element.addToOrder" [value]="element.qty">
+				<mat-option *ngFor="let num of availableToOrder" [value]="num" (click)="selectDropdownValue(element.size, num)">
+					{{ num }}
+				</mat-option>
+			</mat-select>
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="price">
+		<th mat-header-cell *matHeaderCellDef>Price</th>
+		<td mat-cell *matCellDef="let element">
+			<p>£{{ element.price }} each</p>
+		</td>
+	</ng-container>
+
+	<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </mat-table>
-<div class='button-div'>
-    <button mat-raised-button mat-dialog-close 
-            id='update'
-            [disabled]="disableOrderButton"
-            (click)='onSave()'>Update order</button>
-    <button mat-raised-button mat-dialog-close
-            id='back'
-            (click)='onBack()'>Back</button>
+<div class="button-div">
+	<button mat-raised-button mat-dialog-close id="update" [disabled]="disableOrderButton" (click)="onSave()">Update order</button>
+	<button mat-raised-button mat-dialog-close id="back" (click)="onBack()">Back</button>
 </div>

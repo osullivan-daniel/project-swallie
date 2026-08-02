@@ -1,4 +1,4 @@
-<mat-table #table [dataSource]="orderObjectForDisplay">
+<mat-table class="order-table" [dataSource]="orderObjectForDisplay">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
@@ -30,7 +30,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </mat-table>
-<p>Total £{{total}}</p>
+<p class="order-total">Total £{{total}}</p>
 <div class='button-div'>
     <button mat-raised-button mat-dialog-close 
         id='submit'

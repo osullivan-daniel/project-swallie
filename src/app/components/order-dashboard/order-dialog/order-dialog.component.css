@@ -10,47 +10,41 @@
 	float: right !important;
 }
 
-
-.mat-column-username {
-	flex: 0 0 40% !important;
-	width: 40% !important;
-	overflow-wrap: break-word;
-	word-wrap: break-word;
-	word-break: break-word;
-	justify-content: right;
+.order-table {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	margin: 20px 0 0;
+	padding: 0 20px;
 }
 
-.mat-cell,
-.mat-mdc-cell,
-.mat-header-cell,
-.mat-mdc-header-cell {
-	box-sizing: border-box !important;
-	padding: 8px !important;
+.order-table .mat-row,
+.order-table .mat-mdc-row {
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	border-bottom: 0 !important;
 }
 
-.mat-column-size {
-	flex: 0 0 50% !important;
-	width: 50% !important;
+.order-table .mat-row::after,
+.order-table .mat-mdc-row::after {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 1px;
+	content: '';
+	background-color: rgba(0, 0, 0, 0.12);
 }
 
-.mat-column-qty {
-	flex: 0 0 25% !important;
-	width: 25% !important;
+.order-table .mat-cell,
+.order-table .mat-mdc-cell {
+	border-bottom: 0 !important;
 }
 
-.mat-column-price {
-	flex: 0 0 25% !important;
-	width: 25% !important;
-}
-
-.mat-column-price p {
-	margin: 0;
-	white-space: nowrap;
-}
-
-.mat-column-remove {
-	flex: 0 0 15% !important;
-	width: 15% !important;
+.order-total {
+	margin: 20px 20px 0;
+	text-align: left;
 }
 
 .button-div {
