@@ -12,11 +12,6 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "ES2022",
-      "ES2022.Intl",
-      "DOM"
-    ],
     "useDefineForClassFields": false
   }
 }
