@@ -1,7 +1,9 @@
 <app-header></app-header>
-<mat-sidenav-container fixedInViewport="true">
+<mat-sidenav-container class="navContainer" fixedInViewport="true">
 	<mat-sidenav [ngStyle]="{ 'background-color': this.backgroundColour }" [(opened)]="sideMenuVisable" disableClose mode="side">
-		<img id="menuIcon" src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="" />
+		<div class="close-menu">
+			<img src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" alt="Close menu" />
+		</div>
 
 		<mat-nav-list class="swally-menu-style" [ngStyle]="{ '--mdc-list-list-item-label-text-color': textColour, '--mdc-list-list-item-hover-label-text-color': textColour, '--mdc-list-list-item-focus-label-text-color': textColour }">
 			<mat-list-item *ngFor="let key of availableCatagories" (click)="changeMenu(key)">

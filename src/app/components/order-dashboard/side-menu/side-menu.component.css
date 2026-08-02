@@ -1,0 +1,14 @@
+.navContainer {
+    height: calc(100vh - 100px);
+    background-color: #FFFFFF;
+}
+
+.close-menu {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 16px;
+}
+
+.close-menu img {
+    cursor: pointer;
+}

@@ -5,7 +5,7 @@
 
 	<div class="flexDiv">
 		<div *ngFor="let key of selectedSubMenu">
-			<img id="clickableCanImage" src="{{ key.img }}" (click)="displayupdateCart(key)" />
+			<img class="clickableCanImage" id="clickableCanImage" src="{{ key.img }}" (click)="displayupdateCart(key)" />
 			<p class="productName">{{ key.name }}</p>
 			<p class="productName">{{ key.APV }}%</p>
 		</div>
