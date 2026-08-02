@@ -6,20 +6,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-sidemenu',
   templateUrl: 'admin-sidemenu.component.html',
-  styles: [
-    `#matListItems { 
-      font-weight: bold; 
-      font-family: Andale Mono, monospace, sans-serif;
-      color: this.textColour 
-    }`
-  ]
+  styleUrls:['admin-sidemenu.component.css'] 
 })
 
 export class AdminSidemenuComponent implements OnInit {
 
-  displayBody:string;
-  textColour: string;
-  backgroundColour:string;
+  displayBody:string | undefined;
+  textColour: string | undefined;
+  backgroundColour:string | undefined;
   sideMenuVisable:boolean = true;
 
   constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService, private router: Router) {}

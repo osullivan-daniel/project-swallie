@@ -1,26 +1,11 @@
-<mat-nav-list>
-    <mat-list-item id="matListItems"                         
-                    [ngStyle]="{'color': this.textColour}"
-                    (click)="changeView('live')">
-                    Live Orders</mat-list-item>
-    
-    <mat-list-item id="matListItems"                         
-                    [ngStyle]="{'color': this.textColour}"
-                    (click)="changeView('completed')">
-                    Completed Orders</mat-list-item>
+<mat-nav-list class="swally-menu-style" [ngStyle]="{ '--mdc-list-list-item-label-text-color': textColour, '--mdc-list-list-item-hover-label-text-color': textColour, '--mdc-list-list-item-focus-label-text-color': textColour }">
+	<mat-list-item (click)="changeView('live')"> Live Orders</mat-list-item>
 
-    <mat-list-item id="matListItems"                         
-                    [ngStyle]="{'color': this.textColour}"
-                    (click)="changeView('menu')">
-                    Menu</mat-list-item>
+	<mat-list-item (click)="changeView('completed')"> Completed Orders</mat-list-item>
 
-    <mat-list-item id="matListItems"                         
-                    [ngStyle]="{'color': this.textColour}"
-                    (click)="changeView('products')">
-                    Add Products</mat-list-item>
-    
-    <mat-list-item id="matListItems"                         
-                    [ngStyle]="{'color': this.textColour}"
-                    (click)="loadOrder()">
-                    Order</mat-list-item>
+	<mat-list-item (click)="changeView('menu')"> Menu</mat-list-item>
+
+	<mat-list-item (click)="changeView('products')"> Add Products</mat-list-item>
+
+	<mat-list-item (click)="loadOrder()"> Order</mat-list-item>
 </mat-nav-list>

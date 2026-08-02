@@ -13,3 +13,7 @@
     box-shadow: 10px 10px 10px rgba(0,0,0,0.15) !important;;
 }
 
+.swally-menu-style {
+    --mdc-list-list-item-label-text-font: "Andale Mono", monospace, sans-serif;
+    --mdc-list-list-item-label-text-weight: 700;
+}
