@@ -14,8 +14,8 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
 
 export class AdminLiveOrdersComponent
 {
-  localQueue: Array<any> = []
-  localProgress: Array<any> = []
+  localQueue: any = []
+  localProgress: any = []
 
   displayedColumns = ['name', 'size', 'qty']
 

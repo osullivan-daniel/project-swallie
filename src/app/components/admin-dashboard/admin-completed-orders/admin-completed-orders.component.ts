@@ -14,7 +14,7 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
 
 export class AdminCompletedOrdersComponent
 {
-  localComplete: Array<any> = []
+  localComplete: any = []
 
   displayedColumns = ['name', 'size', 'qty']
 

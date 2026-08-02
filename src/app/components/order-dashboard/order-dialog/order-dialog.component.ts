@@ -18,7 +18,7 @@ import { format } from 'date-fns';
 })
 export class OrderDialogComponent implements OnInit {
 
-  orderObject: Array<any> = []; // local copy of what is in the order
+  orderObject: any = []; // local copy of what is in the order
   orderObjectForAll: any; // How we interact with oderservice
   orderObjectForDisplay: any; // MatTableDataSource for display
   total: number = 0; //total price of order

@@ -34,8 +34,8 @@ import { MenuService } from 'src/app/services/menu.service';
 })
 export class AdminMenuComponent {
 
-  availableProductsLocal;
-  avilableProducts;
+  availableProductsLocal: any;
+  avilableProducts: any;
   addItemToMenu: any;
   productList: any = [];
 
