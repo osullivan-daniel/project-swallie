@@ -10,9 +10,10 @@ import { format } from 'date-fns';
 
 
 @Component({
-  selector: 'app-order-dialog',
-  templateUrl: 'order-dialog.component.html',
-  styleUrls: ['order-dialog.component.css']
+    selector: 'app-order-dialog',
+    templateUrl: 'order-dialog.component.html',
+    styleUrls: ['order-dialog.component.css'],
+    standalone: false
 })
 export class OrderDialogComponent implements OnInit {
 

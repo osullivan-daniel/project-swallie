@@ -4,9 +4,10 @@ import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
 
 @Component({
-  selector: 'app-update-order-dialog',
-  templateUrl: 'update-order-dialog.component.html', 
-  styleUrls: ['update-order-dialog.component.css']
+    selector: 'app-update-order-dialog',
+    templateUrl: 'update-order-dialog.component.html',
+    styleUrls: ['update-order-dialog.component.css'],
+    standalone: false
 })
 
 export class updateOrderDialogComponent implements OnInit

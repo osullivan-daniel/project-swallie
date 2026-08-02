@@ -6,14 +6,13 @@ import { MenuService } from 'src/app/services/menu.service';
 
 
 @Component({
-  selector: 'app-admin-menu',
-  templateUrl: 'admin-menu.component.html',
-  //providers: [DataService],
-  styles: [
-    `.mainDiv {justify-content: space-between;}`,
-    `mat-card {margin: 15px;}`,
-
-    `input[type=number], select, textarea {
+    selector: 'app-admin-menu',
+    templateUrl: 'admin-menu.component.html',
+    //providers: [DataService],
+    styles: [
+        `.mainDiv {justify-content: space-between;}`,
+        `mat-card {margin: 15px;}`,
+        `input[type=number], select, textarea {
       width: 25%;
       padding: 6px; /* Some padding */ 
       border: 1px solid #ccc; /* Gray border */
@@ -22,14 +21,15 @@ import { MenuService } from 'src/app/services/menu.service';
       margin-top: 6px; /* Add a top margin */
       margin-bottom: 6px; /* Bottom margin */
     }`,
-    `mat-checkbox {
+        `mat-checkbox {
       width: 25%;
       padding: 8px; /* Some padding */ 
       box-sizing: border-box; /* Make sure that padding and width stays in place */
       margin-top: 6px; /* Add a top margin */
       margin-bottom: 6px; /* Bottom margin */
     }`
-  ]
+    ],
+    standalone: false
 })
 export class AdminMenuComponent {
 

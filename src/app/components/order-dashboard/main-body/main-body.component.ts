@@ -8,9 +8,10 @@ import { MenuService } from 'src/app/services/menu.service';
 
 
 @Component({
-  selector: 'app-main-body',
-  templateUrl: 'main-body.component.html',
-  styleUrls: ['main-body.component.css']
+    selector: 'app-main-body',
+    templateUrl: 'main-body.component.html',
+    styleUrls: ['main-body.component.css'],
+    standalone: false
 })
 
 

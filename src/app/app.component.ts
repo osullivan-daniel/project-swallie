@@ -3,12 +3,12 @@ import { ProductService } from './services/product.service'
 import { MenuService } from './services/menu.service'
 
 @Component({
-  selector: 'app-root',
-  template:
-`
+    selector: 'app-root',
+    template: `
 <router-outlet></router-outlet>
 `,
-  styleUrls: []
+    styleUrls: [],
+    standalone: false
 })
 
 export class AppComponent

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
 
 @Component({
-  selector: 'app-header',
-  template: `
+    selector: 'app-header',
+    template: `
     <nav class="navbar">
 
     <!-- logo -->
@@ -16,9 +16,10 @@ import { GuiStyleService } from '../../../services/gui-style.service';
     </div>
   </nav>
   `,
-  styles: [
-    'div { height: 100px; width: 100%; }'
-  ]
+    styles: [
+        'div { height: 100px; width: 100%; }'
+    ],
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
 

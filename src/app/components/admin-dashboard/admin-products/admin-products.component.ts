@@ -6,10 +6,10 @@ import { ProductService } from '../../../services/product.service'
 import { v4 as uuid } from 'uuid';
 
 @Component({
-  selector: 'app-admin-products',
-  templateUrl: 'admin-products.component.html',
-  styles: [   
-    `/* Style inputs with type="text", select elements and textareas */
+    selector: 'app-admin-products',
+    templateUrl: 'admin-products.component.html',
+    styles: [
+        `/* Style inputs with type="text", select elements and textareas */
     input[type=text], input[type=number], select, textarea {
       width: 100%; /* Full width */
       padding: 12px; /* Some padding */ 
@@ -40,15 +40,14 @@ import { v4 as uuid } from 'uuid';
       border-radius: 5px;
       padding: 25px;
     }`,
-
-    `.button-div {
+        `.button-div {
       display: flex;
       justify-content: center;
       align-items: center;
       padding-top: 15px;
   }`
-
-  ]
+    ],
+    standalone: false
 })
 export class AdminProductsComponent implements OnInit 
 {

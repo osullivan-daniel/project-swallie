@@ -5,9 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
 
 @Component({
-  selector: 'app-admin-live-orders',
-  templateUrl: 'admin-live-orders.component.html',
-  styleUrls: ['./admin-live-orders.component.css']
+    selector: 'app-admin-live-orders',
+    templateUrl: 'admin-live-orders.component.html',
+    styleUrls: ['./admin-live-orders.component.css'],
+    standalone: false
 })
 
 export class AdminLiveOrdersComponent

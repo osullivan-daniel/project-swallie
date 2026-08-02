@@ -5,9 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
 
 @Component({
-  selector: 'app-admin-completed-orders',
-  templateUrl: 'admin-completed-orders.component.html',
-  styleUrls: ['admin-completed-orders.component.css']
+    selector: 'app-admin-completed-orders',
+    templateUrl: 'admin-completed-orders.component.html',
+    styleUrls: ['admin-completed-orders.component.css'],
+    standalone: false
 })
 
 export class AdminCompletedOrdersComponent

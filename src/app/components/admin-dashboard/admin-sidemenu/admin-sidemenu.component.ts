@@ -4,8 +4,9 @@ import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-sidemenu',
-  templateUrl: 'admin-sidemenu.component.html'
+    selector: 'app-admin-sidemenu',
+    templateUrl: 'admin-sidemenu.component.html',
+    standalone: false
 })
 
 export class AdminSidemenuComponent implements OnInit {
