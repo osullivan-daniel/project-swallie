@@ -4,7 +4,7 @@ import { MenuBodyService } from '../../../services/menu-body.service';
 import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MenuService } from 'src/app/services/menu.service';
-import { ProductService } from 'src/app/services/product.service';
+// import { ProductService } from 'src/app/services/product.service';
 
 
 @Component({
@@ -54,13 +54,13 @@ import { ProductService } from 'src/app/services/product.service';
 
 export class MainBodyComponent implements OnInit {
   
-  displayMenuIcon:string;
-  backgroundColour:string;
+  displayMenuIcon!:string;
+  backgroundColour!: string;
   order: any = {};
 
-  selectedSubMenu;
-  availableSelectedMenu; 
-  selectedOption;
+  selectedSubMenu!: null;
+  availableSelectedMenu: any; 
+  selectedOption: any;
 
   constructor(private _menuBody: MenuBodyService, 
               public dialog: MatDialog, 
@@ -79,7 +79,7 @@ export class MainBodyComponent implements OnInit {
     this._menuBody.changeMenuVisability()
   }
 
-  public displayupdateCart(selectedItem): void 
+  public displayupdateCart(selectedItem: { name: any; orderDetails: any; }): void 
   {
     //console.log(selectedItem)
     let dialogRef = this.dialog.open(updateOrderDialogComponent, 
