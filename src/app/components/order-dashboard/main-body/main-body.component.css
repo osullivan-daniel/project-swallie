@@ -1,0 +1,28 @@
+.appHomeTitle {
+	font-weight: bold;
+	text-align: center;
+}
+
+.productName {
+	font-weight: bold;
+	text-align: center;
+	text-overflow: ellipsis;
+	width: 180px;
+}
+
+.flexDiv {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.menuIcon {
+	position: fixed;
+	cursor: pointer;
+}
+
+.clickableCanImage {
+	height: 270px;
+	width: 180px;
+}

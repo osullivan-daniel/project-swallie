@@ -1,0 +1,71 @@
+#update {
+	float: left !important;
+}
+
+#back {
+	float: right !important;
+} 
+
+#dialogHeader {
+	margin: 16px 0;
+	text-align: center;
+}
+
+.update-order-table {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	margin: 0;
+	padding: 0 16px;
+}
+
+.update-order-table .mat-row,
+.update-order-table .mat-mdc-row {
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	border-bottom: 0 !important;
+}
+
+.update-order-table .mat-row::after,
+.update-order-table .mat-mdc-row::after {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 1px;
+	content: '';
+	background-color: rgba(0, 0, 0, 0.12);
+}
+
+.update-order-table .mat-cell,
+.update-order-table .mat-mdc-cell {
+	border-bottom: 0 !important;
+}
+
+.mat-column-size {
+	flex: 0 0 50% !important;
+	width: 50% !important;
+}
+
+.mat-column-qty {
+	flex: 0 0 25% !important;
+	width: 25% !important;
+}
+
+.mat-column-price {
+	flex: 0 0 25% !important;
+	width: 25% !important;
+}
+
+.mat-column-price p {
+	margin: 0;
+	white-space: nowrap;
+}
+
+.button-div {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}

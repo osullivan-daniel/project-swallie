@@ -1,0 +1,55 @@
+#deleteIcon {
+	cursor: pointer;
+}
+
+#submit {
+	float: left !important;
+}
+
+#back {
+	float: right !important;
+}
+
+.order-table {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	margin: 20px 0 0;
+	padding: 0 20px;
+}
+
+.order-table .mat-row,
+.order-table .mat-mdc-row {
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	border-bottom: 0 !important;
+}
+
+.order-table .mat-row::after,
+.order-table .mat-mdc-row::after {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 1px;
+	content: '';
+	background-color: rgba(0, 0, 0, 0.12);
+}
+
+.order-table .mat-cell,
+.order-table .mat-mdc-cell {
+	border-bottom: 0 !important;
+}
+
+.order-total {
+	margin: 20px 20px 0;
+	text-align: left;
+}
+
+.button-div {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}

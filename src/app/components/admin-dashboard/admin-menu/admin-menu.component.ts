@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormArray, UntypedFormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table'
 import { ProductService } from 'src/app/services/product.service';
 import { MenuService } from 'src/app/services/menu.service';
 
 
 @Component({
-  selector: 'app-admin-menu',
-  templateUrl: 'admin-menu.component.html',
-  //providers: [DataService],
-  styles: [
-    `.mainDiv {justify-content: space-between;}`,
-    `mat-card {margin: 15px;}`,
-
-    `input[type=number], select, textarea {
+    selector: 'app-admin-menu',
+    templateUrl: 'admin-menu.component.html',
+    //providers: [DataService],
+    styles: [
+        `.mainDiv {justify-content: space-between;}`,
+        `mat-card {margin: 15px;}`,
+        `input[type=number], select, textarea {
       width: 25%;
       padding: 6px; /* Some padding */ 
       border: 1px solid #ccc; /* Gray border */
@@ -22,19 +21,21 @@ import { MenuService } from 'src/app/services/menu.service';
       margin-top: 6px; /* Add a top margin */
       margin-bottom: 6px; /* Bottom margin */
     }`,
-    `mat-checkbox {
+        `mat-checkbox {
       width: 25%;
       padding: 8px; /* Some padding */ 
       box-sizing: border-box; /* Make sure that padding and width stays in place */
       margin-top: 6px; /* Add a top margin */
       margin-bottom: 6px; /* Bottom margin */
     }`
-  ]
+    ],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class AdminMenuComponent {
 
-  availableProductsLocal;
-  avilableProducts;
+  availableProductsLocal: any;
+  avilableProducts: any;
   addItemToMenu: any;
   productList: any = [];
 
@@ -45,7 +46,7 @@ export class AdminMenuComponent {
 
   displayedColumns = ['size', 'price']
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: UntypedFormBuilder, 
               private __productService: ProductService,
               private __menuService: MenuService) 
   {
@@ -54,21 +55,21 @@ export class AdminMenuComponent {
       this.availableProductsLocal=value;
     });  
 
-    this.menuGroupArray = new FormArray([]);
+    this.menuGroupArray = new UntypedFormArray([]);
 
     this.availableProductsLocal.forEach( item => {
       
       let menuGroup = this.formBuilder.group({
         0: this.formBuilder.group({"size": item['cans'], 
-                                   "price": new FormControl(
+                                   "price": new UntypedFormControl(
                                             {value: item['cansPrice'], disabled: !item['cans']})
         }),
         1: this.formBuilder.group({"size": item['halves'], 
-                                   "price": new FormControl(
+                                   "price": new UntypedFormControl(
                                             {value: item['halvesPrice'], disabled: !item['halves']})
         }),
         2: this.formBuilder.group({"size": item['thirds'], 
-                                   "price": new FormControl(
+                                   "price": new UntypedFormControl(
                                             {value: item['thirdsPrice'], disabled: !item['thirds']})
         })
       });

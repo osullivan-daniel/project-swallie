@@ -1,65 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { MatTableDataSource } from '@angular/material/table'
 import { MatDialog } from '@angular/material/dialog';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
 
 @Component({
-  selector: 'app-admin-live-orders',
-  templateUrl: 'admin-live-orders.component.html',
-  styles: [
-    `#menuIcon {
-      cursor: pointer; 
-    }`,
-
-    `#tableTest {
-      width: 100%;
-     }`,
-     
-    `#cardItemList {
-      height: auto;
-    }`,
-
-    `
-    .mat-footer-row,
-    .mat-header-row,
-    .mat-row {
-        display: inline-flex;
-        min-width: 90%;
-    }
-    `,
-    `.mat-column-name {
-      flex: 0 0 50% !important;
-      width: 50% !important;
-    }`,
-
-    `.mat-column-size {
-      flex: 0 0 25% !important;
-      width: 25% !important;
-    }`,
-
-    `.mat-column-qty {
-      flex: 0 0 25% !important;
-      width: 25% !important;
-    }`,
-
-    `::ng-deep .mat-list-item-content {
-      display: block !important;
-    }`,
-
-    `.button-div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-top: 15px;
-    }`
-  ]
+    selector: 'app-admin-live-orders',
+    templateUrl: 'admin-live-orders.component.html',
+    styleUrls: ['./admin-live-orders.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 
 export class AdminLiveOrdersComponent
 {
-  localQueue: Array<any> = []
-  localProgress: Array<any> = []
+  localQueue: any = []
+  localProgress: any = []
 
   displayedColumns = ['name', 'size', 'qty']
 

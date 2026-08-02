@@ -1,27 +1,35 @@
 <app-header></app-header>
 
 <mat-sidenav-container class="navContainer" fixedInViewport="true">
-    <mat-sidenav [ngStyle]="{'background-color': this.backgroundColour}" 
-                 [(opened)]="sideMenuVisable" 
-                 disableClose
-                 mode="side">
-        <div id='closeMenu'>
-            <img id="menuIcon" src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
-        </div>
+  <mat-sidenav [ngStyle]="{'background-color': this.backgroundColour}"
+    [(opened)]="sideMenuVisable"
+    disableClose
+    mode="side">
+    <div id='closeMenu'>
+      <img id="menuIcon" src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
+    </div>
 
-        <app-admin-sidemenu></app-admin-sidemenu>
+    <app-admin-sidemenu></app-admin-sidemenu>
 
-    </mat-sidenav>
-    <mat-sidenav-content id=makemebig>
-        <div class="container" id="example-container">
-            <img id="menuIcon" src="../../assets/icons/menu-black-36dp.svg" 
-            (click)="openMenu()"  
-            [ngStyle]="{'visibility': this.displayMenuIcon}">
+  </mat-sidenav>
+  <mat-sidenav-content id=makemebig>
+    <div class="container" id="example-container">
+      <img id="menuIcon" src="../../assets/icons/menu-black-36dp.svg"
+        (click)="openMenu()"
+        [ngStyle]="{'visibility': this.displayMenuIcon}">
 
-            <app-admin-live-orders *ngIf="displayBody==='live'"></app-admin-live-orders>
-            <app-admin-menu *ngIf="displayBody==='menu'"></app-admin-menu>
-            <app-admin-products *ngIf="displayBody==='products'"></app-admin-products>
-            <app-admin-completed-orders *ngIf="displayBody==='completed'"></app-admin-completed-orders>
-        </div>
-    </mat-sidenav-content>
+      @if (displayBody==='live') {
+        <app-admin-live-orders></app-admin-live-orders>
+      }
+      @if (displayBody==='menu') {
+        <app-admin-menu></app-admin-menu>
+      }
+      @if (displayBody==='products') {
+        <app-admin-products></app-admin-products>
+      }
+      @if (displayBody==='completed') {
+        <app-admin-completed-orders></app-admin-completed-orders>
+      }
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

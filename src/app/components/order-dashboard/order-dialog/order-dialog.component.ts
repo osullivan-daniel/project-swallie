@@ -1,68 +1,24 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
 import { AdminService } from 'src/app/services/admin.service';
 import { Product } from 'src/app/services/product';
 import { Order } from 'src/app/services/order';
-import * as moment from 'moment';
 import { MenuService } from 'src/app/services/menu.service';
+import { format } from 'date-fns';
+
 
 @Component({
-  selector: 'app-order-dialog',
-  templateUrl: 'order-dialog.component.html',
-  styles: [
-  `#deleteIcon {
-    cursor: pointer; 
-  }`,
-  `
-  #submit {
-      float: left !important;
-  }`,
-  `
-  #back {
-      float: right !important;
-  }`,
-
-` .mat-cell {
-    padding: 0 8px 8px 0;
-  }`,
-
-`.mat-column-username {
-    flex: 0 0 40% !important;
-    width: 40% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    justify-content:right;
-  }`,
-  
-  `.mat-column-size {
-    flex: 0 0 20% !important;
-    width: 20% !important;
-  }`,
-
-  `.mat-column-qty {
-    flex: 0 0 15% !important;
-    width: 15% !important;
-  }`,
-
-  `.mat-column-remove {
-    flex: 0 0 15% !important;
-    width: 15% !important;
-  }`,
-
-  `.button-div {
-    padding-top: 10px;
-    padding-bottom: 10px !important;
-  }
-  `
-
-  ]
+    selector: 'app-order-dialog',
+    templateUrl: 'order-dialog.component.html',
+    styleUrls: ['order-dialog.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class OrderDialogComponent implements OnInit {
 
-  orderObject: Array<any> = []; // local copy of what is in the order
+  orderObject: any = []; // local copy of what is in the order
   orderObjectForAll: any; // How we interact with oderservice
   orderObjectForDisplay: any; // MatTableDataSource for display
   total: number = 0; //total price of order
@@ -88,7 +44,7 @@ export class OrderDialogComponent implements OnInit {
     
 
 
-    let newOrderObject = new Order('1', 'Daniel', moment().format('MMMM Do YYYY, HH:mm:ss'), orderData)
+    let newOrderObject = new Order('1', 'Daniel', format(new Date(), 'MMMM do yyyy, HH:mm:ss'), orderData)
     console.log(newOrderObject)
 
 

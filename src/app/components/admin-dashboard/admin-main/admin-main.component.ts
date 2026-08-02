@@ -1,34 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
 import { AdminService } from 'src/app/services/admin.service';
 
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: 'admin-main.component.html',
-  styles: [
-    `#menuIcon {
+    selector: 'app-admin',
+    templateUrl: 'admin-main.component.html',
+    styles: [
+        `#menuIcon {
       cursor: pointer; 
     }`,
-
-    `mat-sidenav-container {
+        `mat-sidenav-container {
       height: 100vh;
       min-height: 100vh;
       width: 100%;
       min-width: 100%;
    }`,
-
-   `.navContainer {
+        `.navContainer {
     height: 100vh;
     hasBackdrop: false;
     background-color: #FFFFFF;
   }`,
-  
-  `#closeMenu {
+        `mat-sidenav-content {
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  #example-container {
+    /* Table width plus the card and list horizontal padding. */
+    min-width: 28rem;
+  }`,
+        `#closeMenu {
     display: flex !important;
     margin-left: 75%  
-  }`,  
-  ]
+  }`,
+    ],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class AdminMainComponent implements OnInit {
 

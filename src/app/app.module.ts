@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select'
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -48,49 +47,46 @@ import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admi
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    MainBodyComponent,
-    SideMenuComponent,
-    updateOrderDialogComponent,
-    OrderDialogComponent,
-    AdminMainComponent,
-    AdminSidemenuComponent,
-    AdminLiveOrdersComponent,
-    AdminMenuComponent,
-    AdminProductsComponent,
-    AdminConfirmDialogComponent,
-    AdminCompletedOrdersComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatDialogModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatTableModule,
-    FormsModule, 
-    ReactiveFormsModule,
-    
-  ],
-  providers: [
-    GuiStyleService,
-    MenuBodyService
-    //DataService
-  ],    
-  bootstrap: [AppComponent],
-  entryComponents: [updateOrderDialogComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        MainBodyComponent,
+        SideMenuComponent,
+        updateOrderDialogComponent,
+        OrderDialogComponent,
+        AdminMainComponent,
+        AdminSidemenuComponent,
+        AdminLiveOrdersComponent,
+        AdminMenuComponent,
+        AdminProductsComponent,
+        AdminConfirmDialogComponent,
+        AdminCompletedOrdersComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatCardModule,
+        MatTableModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
+    providers: [
+        GuiStyleService,
+        MenuBodyService
+        //DataService
+    ],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

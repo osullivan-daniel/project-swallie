@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Product } from '../../../services/product';
 //import { DataService } from '../../../services/data.service';
 import { ProductService } from '../../../services/product.service'
 import { v4 as uuid } from 'uuid';
 
 @Component({
-  selector: 'app-admin-products',
-  templateUrl: 'admin-products.component.html',
-  styles: [   
-    `/* Style inputs with type="text", select elements and textareas */
+    selector: 'app-admin-products',
+    templateUrl: 'admin-products.component.html',
+    styles: [
+        `/* Style inputs with type="text", select elements and textareas */
     input[type=text], input[type=number], select, textarea {
       width: 100%; /* Full width */
       padding: 12px; /* Some padding */ 
@@ -40,15 +40,15 @@ import { v4 as uuid } from 'uuid';
       border-radius: 5px;
       padding: 25px;
     }`,
-
-    `.button-div {
+        `.button-div {
       display: flex;
       justify-content: center;
       align-items: center;
       padding-top: 15px;
   }`
-
-  ]
+    ],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class AdminProductsComponent implements OnInit 
 {
@@ -58,7 +58,7 @@ export class AdminProductsComponent implements OnInit
 
   availableProductsLocal: Array<Product> = []
   
-  constructor(private formBuilder: FormBuilder, private _productService: ProductService) 
+  constructor(private formBuilder: UntypedFormBuilder, private _productService: ProductService) 
   {
     this.newProductForm = this.formBuilder.group({'name': '','style': '','abv': '', 'imgUrl': ''}); 
   }

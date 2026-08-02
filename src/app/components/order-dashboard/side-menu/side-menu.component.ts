@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';  // Breakpoints?
 import { GuiStyleService } from '../../../services/gui-style.service';
 import { MenuBodyService } from '../../../services/menu-body.service';
@@ -10,44 +10,20 @@ import { MenuService } from 'src/app/services/menu.service';
 
 
 @Component({
-  selector: 'app-side-menu',
-  templateUrl: 'side-menu.component.html',
-  styles: [
-    `.navContainer {
-      hasBackdrop: false;
-      background-color: #FFFFFF;
-      
-    }`,
-    `#matListItems { 
-      font-weight: bold; 
-      font-family: Andale Mono, monospace, sans-serif;
-      color: this.textColour 
-    }`,
-    `img { 
-      float:right; 
-      cursor: pointer; 
-    }`,
-    `.navContainer {
-      height: 100vh;
-      hasBackdrop: false;
-      background-color: #FFFFFF;
-    }`,
-    `mat-sidenav-container {
-      height: 100vh;
-      min-height: 100vh;
-      width: 100%;
-      min-width: 100%;
-   }`
-  ]
+    selector: 'app-side-menu',
+    templateUrl: 'side-menu.component.html',
+    styleUrls: ['side-menu.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 
 export class SideMenuComponent implements OnInit{
 
-  sideMenuVisable:boolean;
-  backgroundColour:string;
-  textColour:string;
-  jsonOfOptions:JSON;
-  availableCatagories:Array<string>;
+  sideMenuVisable:boolean | undefined;
+  backgroundColour:string | undefined;
+  textColour:string | undefined;
+  jsonOfOptions:JSON | undefined;
+  availableCatagories:Array<string> | undefined;
 
   constructor(private breakpointObserver: BreakpointObserver, 
               private _guiStyle: GuiStyleService, 
@@ -64,7 +40,6 @@ export class SideMenuComponent implements OnInit{
 
 
   public changeMenu(key): void {
-    this.closeMenu();
     this.__menuService.setNewSubMenu(key);
   }
 
