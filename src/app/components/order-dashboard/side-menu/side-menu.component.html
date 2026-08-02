@@ -5,7 +5,7 @@
       <img src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" alt="Close menu" />
     </div>
 
-    <mat-nav-list class="swally-menu-style" [ngStyle]="{ '--mdc-list-list-item-label-text-color': textColour, '--mdc-list-list-item-hover-label-text-color': textColour, '--mdc-list-list-item-focus-label-text-color': textColour }">
+    <mat-nav-list class="swally-menu-style" [ngStyle]="{ '--mat-list-list-item-label-text-color': textColour, '--mat-list-list-item-hover-label-text-color': textColour, '--mat-list-list-item-focus-label-text-color': textColour }">
       @for (key of availableCatagories; track key) {
         <mat-list-item (click)="changeMenu(key)">
           {{ key }}

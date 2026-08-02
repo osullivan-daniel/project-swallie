@@ -14,6 +14,6 @@
 }
 
 .swally-menu-style {
-    --mdc-list-list-item-label-text-font: "Andale Mono", monospace, sans-serif;
-    --mdc-list-list-item-label-text-weight: 700;
+    --mat-list-list-item-label-text-font: "Andale Mono", monospace, sans-serif;
+    --mat-list-list-item-label-text-weight: 700;
 }
