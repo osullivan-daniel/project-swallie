@@ -21,7 +21,7 @@ export class MainBodyComponent implements OnInit {
   backgroundColour!: string;
   order: any = {};
 
-  selectedSubMenu!: null;
+  selectedSubMenu: any;
   availableSelectedMenu: any; 
   selectedOption: any;
 

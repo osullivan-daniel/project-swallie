@@ -1,5 +1,5 @@
 <div class=mainDiv>
-  @for (eachItem of listWithDetailsTest let i=index; track eachItem) {
+  @for (eachItem of listWithDetailsTest; let i=$index; track eachItem.id) {
     <div>
       <mat-card class="swally-card">
         <form [formGroup]="menuGroupArray.controls[i]" (ngSubmit)="onSubmit(eachItem)">
