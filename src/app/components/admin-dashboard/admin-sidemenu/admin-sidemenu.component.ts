@@ -17,19 +17,13 @@ export class AdminSidemenuComponent implements OnInit {
 
   constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService, private router: Router) {}
 
-  closeMenu() {
-    this.sideMenuVisable = false
-  }
-
   changeView(view) {
     this._adminService.setVisableBody(view)
-    this._adminService.setDisplaySideMenu(false);
   }
 
   loadOrder(): void {
     this.router.navigate(['/home']);
   }
-
 
   ngOnInit(): void {
     this._adminService.displayBody.subscribe(value => {this.displayBody=value});    

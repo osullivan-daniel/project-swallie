@@ -38,7 +38,6 @@ export class SideMenuComponent implements OnInit{
 
 
   public changeMenu(key): void {
-    this.closeMenu();
     this.__menuService.setNewSubMenu(key);
   }
 
