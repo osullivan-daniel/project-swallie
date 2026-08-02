@@ -6,45 +6,7 @@ import { MatTableDataSource } from '@angular/material/table'
 @Component({
   selector: 'app-update-order-dialog',
   templateUrl: 'update-order-dialog.component.html', 
-  styles: [
-    `#itemSelect: {float:left; }`,
-
-    `#quantitySelect {
-      width:50px !important;
-      float:right !important;
-    } `,
-
-    `#deleteIcon {
-      cursor: pointer; 
-    }`,
-    `
-    #update {
-        float: left !important;
-    }`,
-    `
-    #back {
-        float: right !important;
-    }`,
-  
-  ` .mat-cell {
-      padding: 8px 8px 0;
-    }`,
-
-    `.mat-column-size {
-      flex: 0 0 50% !important;
-      width: 50% !important;
-    }`,
-  
-    `.mat-column-qty {
-      flex: 0 0 25% !important;
-      width: 25% !important;
-    }`,
-
-    `.button-div {
-      padding-top: 10px;
-      padding-bottom: 10px !important;
-    }`
-  ]
+  styleUrls: ['update-order-dialog.component.css']
 })
 
 export class updateOrderDialogComponent implements OnInit

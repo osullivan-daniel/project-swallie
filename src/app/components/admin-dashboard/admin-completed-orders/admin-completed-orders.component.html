@@ -1,8 +1,8 @@
 <h2>Completed</h2>
 <mat-nav-list>
-    <mat-list-item id=cardItemList>
+    <div id=cardItemList>
         <mat-nav-list>
-            <mat-list-item id=cardItemList *ngFor="let eachOrder of localComplete; let i = index">
+            <div class="card-item-list" id=cardItemList *ngFor="let eachOrder of localComplete; let i = index">
                 <mat-card class="swally-card">
                     <mat-table id=tableTest [dataSource]="eachOrder.order">
 
@@ -32,7 +32,7 @@
                         (click)='displayConfirmation(eachOrder)'>Review Order Details</button>
                     </div>
                 </mat-card>
-            </mat-list-item>
+            </div>
         </mat-nav-list>
-    </mat-list-item>
+    </div>
 </mat-nav-list>

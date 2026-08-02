@@ -11,54 +11,7 @@ import { MenuService } from 'src/app/services/menu.service';
 @Component({
   selector: 'app-order-dialog',
   templateUrl: 'order-dialog.component.html',
-  styles: [
-  `#deleteIcon {
-    cursor: pointer; 
-  }`,
-  `
-  #submit {
-      float: left !important;
-  }`,
-  `
-  #back {
-      float: right !important;
-  }`,
-
-` .mat-cell {
-    padding: 0 8px 8px 0;
-  }`,
-
-`.mat-column-username {
-    flex: 0 0 40% !important;
-    width: 40% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    justify-content:right;
-  }`,
-  
-  `.mat-column-size {
-    flex: 0 0 20% !important;
-    width: 20% !important;
-  }`,
-
-  `.mat-column-qty {
-    flex: 0 0 15% !important;
-    width: 15% !important;
-  }`,
-
-  `.mat-column-remove {
-    flex: 0 0 15% !important;
-    width: 15% !important;
-  }`,
-
-  `.button-div {
-    padding-top: 10px;
-    padding-bottom: 10px !important;
-  }
-  `
-
-  ]
+  styleUrls: ['order-dialog.component.css']
 })
 export class OrderDialogComponent implements OnInit {
 

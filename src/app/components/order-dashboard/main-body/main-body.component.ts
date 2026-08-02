@@ -47,6 +47,8 @@ export class MainBodyComponent implements OnInit {
     let dialogRef = this.dialog.open(updateOrderDialogComponent, 
     { 
       disableClose: true,
+      width: '400px',
+      maxWidth: 'calc(100vw - 32px)',
       data: {'name':selectedItem.name,
              'orderDetails':selectedItem.orderDetails}
     });

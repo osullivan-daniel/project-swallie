@@ -1,0 +1,63 @@
+#update {
+	float: left !important;
+}
+
+#back {
+	float: right !important;
+} 
+
+#dialogHeader {
+	margin: 16px 0;
+	text-align: center;
+}
+
+.update-order-table {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	margin: 0;
+	padding: 0 16px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.update-order-table .mat-row,
+.update-order-table .mat-mdc-row {
+	box-sizing: border-box;
+	width: 100%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-cell,
+.mat-mdc-cell,
+.mat-header-cell,
+.mat-mdc-header-cell {
+	box-sizing: border-box !important;
+	padding: 8px !important;
+}
+
+.mat-column-size {
+	flex: 0 0 50% !important;
+	width: 50% !important;
+}
+
+.mat-column-qty {
+	flex: 0 0 25% !important;
+	width: 25% !important;
+}
+
+.mat-column-price {
+	flex: 0 0 25% !important;
+	width: 25% !important;
+}
+
+.mat-column-price p {
+	margin: 0;
+	white-space: nowrap;
+}
+
+.button-div {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
