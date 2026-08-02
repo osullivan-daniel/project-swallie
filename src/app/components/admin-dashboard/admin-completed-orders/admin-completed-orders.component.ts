@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AdminService } from '../../../services/admin.service';
+import { AdminStateService } from '../../../../apps/frontend-admin/src/app/services/admin-state.service';
 import { MatTableDataSource } from '@angular/material/table'
 import { MatDialog } from '@angular/material/dialog';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
@@ -18,7 +18,7 @@ export class AdminCompletedOrdersComponent
 
   displayedColumns = ['name', 'size', 'qty']
 
-  constructor(private _adminService: AdminService, public dialog: MatDialog) 
+  constructor(private _adminService: AdminStateService, public dialog: MatDialog)
   {
     this._adminService.ordersComplete.subscribe(value => {
       this.localComplete=value;

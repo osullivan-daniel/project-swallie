@@ -1,0 +1,41 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "frontend-portal",
+  "projectType": "application",
+  "sourceRoot": "apps/frontend-portal/src",
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "options": {
+        "outputPath": {
+          "base": "dist/frontend-portal"
+        },
+        "index": "apps/frontend-portal/src/index.html",
+        "browser": "apps/frontend-portal/src/main.ts",
+        "polyfills": [
+          "apps/frontend-portal/src/polyfills.ts"
+        ],
+        "tsConfig": "apps/frontend-portal/tsconfig.app.json",
+        "styles": [
+          "apps/frontend-portal/src/styles.css"
+        ],
+        "scripts": [],
+        "extractLicenses": false,
+        "sourceMap": true,
+        "optimization": false,
+        "namedChunks": true,
+        "assets": []
+      },
+      "outputs": [
+        "{options.outputPath.base}"
+      ]
+    },
+    "serve": {
+      "executor": "@angular/build:dev-server",
+      "options": {
+        "buildTarget": "frontend-portal:build",
+        "port": 4202
+      }
+    }
+  }
+}

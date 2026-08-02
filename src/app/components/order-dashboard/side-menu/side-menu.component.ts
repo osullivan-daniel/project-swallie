@@ -7,6 +7,7 @@ import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MenuService } from 'src/app/services/menu.service';
+import { OrderStateService } from '../../../../apps/frontend-portal/src/app/services/order-state.service';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class SideMenuComponent implements OnInit{
               private _menuBody: MenuBodyService, 
               //private _data: DataService,
               private __menuService: MenuService,
+              private _orderState: OrderStateService,
               public dialog: MatDialog,
               private router: Router) { 
 

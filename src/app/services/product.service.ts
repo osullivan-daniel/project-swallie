@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { Product } from './product'
+import { Product } from './product';
+import { CatalogApiService } from '../../../libs/angular/api/src/catalog-api.service';
 import { v4 as uuid } from 'uuid';
 
 
@@ -14,7 +15,7 @@ import { v4 as uuid } from 'uuid';
   {
     private productList = new BehaviorSubject(null);
   
-    constructor(){}
+    constructor(private readonly catalogApiService: CatalogApiService) {}
 
     getProducts()
     {
@@ -91,7 +92,9 @@ import { v4 as uuid } from 'uuid';
 
     load()
     {
-      console.log('On load')
-      this.productList.next(this.updateAvailableProductsFromServer());
+      console.log('On load');
+      const products = this.updateAvailableProductsFromServer();
+      this.productList.next(products);
+      this.catalogApiService.publishProducts(products);
     }
   }

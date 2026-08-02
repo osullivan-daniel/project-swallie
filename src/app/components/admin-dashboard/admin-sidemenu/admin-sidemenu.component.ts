@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
-import { AdminService } from 'src/app/services/admin.service';
+import { AdminStateService } from '../../../../apps/frontend-admin/src/app/services/admin-state.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class AdminSidemenuComponent implements OnInit {
   backgroundColour:string | undefined;
   sideMenuVisable:boolean = true;
 
-  constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService, private router: Router) {}
+  constructor(private _guiStyle: GuiStyleService, private _adminService: AdminStateService, private router: Router) {}
 
   changeView(view) {
     this._adminService.setVisableBody(view)

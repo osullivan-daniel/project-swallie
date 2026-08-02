@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/cor
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
-import { AdminService } from 'src/app/services/admin.service';
+import { AdminStateService } from '../../../../apps/frontend-admin/src/app/services/admin-state.service';
 import { Product } from 'src/app/services/product';
 import { Order } from 'src/app/services/order';
 import { MenuService } from 'src/app/services/menu.service';
@@ -26,7 +26,7 @@ export class OrderDialogComponent implements OnInit {
   displayedColumns: Array<string> = ['name', 'size', 'qty', 'remove'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public __dialogData: any, 
-              private __adminService: AdminService,
+              private __adminService: AdminStateService,
               private dialogRef: MatDialogRef<OrderDialogComponent>,
               private __menuService: MenuService) {}
 

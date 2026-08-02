@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { GuiStyleService } from '../../../services/gui-style.service';
-import { AdminService } from 'src/app/services/admin.service';
-
+import { AdminStateService } from '../../../../apps/frontend-admin/src/app/services/admin-state.service';
 
 @Component({
     selector: 'app-admin',
@@ -60,7 +59,7 @@ export class AdminMainComponent implements OnInit {
     this._adminService.setDisplaySideMenu(true);
   }
 
-  constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService) {}
+  constructor(private _guiStyle: GuiStyleService, private _adminService: AdminStateService) {}
 
   ngOnInit(): void {
     this._adminService.displayBody.subscribe(value => {this.displayBody=value});    
