@@ -19,10 +19,22 @@
     flex: 1 1 auto;
 }
 
+/* The table remains fluid above this size.  Below it, the table scrolls
+   instead of letting Material reduce a cell until it displays an ellipsis. */
+.order-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.order-table-scroll mat-table {
+    width: 100%;
+    min-width: 24rem;
+}
+
 .mat-column-name {
     flex: 1 1 50% !important;
     width: 50% !important;
-    min-width: 0;
+    min-width: 12rem;
 }
 
 /* Keep item names readable on narrow screens: wrap only between words and
@@ -41,11 +53,13 @@
 .mat-column-size {
     flex: 1 1 25% !important;
     width: 25% !important;
+    min-width: 7rem;
 }
 
 .mat-column-qty {
     flex: 1 1 25% !important;
     width: 25% !important;
+    min-width: 5rem;
 }
 
 .button-div {
