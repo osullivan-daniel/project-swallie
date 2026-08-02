@@ -23,6 +23,16 @@ import { AdminService } from 'src/app/services/admin.service';
     hasBackdrop: false;
     background-color: #FFFFFF;
   }`,
+
+  `mat-sidenav-content {
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  #example-container {
+    /* Table width plus the card and list horizontal padding. */
+    min-width: 28rem;
+  }`,
   
   `#closeMenu {
     display: flex !important;

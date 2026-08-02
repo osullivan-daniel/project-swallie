@@ -4,7 +4,6 @@
         <mat-nav-list>
             <div class="card-item-list" id=cardItemList *ngFor="let eachOrder of localProgress; let i = index">
                 <mat-card class="swally-card">
-                    <div class="order-table-scroll">
                     <mat-table id=tableTest [dataSource]="eachOrder.order">
 
                         <ng-container matColumnDef="name">
@@ -28,7 +27,6 @@
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                     </mat-table>
-                    </div>
                     <div class='button-div'>
                         <button mat-raised-button
                         id='completeButton'
@@ -48,7 +46,6 @@
         <mat-nav-list>
             <div class="card-item-list" id="cardItemList" *ngFor="let eachOrder of localQueue; let i = index">
                 <mat-card class="swally-card">
-                    <div class="order-table-scroll">
                     <mat-table [dataSource]="eachOrder.order">
 
                         <ng-container matColumnDef="name">
@@ -72,7 +69,6 @@
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                     </mat-table>
-                    </div>
                     <div class='button-div' *ngIf="i===0">
                         <button mat-raised-button
                         id='completeButton'

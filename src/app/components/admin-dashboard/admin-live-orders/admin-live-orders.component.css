@@ -19,14 +19,8 @@
     flex: 1 1 auto;
 }
 
-/* The table remains fluid above this size.  Below it, the table scrolls
-   instead of letting Material reduce a cell until it displays an ellipsis. */
-.order-table-scroll {
-    width: 100%;
-    overflow-x: auto;
-}
-
-.order-table-scroll mat-table {
+/* The page supplies horizontal scrolling once the table reaches this size. */
+mat-table {
     width: 100%;
     min-width: 24rem;
 }
@@ -67,14 +61,4 @@
     justify-content: center;
     align-items: center;
     padding-top: 15px;
-}
-
-.swally-card {
-    min-width: min-content;
-    width: 100% !important;;
-    box-sizing: border-box !important;;
-    padding: 16px !important;;
-    margin-bottom: 16px !important;;
-    border: 1px solid #ddd !important;;
-    box-shadow: 10px 10px 10px rgba(0,0,0,0.15) !important;;
 }
