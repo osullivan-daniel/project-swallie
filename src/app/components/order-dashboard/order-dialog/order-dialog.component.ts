@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
 import { AdminStateService } from '../../../../apps/frontend-admin/src/app/services/admin-state.service';
 import { Product } from 'src/app/services/product';
-import { Order } from 'src/app/services/order';
+import { Order } from '../../../../../libs/angular/api/src/order';
 import { MenuService } from 'src/app/services/menu.service';
 import { format } from 'date-fns';
 

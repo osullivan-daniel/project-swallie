@@ -2,10 +2,10 @@ import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/cor
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
-import { AdminStateService } from '../../../../apps/frontend-admin/src/app/services/admin-state.service';
-import { Product } from 'src/app/services/product';
-import { Order } from 'src/app/services/order';
-import { MenuService } from 'src/app/services/menu.service';
+import { AdminStateService } from '../../../../../../../libs/angular/api/src/admin-state.service'
+import { Product } from '../../../../../../../libs/angular/api/src/product';
+import { Order } from '../../../../../../../libs/angular/api/src/order';
+import { MenuService } from './../../../../../../../libs/angular/api/src/menu.service';
 import { format } from 'date-fns';
 
 

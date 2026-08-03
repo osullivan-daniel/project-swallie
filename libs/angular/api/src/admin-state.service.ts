@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { format } from 'date-fns';
-import { Order } from '../../../../../libs/angular/models/src/order.model';
+import { Order } from '../../models/src/order.model';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormArray, UntypedFormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table'
 import { ProductService } from '../../../../../../../src/app/services/product.service';
-import { MenuService } from '../../../services/menu.service';
+import { MenuService } from '../../../../../../../libs/angular/api/src/menu.service';
 
 
 @Component({

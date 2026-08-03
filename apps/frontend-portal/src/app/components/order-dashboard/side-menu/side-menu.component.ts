@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';  // Breakpoints?
-import { GuiStyleService } from "../../../../../../../src/app/services/gui-style.service";
-import { MenuBodyService } from '../../../services/menu-body.service';
+import { GuiStyleService } from "../../../../../../../libs/angular/api/src/gui-style.service";
+import { MenuBodyService } from '../../../../../../../libs/angular/api/src/menu-body.service'
 //import { DataService } from '../../../services/data.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { MenuService } from 'src/app/services/menu.service';
-import { OrderStateService } from '../../../../apps/frontend-portal/src/app/services/order-state.service';
+import { MenuService } from '../../../../../../../libs/angular/api/src/menu.service';
+import { OrderStateService } from '../../../../../../../libs/angular/api/src/order-state.service';
 
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { GuiStyleService } from "../../../../../../src/app/services/gui-style.service";
+import { GuiStyleService } from "../../../../api/src/gui-style.service";
 
 @Component({
     selector: 'app-header',

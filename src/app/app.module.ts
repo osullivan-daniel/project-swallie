@@ -36,7 +36,7 @@ import { HeaderComponent } from '../../libs/angular/api/src/header.component';
 // services
 //import { DataService } from './services/data.service';
 //import { ProductService } from './services/product.service';
-import { GuiStyleService } from './services/gui-style.service';
+import { GuiStyleService } from '../../libs/angular/api/src/gui-style.service';
 import { MenuBodyService } from './services/menu-body.service';
 import { AdminMenuComponent } from './components/admin-dashboard/admin-menu/admin-menu.component';
 import { AdminProductsComponent } from './components/admin-dashboard/admin-products/admin-products.component';

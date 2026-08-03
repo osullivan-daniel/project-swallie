@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MenuBodyService } from '../../../services/menu-body.service';
+import { MenuBodyService } from '../../../../../../../libs/angular/api/src/menu-body.service';
 //import { DataService } from '../../../services/data.service';
 import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MenuService } from 'src/app/services/menu.service';
+import { MenuService } from '../../../../../../../libs/angular/api/src/menu.service';
 // import { ProductService } from 'src/app/services/product.service';
 
 

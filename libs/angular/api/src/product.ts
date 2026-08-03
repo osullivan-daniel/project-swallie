@@ -1,0 +1,1 @@
+export { Product } from '../../models/src/product.model';

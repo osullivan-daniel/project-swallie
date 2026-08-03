@@ -8,7 +8,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AdminAppRoutingModule } from "./app-routing.module";
-import { AdminStateService } from "./services/admin-state.service";
+import { AdminStateService } from "../../../../libs/angular/api/src/admin-state.service";
 import { AdminAppShellComponent } from "./admin-app-shell.component";
 import { HeaderComponent } from '../../../../libs/angular/ui/src/shared/header/header.component';
 import { AdminMainComponent } from "./components/admin-dashboard/admin-main/admin-main.component";
@@ -46,4 +46,5 @@ import { AdminCompletedOrdersComponent } from "./components/admin-dashboard/admi
 	providers: [AdminStateService],
 	bootstrap: [AdminAppShellComponent],
 })
+
 export class AdminAppModule {}

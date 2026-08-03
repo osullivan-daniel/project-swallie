@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { Product } from './product';
-import { CatalogApiService } from '../../../../../libs/angular/api/src/catalog-api.service';
+import { CatalogApiService } from './catalog-api.service';
 import { v4 as uuid } from 'uuid';
 
 
