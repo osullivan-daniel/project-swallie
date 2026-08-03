@@ -31,7 +31,7 @@ import { AdminMainComponent } from './components/admin-dashboard/admin-main/admi
 import { AdminSidemenuComponent } from './components/admin-dashboard/admin-sidemenu/admin-sidemenu.component';
 import { AdminLiveOrdersComponent } from './components/admin-dashboard/admin-live-orders/admin-live-orders.component';
 // shared
-import { HeaderComponent } from './components/shared/header/header.component';
+import { HeaderComponent } from '../../libs/angular/api/src/header.component';
 
 // services
 //import { DataService } from './services/data.service';

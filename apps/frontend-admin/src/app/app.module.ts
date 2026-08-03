@@ -1,13 +1,16 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from "@angular/material/list";
 import { MatCardModule } from "@angular/material/card";
 import { MatTableModule } from "@angular/material/table";
 import { BrowserModule } from "@angular/platform-browser";
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { AdminAppRoutingModule } from "./app-routing.module";
 import { AdminStateService } from "./services/admin-state.service";
 import { AdminAppShellComponent } from "./admin-app-shell.component";
-import { HeaderComponent } from '../../../../src/app/components/shared/header/header.component';
+import { HeaderComponent } from '../../../../libs/angular/ui/src/shared/header/header.component';
 import { AdminMainComponent } from "./components/admin-dashboard/admin-main/admin-main.component";
 import { AdminMenuComponent } from "./components/admin-dashboard/admin-menu/admin-menu.component";
 import { AdminSidemenuComponent } from "./components/admin-dashboard/admin-sidemenu/admin-sidemenu.component";
@@ -26,7 +29,7 @@ import { AdminCompletedOrdersComponent } from "./components/admin-dashboard/admi
     AdminConfirmDialogComponent, 
     AdminCompletedOrdersComponent, 
     AdminSidemenuComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
 	imports: [
     BrowserModule, 
@@ -35,7 +38,10 @@ import { AdminCompletedOrdersComponent } from "./components/admin-dashboard/admi
     AdminAppShellComponent, 
     MatListModule, 
     MatCardModule, 
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatSidenavModule,
+    ReactiveFormsModule
   ],
 	providers: [AdminStateService],
 	bootstrap: [AdminAppShellComponent],
