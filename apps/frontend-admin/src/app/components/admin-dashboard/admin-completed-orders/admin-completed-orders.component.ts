@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AdminStateService } from '../../../../apps/frontend-admin/src/app/services/admin-state.service';
-import { MatTableDataSource } from '@angular/material/table'
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { AdminStateService } from '../../../services/admin-state.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
+
 
 @Component({
     selector: 'app-admin-completed-orders',

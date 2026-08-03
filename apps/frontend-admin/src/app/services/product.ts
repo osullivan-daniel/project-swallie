@@ -1,0 +1,1 @@
+export { Product } from '../../../libs/angular/models/src/product.model';
