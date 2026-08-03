@@ -1,19 +1,7 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-    "paths": {
-      "src/*": ["./src/*"]
-    },
-    "sourceMap": true,
+  "compilerOptions": {
     "esModuleInterop": true,
-    "declaration": false,
-    "experimentalDecorators": true,
-    "moduleResolution": "bundler",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "es2020",
-    "useDefineForClassFields": false,
-    "strict": false
-  }
+    "useDefineForClassFields": false
+  },
+  "extends": "./tsconfig.base.json"
 }
