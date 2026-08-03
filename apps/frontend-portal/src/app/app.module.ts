@@ -26,10 +26,11 @@ import { HeaderComponent } from '../../../../libs/angular/ui/src/shared/header/h
 import { OrderDialogComponent } from "./components/order-dashboard/order-dialog/order-dialog.component";
 import { updateOrderDialogComponent } from "./components/order-dashboard/update-order-dialog/update-order-dialog.component";
 
+import { RouterOutlet } from '@angular/router'
 
 @NgModule({
 	declarations: [MainBodyComponent, OrderDialogComponent, SideMenuComponent, updateOrderDialogComponent, HeaderComponent],
-	imports: [BrowserModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialogModule, MatRadioModule, MatSelectModule, MatCheckboxModule, MatCardModule, MatTableModule, FormsModule, ReactiveFormsModule],
+	imports: [RouterOutlet, BrowserModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialogModule, MatRadioModule, MatSelectModule, MatCheckboxModule, MatCardModule, MatTableModule, FormsModule, ReactiveFormsModule],
 	providers: [GuiStyleService, MenuBodyService],
 	bootstrap: [PortalAppShellComponent],
 })

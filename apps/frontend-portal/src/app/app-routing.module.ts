@@ -5,9 +5,11 @@ import { PortalAppShellComponent } from './portal-app-shell.component';
 import { SideMenuComponent } from './components/order-dashboard/side-menu/side-menu.component';
 
 const routes: Routes = [
-  { path: '', component: PortalAppShellComponent },
-  { path: 'home', component: MainBodyComponent },
-  { path: 'menu', component: SideMenuComponent },
+  { path: '', component: PortalAppShellComponent, children: [
+    { path: 'home', component: MainBodyComponent },
+    { path: 'menu', component: SideMenuComponent },
+    { path: '', redirectTo: 'home', pathMatch: 'full' }
+  ]},
 ];
 
 @NgModule({

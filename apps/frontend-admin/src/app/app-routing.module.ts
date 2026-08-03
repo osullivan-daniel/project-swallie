@@ -7,11 +7,13 @@ import { AdminLiveOrdersComponent } from './components/admin-dashboard/admin-liv
 import { AdminProductsComponent } from './components/admin-dashboard/admin-products/admin-products.component';
 
 const routes: Routes = [
-  { path: '', component: AdminAppShellComponent },
-  { path: 'admin', component: AdminMainComponent },
-  { path: 'admin/completed', component: AdminCompletedOrdersComponent },
-  { path: 'admin/live', component: AdminLiveOrdersComponent },
-  { path: 'admin/products', component: AdminProductsComponent },
+  { path: '', component: AdminAppShellComponent, children: [
+    { path: 'admin', component: AdminMainComponent },
+    { path: 'admin/completed', component: AdminCompletedOrdersComponent },
+    { path: 'admin/live', component: AdminLiveOrdersComponent },
+    { path: 'admin/products', component: AdminProductsComponent },
+    { path: '', redirectTo: 'admin', pathMatch: 'full' }
+  ]},
 ];
 
 @NgModule({
