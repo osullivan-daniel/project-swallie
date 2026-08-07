@@ -13,7 +13,7 @@ import { format } from 'date-fns';
     selector: 'app-order-dialog',
     templateUrl: 'order-dialog.component.html',
     styleUrls: ['order-dialog.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class OrderDialogComponent implements OnInit {

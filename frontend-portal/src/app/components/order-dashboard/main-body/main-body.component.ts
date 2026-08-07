@@ -11,7 +11,7 @@ import { MenuService } from './menu.service';
     selector: 'app-main-body',
     templateUrl: 'main-body.component.html',
     styleUrls: ['main-body.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 

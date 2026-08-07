@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table'
     selector: 'app-update-order-dialog',
     templateUrl: 'update-order-dialog.component.html',
     styleUrls: ['update-order-dialog.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 

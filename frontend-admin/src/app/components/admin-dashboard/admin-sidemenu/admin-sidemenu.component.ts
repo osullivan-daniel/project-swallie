@@ -11,7 +11,7 @@ import { AdminService } from '../../../services/admin.service';
 @Component({
     selector: 'app-admin-sidemenu',
     templateUrl: 'admin-sidemenu.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports:[CommonModule, MatListModule]
 })

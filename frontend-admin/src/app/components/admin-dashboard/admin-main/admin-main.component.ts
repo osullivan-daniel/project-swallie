@@ -17,7 +17,7 @@ import { AdminCompletedOrdersComponent } from '../admin-completed-orders/admin-c
 @Component({
   selector: 'app-admin',
   templateUrl: 'admin-main.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,

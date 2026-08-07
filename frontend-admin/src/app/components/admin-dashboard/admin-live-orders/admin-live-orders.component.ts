@@ -13,7 +13,7 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
     selector: 'app-admin-live-orders',
     templateUrl: 'admin-live-orders.component.html',
     styleUrls: ['./admin-live-orders.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [MatListModule, MatCardModule, MatTableModule],
 })

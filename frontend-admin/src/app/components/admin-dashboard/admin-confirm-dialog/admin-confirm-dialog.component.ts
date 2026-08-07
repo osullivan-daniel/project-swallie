@@ -6,7 +6,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     selector: 'app-admin-confirm-dialog',
     templateUrl: 'admin-confirm-dialog.component.html',
     styleUrls: ['admin-confirm-dialog.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports:[MatDialogModule]
 })

@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table'
     selector: 'app-admin-completed-orders',
     templateUrl: 'admin-completed-orders.component.html',
     styleUrls: ['admin-completed-orders.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [MatListModule, MatCardModule, MatTableModule],
 })

@@ -12,7 +12,7 @@ import { MenuService } from 'shared-services';
     selector: 'app-side-menu',
     templateUrl: 'side-menu.component.html',
     styleUrls: ['side-menu.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 

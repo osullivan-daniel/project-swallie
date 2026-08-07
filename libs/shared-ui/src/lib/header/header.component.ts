@@ -6,7 +6,7 @@ import { GuiStyleService } from 'shared-services';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styles: ['div { height: 100px; width: 100%; }'],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
 

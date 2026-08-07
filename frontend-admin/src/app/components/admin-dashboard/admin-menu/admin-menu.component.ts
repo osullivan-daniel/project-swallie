@@ -12,7 +12,7 @@ import { ProductService } from '../../../services/product.service';
     selector: 'app-admin-menu',
     templateUrl: 'admin-menu.component.html',
     styleUrls: ['admin-menu.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [MatCardModule, MatTableModule, MatCheckboxModule, FormsModule, ReactiveFormsModule]
 })

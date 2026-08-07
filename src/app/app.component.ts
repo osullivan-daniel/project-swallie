@@ -8,7 +8,7 @@ import { MenuService } from '../../libs/shared-services/src/lib/shared-services/
 <router-outlet></router-outlet>
 `,
     styleUrls: [],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 

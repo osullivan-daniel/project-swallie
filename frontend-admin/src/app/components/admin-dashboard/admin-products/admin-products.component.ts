@@ -7,8 +7,8 @@ import { v4 as uuid } from 'uuid';
 @Component({
     selector: 'app-admin-products',
     templateUrl: 'admin-products.component.html',
-    styles: ['admin-products.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrls: ['admin-products.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports:[ReactiveFormsModule]
 })
