@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { GuiStyleService } from 'shared-services';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-header',

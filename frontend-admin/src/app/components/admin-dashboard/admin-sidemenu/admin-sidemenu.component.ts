@@ -1,13 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { GuiStyleService } from '../../../../../../libs/shared-services/src/lib/models/gui-style.service';
-import { AdminService } from '../../../services/admin.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+
+import { GuiStyleService } from 'shared-services';
+import { AdminService } from '../../../services/admin.service';
+
 
 @Component({
     selector: 'app-admin-sidemenu',
     templateUrl: 'admin-sidemenu.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: true,
+    imports:[CommonModule, MatListModule]
 })
 
 export class AdminSidemenuComponent implements OnInit {

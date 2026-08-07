@@ -1,37 +1,22 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormArray, UntypedFormControl, FormGroup, Validators } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table'
-import { ProductService } from 'src/app/services/product.service';
-import { MenuService } from '../../../../../../libs/shared-services/src/lib/models/menu.service';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table'
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ReactiveFormsModule, FormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormArray } from '@angular/forms';
+
+import { MenuService } from 'shared-services';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
     selector: 'app-admin-menu',
     templateUrl: 'admin-menu.component.html',
-    //providers: [DataService],
-    styles: [
-        `.mainDiv {justify-content: space-between;}`,
-        `mat-card {margin: 15px;}`,
-        `input[type=number], select, textarea {
-      width: 25%;
-      padding: 6px; /* Some padding */ 
-      border: 1px solid #ccc; /* Gray border */
-      border-radius: 7px; /* Rounded borders */
-      box-sizing: border-box; /* Make sure that padding and width stays in place */
-      margin-top: 6px; /* Add a top margin */
-      margin-bottom: 6px; /* Bottom margin */
-    }`,
-        `mat-checkbox {
-      width: 25%;
-      padding: 8px; /* Some padding */ 
-      box-sizing: border-box; /* Make sure that padding and width stays in place */
-      margin-top: 6px; /* Add a top margin */
-      margin-bottom: 6px; /* Bottom margin */
-    }`
-    ],
+    styleUrls: ['admin-menu.component.css'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: true,
+    imports: [MatCardModule, MatTableModule, MatCheckboxModule, FormsModule, ReactiveFormsModule]
 })
+
 export class AdminMenuComponent {
 
   availableProductsLocal: any;
