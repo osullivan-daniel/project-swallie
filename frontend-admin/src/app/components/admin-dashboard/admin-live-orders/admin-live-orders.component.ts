@@ -1,15 +1,21 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AdminService } from '../../../../../../src/app/services/admin.service';
-import { MatTableDataSource } from '@angular/material/table'
 import { MatDialog } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+
+import { AdminService } from '../../../services/admin.service';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
+
 
 @Component({
     selector: 'app-admin-live-orders',
     templateUrl: 'admin-live-orders.component.html',
     styleUrls: ['./admin-live-orders.component.css'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: true,
+    imports: [MatListModule, MatCardModule, MatTableModule],
 })
 
 export class AdminLiveOrdersComponent

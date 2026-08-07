@@ -1,12 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';  // Breakpoints?
-import { GuiStyleService } from '../../../../../../libs/shared-services/src/lib/models/gui-style.service';
-import { MenuBodyService } from '../../../../../libs/shared-services/src/lib/shared-services/menu-body.service';
+import { GuiStyleService } from 'shared-services';
+import { MenuBodyService } from 'shared-services';
 //import { DataService } from '../../../services/data.service';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { MenuService } from '../../../../../../libs/shared-services/src/lib/models/menu.service';
+import { MenuService } from 'shared-services';
 
 
 @Component({
@@ -23,9 +22,9 @@ export class SideMenuComponent implements OnInit{
   backgroundColour:string | undefined;
   textColour:string | undefined;
   jsonOfOptions:JSON | undefined;
-  availableCatagories:Array<string> | undefined;
+  availableCatagories: [] | undefined;
 
-  constructor(private breakpointObserver: BreakpointObserver, 
+  constructor(
               private _guiStyle: GuiStyleService, 
               private _menuBody: MenuBodyService, 
               //private _data: DataService,
@@ -34,7 +33,7 @@ export class SideMenuComponent implements OnInit{
               private router: Router) { 
 
     this._menuBody.sideMenuVisibilityChange.subscribe(value => {this.sideMenuVisable=value});    
-    this.__menuService.availableCatagories.subscribe(value => {this.availableCatagories = value});
+    this.__menuService.availableCatagories.subscribe(value => {this.availableCatagories=value});
     console.log('side-menu available catagories::', this.availableCatagories)
   };
 

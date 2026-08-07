@@ -1,15 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AdminService } from '../../../../../../src/app/services/admin.service';
-import { MatTableDataSource } from '@angular/material/table'
 import { MatDialog } from '@angular/material/dialog';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { AdminService } from '../../../services/admin.service';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table'
 
 @Component({
     selector: 'app-admin-completed-orders',
     templateUrl: 'admin-completed-orders.component.html',
     styleUrls: ['admin-completed-orders.component.css'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: true,
+    imports: [MatListModule, MatCardModule, MatTableModule],
 })
 
 export class AdminCompletedOrdersComponent

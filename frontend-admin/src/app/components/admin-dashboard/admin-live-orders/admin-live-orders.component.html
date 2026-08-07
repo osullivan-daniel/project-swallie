@@ -26,7 +26,7 @@
             <div class='button-div'>
               <button mat-raised-button
                 id='completeButton'
-                [disabled]="disableOrderButton"
+                /* [disabled]="disableOrderButton" */
               (click)='displayConfirmation(eachOrder, i)'>Complete</button>
             </div>
           </mat-card>
@@ -66,8 +66,8 @@
               <div class='button-div'>
                 <button mat-raised-button
                   id='completeButton'
-                  [disabled]="disableOrderButton"
-                (click)='onMoveToInProgress(i, eachOrder)'>Move To In Progress</button>
+                  /* [disabled]="disableOrderButton" */
+                (click)='onMoveToInProgress(i)'>Move To In Progress</button>
               </div>
             }
           </mat-card>

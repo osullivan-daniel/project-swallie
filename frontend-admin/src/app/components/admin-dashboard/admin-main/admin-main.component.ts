@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { GuiStyleService } from '../../../../../../libs/shared-services/src/lib/models/gui-style.service';
-import { AdminService } from 'src/app/services/admin.service';
+import { GuiStyleService } from 'shared-services';
+import { AdminService } from '../../../services/admin.service'
+
 
 
 @Component({
