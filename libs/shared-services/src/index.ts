@@ -1,4 +1,4 @@
-// export * from './lib/shared-services/shared-services';
-export * from './lib/shared-services/models/product';
-export * from './lib/shared-services/menu.service';
-export * from './lib/shared-services/gui-style.service';
+export * from './lib/menu.service';
+export * from './lib/gui-style.service';
+export * from './lib/menu-body.service';
+export * from './lib/models/product';
