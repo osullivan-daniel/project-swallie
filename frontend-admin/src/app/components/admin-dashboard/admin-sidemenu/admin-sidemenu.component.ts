@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 
 import { GuiStyleService } from 'shared-services';
@@ -18,6 +18,8 @@ import { AdminService } from '../../../services/admin.service';
 
 export class AdminSidemenuComponent implements OnInit {
 
+  @Output() viewChanged = new EventEmitter<string>();
+
   displayBody:string | undefined;
   textColour: string | undefined;
   backgroundColour:string | undefined;
@@ -26,11 +28,7 @@ export class AdminSidemenuComponent implements OnInit {
   constructor(private _guiStyle: GuiStyleService, private _adminService: AdminService, private router: Router) {}
 
   changeView(view) {
-    this._adminService.setVisableBody(view)
-  }
-
-  loadOrder(): void {
-    this.router.navigate(['/home']);
+    this.viewChanged.emit(view);
   }
 
   ngOnInit(): void {

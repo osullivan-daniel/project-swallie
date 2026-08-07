@@ -6,15 +6,15 @@
     disableClose
     mode="side">
     <div id='closeMenu'>
-      <img id="menuIcon" src="../assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
+      <img id="menuIcon" src="assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
     </div>
 
-    <app-admin-sidemenu></app-admin-sidemenu>
+    <app-admin-sidemenu (viewChanged)="onViewChanged($event)"></app-admin-sidemenu>
 
   </mat-sidenav>
   <mat-sidenav-content id=makemebig>
     <div class="container" id="example-container">
-      <img id="menuIcon" src="../../assets/icons/menu-black-36dp.svg"
+      <img id="menuIcon" src="assets/icons/menu-black-36dp.svg"
         (click)="openMenu()"
         [ngStyle]="{'visibility': this.displayMenuIcon}">
 

@@ -53,6 +53,10 @@ export class AdminMainComponent implements OnInit {
     this._adminService.setDisplaySideMenu(true);
   }
 
+  onViewChanged(view: string) {
+    this._adminService.setVisableBody(view);
+  }
+
   constructor(
     private _guiStyle: GuiStyleService,
     private _adminService: AdminService,
