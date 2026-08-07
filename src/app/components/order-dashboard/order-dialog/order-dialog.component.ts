@@ -3,9 +3,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
 import { AdminService } from 'src/app/services/admin.service';
-import { Product } from 'src/app/services/product';
+import { Product } from 'shared-services';
 import { Order } from 'src/app/services/order';
-import { MenuService } from 'src/app/services/menu.service';
+import { MenuService } from '../../../../../libs/shared-services/src/lib/shared-services/menu.service';
 import { format } from 'date-fns';
 
 

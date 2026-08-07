@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
-import { Product } from '../../../services/product';
+import { Product } from 'shared-services';
 //import { DataService } from '../../../services/data.service';
 import { ProductService } from '../../../services/product.service'
 import { v4 as uuid } from 'uuid';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { Product } from './product'
+import { Product } from 'shared-services';
 import { v4 as uuid } from 'uuid';
 
 

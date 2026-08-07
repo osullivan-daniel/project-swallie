@@ -4,24 +4,24 @@ export class Product {
       public productId: string = '',
       public name: string = '',
       public style:string = '',
-      public abv: number = null,
+      public abv: number = 0,
       public imgUrl: string = '',
       public cans: boolean = false,
       public halves: boolean = false,
       public thirds: boolean = false,
-      public cansPrice: number = null,
-      public halvesPrice: number = null,
-      public thirdsPrice: number = null
+      public cansPrice: number = 0,
+      public halvesPrice: number = 0,
+      public thirdsPrice: number = 0
     ) { }
 
-    public getPrice(size)
+    public getPrice(size: string)
     {
       if (size == 'cans') {return this.cansPrice}
       if (size == 'halves') {return this.halvesPrice}
       if (size == 'thirds') {return this.thirdsPrice}    
     }
 
-    public getSizeEnabled(size)
+    public getSizeEnabled(size: string)
     {
       if (size == 'cans') {return this.cans}
       if (size == 'halves') {return this.halves}

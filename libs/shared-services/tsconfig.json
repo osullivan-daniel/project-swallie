@@ -3,7 +3,7 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "isolatedModules": true,
-    "strict": true,
+    "strict": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,

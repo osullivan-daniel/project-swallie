@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ProductService } from './services/product.service'
-import { MenuService } from './services/menu.service'
+import { MenuService } from '../../libs/shared-services/src/lib/shared-services/menu.service'
 
 @Component({
     selector: 'app-root',

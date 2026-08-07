@@ -3,7 +3,7 @@ import { MenuBodyService } from '../../../services/menu-body.service';
 //import { DataService } from '../../../services/data.service';
 import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MenuService } from 'src/app/services/menu.service';
+import { MenuService } from '../../../../../libs/shared-services/src/lib/shared-services/menu.service';
 // import { ProductService } from 'src/app/services/product.service';
 
 
