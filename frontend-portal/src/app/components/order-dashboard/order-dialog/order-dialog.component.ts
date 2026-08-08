@@ -1,12 +1,15 @@
-import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDialogRef } from '@angular/material/dialog'
-import { MatTableDataSource } from '@angular/material/table'
-import { AdminService } from 'src/app/services/admin.service';
-import { Product } from 'shared-services';
-import { Order } from 'src/app/services/order';
-import { MenuService } from '../../../../../../libs/shared-services/src/lib/models/menu.service';
 import { format } from 'date-fns';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
+
+
+import { MenuService } from 'shared-services';
+import { AdminService } from 'shared-services';
+import { Order } from '../../../services/order';
 
 
 @Component({
@@ -14,7 +17,8 @@ import { format } from 'date-fns';
     templateUrl: 'order-dialog.component.html',
     styleUrls: ['order-dialog.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: true,
+    imports:[MatIconModule, MatTableModule]
 })
 export class OrderDialogComponent implements OnInit {
 

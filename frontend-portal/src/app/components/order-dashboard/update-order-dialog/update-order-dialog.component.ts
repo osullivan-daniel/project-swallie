@@ -1,14 +1,18 @@
 import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog'
-import { MatTableDataSource } from '@angular/material/table'
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector: 'app-update-order-dialog',
     templateUrl: 'update-order-dialog.component.html',
     styleUrls: ['update-order-dialog.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: true,
+    imports:[MatSelectModule, MatTableModule, MatCheckboxModule]
 })
 
 export class updateOrderDialogComponent implements OnInit

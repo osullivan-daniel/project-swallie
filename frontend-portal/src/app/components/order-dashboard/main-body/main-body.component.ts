@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MenuBodyService } from 'shared-services/src/lib/shared-services/menu-body.service';
-//import { DataService } from '../../../services/data.service';
-import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
+import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { MenuService } from './menu.service';
-// import { ProductService } from 'src/app/services/product.service';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { updateOrderDialogComponent } from '../update-order-dialog/update-order-dialog.component';
+
+import { MenuService } from 'shared-services';
+import { MenuBodyService } from 'shared-services';
 
 
 @Component({
@@ -12,7 +12,8 @@ import { MenuService } from './menu.service';
     templateUrl: 'main-body.component.html',
     styleUrls: ['main-body.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: true,
+    imports:[CommonModule]
 })
 
 
