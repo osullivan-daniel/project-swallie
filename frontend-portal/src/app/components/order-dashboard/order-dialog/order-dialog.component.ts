@@ -8,7 +8,7 @@ import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/cor
 
 
 import { MenuService } from 'shared-services';
-import { AdminService } from 'shared-services';
+// import { AdminService } from 'shared-services';
 import { Order } from '../../../services/order';
 
 
@@ -30,7 +30,7 @@ export class OrderDialogComponent implements OnInit {
   displayedColumns: Array<string> = ['name', 'size', 'qty', 'remove'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public __dialogData: any, 
-              private __adminService: AdminService,
+              // private __adminService: AdminService,
               private dialogRef: MatDialogRef<OrderDialogComponent>,
               private __menuService: MenuService) {}
 
@@ -58,7 +58,7 @@ export class OrderDialogComponent implements OnInit {
       each['qty'] = 0
     }
 
-    this.__adminService.updateOrderQue(newOrderObject)
+    // this.__adminService.updateOrderQue(newOrderObject)
     this.dialogRef.close()
   }
 
