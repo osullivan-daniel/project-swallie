@@ -30,26 +30,23 @@ import { updateOrderDialogComponent } from './components/order-dashboard/update-
 import { AdminMainComponent } from './components/admin-dashboard/admin-main/admin-main.component';
 import { AdminSidemenuComponent } from './components/admin-dashboard/admin-sidemenu/admin-sidemenu.component';
 import { AdminLiveOrdersComponent } from './components/admin-dashboard/admin-live-orders/admin-live-orders.component';
-// shared
-import { HeaderComponent } from './components/shared/header/header.component';
 
 // services
 //import { DataService } from './services/data.service';
 //import { ProductService } from './services/product.service';
-import { GuiStyleService } from './services/gui-style.service';
-import { MenuBodyService } from './services/menu-body.service';
+import { GuiStyleService } from '../../libs/shared-services/src/lib/shared-services/gui-style.service';
+import { MenuBodyService } from '../../libs/shared-services/src/lib/shared-services/menu-body.service';
 import { AdminMenuComponent } from './components/admin-dashboard/admin-menu/admin-menu.component';
 import { AdminProductsComponent } from './components/admin-dashboard/admin-products/admin-products.component';
 import { AdminConfirmDialogComponent } from './components/admin-dashboard/admin-confirm-dialog/admin-confirm-dialog.component';
 import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admin-completed-orders/admin-completed-orders.component';
 
-
+import { SharedUiModule } from '../../libs/shared-ui/src/lib/shared-ui/shared-ui.module';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
         MainBodyComponent,
         SideMenuComponent,
         updateOrderDialogComponent,
@@ -63,6 +60,7 @@ import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admi
         AdminCompletedOrdersComponent,
     ],
     imports: [
+        SharedUiModule,
         BrowserModule,
         AppRoutingModule,
         LayoutModule,

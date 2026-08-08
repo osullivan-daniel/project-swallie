@@ -1,0 +1,18 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "bundler",
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "strict": false,
+    "paths": {
+      "src/*": ["./src/*"],
+      "shared-ui": ["./libs/shared-ui/src/index.ts"],
+      "shared-services": ["./libs/shared-services/src/index.ts"]
+    }
+  }
+}

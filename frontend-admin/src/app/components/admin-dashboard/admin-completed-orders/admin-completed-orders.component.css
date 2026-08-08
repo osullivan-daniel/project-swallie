@@ -1,0 +1,65 @@
+.card-item-list {
+    width: 100%;
+    padding: 10px 16px;
+    box-sizing: border-box;
+}
+
+.mat-footer-row,
+.mat-mdc-footer-row,
+.mat-header-row,
+.mat-mdc-header-row,
+.mat-row,
+.mat-mdc-row {
+    width: 100% !important;
+    display: flex !important;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+    flex: 1 1 auto;
+}
+
+/* The page supplies horizontal scrolling once the table reaches this size. */
+mat-table {
+    width: 100%;
+    min-width: 24rem;
+}
+
+.mat-column-name {
+    flex: 1 1 50% !important;
+    width: 50% !important;
+    min-width: 12rem;
+}
+
+/* Keep item names readable on narrow screens: wrap only between words and
+   show at most two lines instead of Material's single-line ellipsis. */
+.order-name {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.mat-column-size {
+    flex: 1 1 25% !important;
+    width: 25% !important;
+    min-width: 7rem;
+}
+
+.mat-column-qty {
+    flex: 1 1 25% !important;
+    width: 25% !important;
+    min-width: 5rem;
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
