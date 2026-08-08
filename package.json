@@ -9,7 +9,7 @@
     "test": "nx test",
     "lint": "nx lint",
     "e2e": "nx e2e",
-    "startAdmin": "nx serve frontend-admin --port 4250" ,
+    "startAdmin": "nx serve frontend-admin --port 4200" ,
     "startPortal": "nx serve frontend-portal --port 4275" 
   },
   "private": true,

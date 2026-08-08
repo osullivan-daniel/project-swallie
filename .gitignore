@@ -53,3 +53,7 @@ Thumbs.db
 .nx/workspace-data
 .nx/migrate-runs
 .angular
+
+
+# python
+**/__pycache__/
