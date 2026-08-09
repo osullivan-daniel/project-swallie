@@ -17,7 +17,10 @@ class Order(Base):
     cust_name: Mapped[str] = mapped_column(String(255), nullable=False)
 
     status: Mapped[OrderStatus] = mapped_column(
-        SQLEnum(OrderStatus),
+        SQLEnum(
+            OrderStatus,
+            values_callable=lambda enum: [item.value for item in enum],
+        ),
         nullable=False,
         default=OrderStatus.IN_QUEUE,
     )
@@ -42,7 +45,7 @@ class Order(Base):
         nullable=False,
     )
 
-    items: Mapped[list["OrderItem"]] = relationship(
+    order_items: Mapped[list["OrderItem"]] = relationship(
         back_populates="order",
         cascade="all, delete-orphan",
     )

@@ -1,5 +1,9 @@
-from fastapi import APIRouter
-from app.features.admin.orders.schemas import Order
+from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends
+
+from app.db.database import get_db
+from app.db.models import Order, OrderStatus
+from app.features.admin.orders.schemas import Order as OrderSchema
 
 router = APIRouter(
     prefix="/orders",
@@ -7,39 +11,10 @@ router = APIRouter(
 )
 
 
-@router.get("/inProgress", response_model=list[Order])
-async def get_in_progress_orders():
-    # db will be in snake case we will map snake to camel here for the api
-    return [{
-        "orderId": 123,
-        "tableNum": 7,
-        "custName": "John",
-        "orderStatus": "inProgress",
-        "orderedAt": "2026-08-09T14:28:00Z",
-        "completedAt": None,
-        "cancelledAt": None,
-        "totalPrice": 15.31,
-        "orderItems": [
-            {
-                "productId": 42,
-                "productName": "BLACK IS THE COLOUR",
-                "productSize": "cans",
-                "qty": 1,
-                "itemPrice": 4.58
-            },
-            {
-                "productId": 46,
-                "productName": "Test 7",
-                "productSize": "1/2 Pint",
-                "qty": 1,
-                "itemPrice": 6.59
-            },
-            {
-                "productId": 48,
-                "productName": "Test 4",
-                "productSize": "1/3 Pint",
-                "qty": 1,
-                "itemPrice": 4.14
-            }
-        ],
-    }]
+@router.get("/inProgress", response_model=list[OrderSchema])
+async def get_in_progress_orders(db: Session = Depends(get_db)):
+    return (
+        db.query(Order)
+            .filter(Order.status == OrderStatus.IN_PROGRESS)
+            .all()
+    )

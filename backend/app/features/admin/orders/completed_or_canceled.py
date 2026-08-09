@@ -1,3 +1,4 @@
+from sqlalchemy import or_
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends
 
@@ -11,10 +12,10 @@ router = APIRouter(
 )
 
 
-@router.get("/inQueue", response_model=list[OrderSchema])
-async def get_in_queue_orders(db: Session = Depends(get_db)):
+@router.get("/completed", response_model=list[OrderSchema])
+async def get_completed_orders(db: Session = Depends(get_db)):
     return (
         db.query(Order)
-            .filter(Order.status == OrderStatus.IN_QUEUE)
-            .all()
+        .filter(or_(Order.status == OrderStatus.COMPLETED, Order.status == OrderStatus.CANCELLED))
+        .all()
     )
