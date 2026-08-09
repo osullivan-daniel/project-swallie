@@ -18,21 +18,21 @@ async def get_in_queue_orders():
         "orderedAt": "2026-08-09T14:28:00Z",
         "completedAt": None,
         "cancelledAt": None,
-        "totalPrice": "9.50",
+        "totalPrice": 9.50,
         "order": [
             {
                 "productId": 42,
                 "productName": "BLACK IS THE COLOUR",
                 "productSize": "cans",
                 "qty": 1,
-                "itemPrice": "6.25"
+                "itemPrice": 6.25
             },
             {
                 "productId": 42,
                 "productName": "Test 1",
                 "productSize": "1/2 Pint",
                 "qty": 1,
-                "itemPrice": "3.25"
+                "itemPrice": 3.25
             }
         ],
     }]

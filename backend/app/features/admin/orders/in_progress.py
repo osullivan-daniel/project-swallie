@@ -18,28 +18,28 @@ async def get_in_progress_orders():
         "orderedAt": "2026-08-09T14:28:00Z",
         "completedAt": None,
         "cancelledAt": None,
-        "totalPrice": "15.31",
+        "totalPrice": 15.31,
         "order": [
             {
                 "productId": 42,
                 "productName": "BLACK IS THE COLOUR",
                 "productSize": "cans",
                 "qty": 1,
-                "itemPrice": "4.58"
+                "itemPrice": 4.58
             },
             {
                 "productId": 46,
                 "productName": "Test 7",
                 "productSize": "1/2 Pint",
                 "qty": 1,
-                "itemPrice": "6.59"
+                "itemPrice": 6.59
             },
             {
                 "productId": 48,
                 "productName": "Test 4",
                 "productSize": "1/3 Pint",
                 "qty": 1,
-                "itemPrice": "4.14"
+                "itemPrice": 4.14
             }
         ],
     }]

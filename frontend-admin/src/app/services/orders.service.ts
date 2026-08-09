@@ -2,25 +2,36 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
+export enum OrderStatus {
+  IN_QUEUE = 'inQueue',
+  IN_PROGRESS = 'inProgress',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled'
+}
+
+
 export interface OrderItem {
   productId: number;
   productName: string;
   productSize: string;
   qty: number;
-  itemPrice: string;
+  itemPrice: number;
 }
+
 
 export interface Order {
   orderId: number;
   tableNum: number;
   custName: string;
-  orderStatus: string;
-  orderedAt: string;
-  completedAt: string | null;
-  cancelledAt: string | null;
-  totalPrice: string;
+  orderStatus: OrderStatus;
+  orderedAt: Date;
+  completedAt: Date | null;
+  cancelledAt: Date | null;
+  totalPrice: number;
   order: OrderItem[];
 }
+
 
 @Injectable({
   providedIn: 'root'

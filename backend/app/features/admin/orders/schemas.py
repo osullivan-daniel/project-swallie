@@ -1,4 +1,14 @@
+from enum import Enum
+from decimal import Decimal
+from datetime import datetime
 from pydantic import BaseModel
+
+
+class OrderStatus(str, Enum):
+    IN_QUEUE = "inQueue"
+    IN_PROGRESS = "inProgress"
+    COMPLETED = "completed"
+    CANCELLED = "cancelled"
 
 
 class OrderItem(BaseModel):
@@ -6,16 +16,18 @@ class OrderItem(BaseModel):
     productName: str
     productSize: str
     qty: int
-    itemPrice: str
+    itemPrice: Decimal
 
 
 class Order(BaseModel):
     orderId: int
     tableNum: int
     custName: str
-    orderStatus: str
-    orderedAt: str
-    completedAt: str | None
-    cancelledAt: str | None
-    totalPrice: str
+    orderStatus: OrderStatus
+    orderedAt: datetime
+    completedAt: datetime | None
+    cancelledAt: datetime | None
+    totalPrice: Decimal
     order: list[OrderItem]
+
+
