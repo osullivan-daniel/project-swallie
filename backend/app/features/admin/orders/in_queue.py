@@ -19,7 +19,7 @@ async def get_in_queue_orders():
         "completedAt": None,
         "cancelledAt": None,
         "totalPrice": 9.50,
-        "order": [
+        "orderItems": [
             {
                 "productId": 42,
                 "productName": "BLACK IS THE COLOUR",

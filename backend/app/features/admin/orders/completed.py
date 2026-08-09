@@ -19,7 +19,7 @@ async def get_completed_orders():
         "completedAt": "2026-08-09T14:32:00Z",
         "cancelledAt": None,
         "totalPrice": 4.58,
-        "order": [
+        "orderItems": [
             {
                 "productId": 42,
                 "productName": "BLACK IS THE COLOUR",

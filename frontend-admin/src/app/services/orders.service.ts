@@ -29,7 +29,7 @@ export interface Order {
   completedAt: Date | null;
   cancelledAt: Date | null;
   totalPrice: number;
-  order: OrderItem[];
+  orderItems: OrderItem[];
 }
 
 

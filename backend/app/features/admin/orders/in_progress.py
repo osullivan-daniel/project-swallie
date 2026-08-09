@@ -19,7 +19,7 @@ async def get_in_progress_orders():
         "completedAt": None,
         "cancelledAt": None,
         "totalPrice": 15.31,
-        "order": [
+        "orderItems": [
             {
                 "productId": 42,
                 "productName": "BLACK IS THE COLOUR",

@@ -6,7 +6,7 @@
       @for (eachOrder of localComplete; track eachOrder; let i = $index) {
         <div class="swally-item-list">
           <mat-card class="swally-card">
-            <mat-table class="swally-table" [dataSource]="eachOrder.order">
+            <mat-table class="swally-table" [dataSource]="eachOrder.orderItems">
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Product Name</th>
                 <td mat-cell *matCellDef="let element">
