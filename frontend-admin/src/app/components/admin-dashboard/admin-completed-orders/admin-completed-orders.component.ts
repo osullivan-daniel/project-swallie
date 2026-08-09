@@ -1,5 +1,6 @@
 import { MatDialog } from '@angular/material/dialog';
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import {
   OrdersService,
   CompletedOrder,
@@ -8,6 +9,9 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { config } from '../../../config';
+
+
 
 @Component({
   selector: 'app-admin-completed-orders',
@@ -15,16 +19,19 @@ import { MatTableModule } from '@angular/material/table';
   styleUrls: ['admin-completed-orders.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatListModule, MatCardModule, MatTableModule],
+  imports: [MatListModule, MatCardModule, MatTableModule, CurrencyPipe],
 })
 export class AdminCompletedOrdersComponent implements OnInit {
   localComplete: CompletedOrder[] = [];
 
-  displayedColumns = ['name', 'size', 'qty'];
+  displayedColumns = ['name', 'size', 'qty',  'price'];
+  currencyCode = config.currency;
 
   constructor(
-    private readonly ordersService: OrdersService,
-    public dialog: MatDialog,
+  private readonly ordersService: OrdersService,
+  private readonly changeDetectorRef: ChangeDetectorRef,
+  public dialog: MatDialog
+
   ) {
     console.log('AdminCompletedOrdersComponent constructed');
   }
@@ -34,6 +41,9 @@ export class AdminCompletedOrdersComponent implements OnInit {
       next: (orders) => {
         console.log('Orders received from FastAPI:', orders);
         this.localComplete = orders;
+        this.changeDetectorRef.markForCheck();
+
+        console.log('localComplete:', this.localComplete);
       },
       error: (error) => {
         console.error('Failed to load completed orders:', error);
@@ -41,14 +51,14 @@ export class AdminCompletedOrdersComponent implements OnInit {
     });
   }
 
-  public displayConfirmation(selectedOrder: any): void {
+  public displayConfirmation(selectedOrder: CompletedOrder): void {
     console.log(selectedOrder);
 
     this.dialog.open(AdminConfirmDialogComponent, {
       disableClose: true,
       data: {
-        tableNum: selectedOrder.tableNumber,
-        custName: selectedOrder.customerName,
+        tableNum: selectedOrder.tableNum,
+        custName: selectedOrder.custName,
       },
     });
   }

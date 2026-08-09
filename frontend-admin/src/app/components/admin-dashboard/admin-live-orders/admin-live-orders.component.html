@@ -3,7 +3,7 @@
   <div id=cardItemList>
     <mat-nav-list>
       @for (eachOrder of localProgress; track eachOrder; let i = $index) {
-        <div class="card-item-list" id=cardItemList>
+        <div class="swally-item-list" id=cardItemList>
           <mat-card class="swally-card">
             <mat-table id=tableTest [dataSource]="eachOrder.order">
               <ng-container matColumnDef="name">

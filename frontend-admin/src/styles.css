@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import '../public/assets/css/modules/_fonts.css';
+
+.swally-card {
+    min-width: calc(24rem + 2rem);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd !important;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.15) !important;
+} 
+
+.swally-menu-style {
+    --mat-list-list-item-label-text-font: "Andale Mono", monospace, sans-serif;
+    --mat-list-list-item-label-text-weight: 700;
+}
+
+.swally-table {
+  display: table !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.swally-item-list {
+    width: 100%;
+    padding: 10px 16px;
+    box-sizing: border-box;
+}
