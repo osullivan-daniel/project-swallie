@@ -29,3 +29,15 @@
     padding: 10px 16px !important;;
     box-sizing: border-box !important;;
 }
+
+.swally-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
+button.swally-button {
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.15) !important;
+}

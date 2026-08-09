@@ -1,13 +1,13 @@
 <app-header></app-header>
 
 <mat-sidenav-container class="admin-sidenav-container" fixedInViewport>
-  <mat-sidenav class="side-Menu"
+  <mat-sidenav
     [(opened)]="sideMenuVisable"
     [ngStyle]="{ 'background-color': backgroundColour }"
     disableClose
     mode="side"
   >
-    <div class="closeMenu">
+    <div class="closeMenuButton">
       <img src="assets/icons/close-white-36dp.svg" (click)="closeMenu()" />
     </div>
 
@@ -29,7 +29,7 @@
       }
 
       @if (displayBody === 'menu') {
-        <app-admin-menu></app-admin-menu>
+        <app-admin-stock></app-admin-stock>
       }
 
       @if (displayBody === 'products') {

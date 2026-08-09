@@ -10,13 +10,14 @@ export interface OrderItem {
   itemPrice: string;
 }
 
-export interface CompletedOrder {
+export interface Order {
   orderId: number;
   tableNum: number;
   custName: string;
   orderStatus: string;
   orderedAt: string;
-  completedAt: string;
+  completedAt: string | null;
+  cancelledAt: string | null;
   totalPrice: string;
   order: OrderItem[];
 }
@@ -30,9 +31,21 @@ export class OrdersService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getCompletedOrders(): Observable<CompletedOrder[]> {
-    return this.http.get<CompletedOrder[]>(
+  getCompletedOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(
       `${this.apiUrl}/orders/completed`
+    );
+  }
+
+  getInProgressOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      `${this.apiUrl}/orders/inProgress`
+    );
+  }
+
+  getInQueueOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      `${this.apiUrl}/orders/inQueue`
     );
   }
 }

@@ -3,11 +3,7 @@
   background-color: #fff;
 }
 
-.side-Menu {
-  width: 40% !important;
-}
-
-.closeMenu {
+.closeMenuButton {
     display: flex !important;
-    margin-left: 75%  
+    margin-left: 85%  
   }

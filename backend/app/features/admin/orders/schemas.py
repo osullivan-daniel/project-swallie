@@ -9,12 +9,13 @@ class OrderItem(BaseModel):
     itemPrice: str
 
 
-class CompletedOrder(BaseModel):
+class Order(BaseModel):
     orderId: int
     tableNum: int
     custName: str
     orderStatus: str
     orderedAt: str
-    completedAt: str
+    completedAt: str | None
+    cancelledAt: str | None
     totalPrice: str
     order: list[OrderItem]

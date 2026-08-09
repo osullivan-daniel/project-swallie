@@ -33,9 +33,10 @@
             </ng-container>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </mat-table>
-          <div class='button-div'>
-            <button mat-raised-button
-              id='update'
+          <div class="swally-button-div">
+            <button
+              mat-raised-button
+              class="swally-button"
               [style.visibility]="eachItem.updateButtonVisable ? 'visible': 'hidden'">
               Update Product Avalability
             </button>

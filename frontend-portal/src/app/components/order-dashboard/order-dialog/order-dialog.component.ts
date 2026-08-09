@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
@@ -18,7 +19,7 @@ import { Order } from '../../../services/order';
     styleUrls: ['order-dialog.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports:[MatIconModule, MatTableModule]
+    imports:[MatIconModule, MatTableModule, MatButtonModule]
 })
 export class OrderDialogComponent implements OnInit {
 

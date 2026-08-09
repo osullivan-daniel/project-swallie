@@ -1,6 +1,7 @@
 
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
+import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormArray } from '@angular/forms';
@@ -9,15 +10,15 @@ import { MenuService } from 'shared-services';
 import { ProductService } from '../../../services/product.service';
 
 @Component({
-    selector: 'app-admin-menu',
-    templateUrl: 'admin-menu.component.html',
-    styleUrls: ['admin-menu.component.css'],
+    selector: 'app-admin-stock',
+    templateUrl: 'admin-stock.component.html',
+    styleUrls: ['admin-stock.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [MatCardModule, MatTableModule, MatCheckboxModule, FormsModule, ReactiveFormsModule]
+    imports: [MatCardModule, MatTableModule, MatCheckboxModule, MatButtonModule, FormsModule, ReactiveFormsModule]
 })
 
-export class AdminMenuComponent {
+export class AdminStockComponent {
 
   availableProductsLocal: any;
   avilableProducts: any;

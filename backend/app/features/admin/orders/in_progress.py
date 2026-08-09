@@ -1,6 +1,5 @@
 from fastapi import APIRouter
-
-from app.features.admin.orders.schemas import CompletedOrder
+from app.features.admin.orders.schemas import Order
 
 router = APIRouter(
     prefix="/orders",
@@ -8,16 +7,18 @@ router = APIRouter(
 )
 
 
-@router.get("/completed", response_model=list[CompletedOrder])
-async def get_completed_orders():
+@router.get("/inProgress", response_model=list[Order])
+async def get_in_progress_orders():
+    # db will be in snake case we will map snake to camel here for the api
     return [{
         "orderId": 123,
-        "tableNum": 1,
-        "custName": "Tom",
-        "orderStatus": "Complete",
+        "tableNum": 7,
+        "custName": "John",
+        "orderStatus": "inProgress",
         "orderedAt": "2026-08-09T14:28:00Z",
-        "completedAt": "2026-08-09T14:32:00Z",
-        "totalPrice": "4.58",
+        "completedAt": None,
+        "cancelledAt": None,
+        "totalPrice": "15.31",
         "order": [
             {
                 "productId": 42,
@@ -27,18 +28,18 @@ async def get_completed_orders():
                 "itemPrice": "4.58"
             },
             {
-                "productId": 42,
-                "productName": "Test 1",
+                "productId": 46,
+                "productName": "Test 7",
                 "productSize": "1/2 Pint",
                 "qty": 1,
-                "itemPrice": "4.58"
+                "itemPrice": "6.59"
             },
             {
-                "productId": 42,
-                "productName": "Test 2",
+                "productId": 48,
+                "productName": "Test 4",
                 "productSize": "1/3 Pint",
                 "qty": 1,
-                "itemPrice": "4.58"
+                "itemPrice": "4.14"
             }
         ],
     }]

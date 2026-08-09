@@ -36,7 +36,7 @@ import { AdminLiveOrdersComponent } from './components/admin-dashboard/admin-liv
 //import { ProductService } from './services/product.service';
 import { GuiStyleService } from '../../libs/shared-services/src/lib/shared-services/gui-style.service';
 import { MenuBodyService } from '../../libs/shared-services/src/lib/shared-services/menu-body.service';
-import { AdminMenuComponent } from './components/admin-dashboard/admin-menu/admin-menu.component';
+import { AdminStockComponent } from './components/admin-dashboard/admin-stock/admin-stock.component';
 import { AdminProductsComponent } from './components/admin-dashboard/admin-products/admin-products.component';
 import { AdminConfirmDialogComponent } from './components/admin-dashboard/admin-confirm-dialog/admin-confirm-dialog.component';
 import { AdminCompletedOrdersComponent } from './components/admin-dashboard/admin-completed-orders/admin-completed-orders.component';
@@ -54,7 +54,7 @@ import { SharedUiModule } from '../../libs/shared-ui/src/lib/shared-ui/shared-ui
         AdminMainComponent,
         AdminSidemenuComponent,
         AdminLiveOrdersComponent,
-        AdminMenuComponent,
+        AdminStockComponent,
         AdminProductsComponent,
         AdminConfirmDialogComponent,
         AdminCompletedOrdersComponent,
