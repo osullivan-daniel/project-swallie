@@ -1,46 +1,44 @@
 <app-header></app-header>
 
-<mat-sidenav-container class="navContainer" fixedInViewport="true">
-  <mat-sidenav [ngStyle]="{'background-color': this.backgroundColour}"
+<mat-sidenav-container class="admin-sidenav-container" fixedInViewport>
+  <mat-sidenav class="side-Menu"
     [(opened)]="sideMenuVisable"
+    [ngStyle]="{ 'background-color': backgroundColour }"
     disableClose
-    mode="side">
-    <div id='closeMenu'>
-      <img id="menuIcon" src="assets/icons/close-white-36dp.svg" (click)="closeMenu()" onmouseover="">
+    mode="side"
+  >
+    <div class="closeMenu">
+      <img src="assets/icons/close-white-36dp.svg" (click)="closeMenu()" />
     </div>
 
     <app-admin-sidemenu (viewChanged)="onViewChanged($event)"></app-admin-sidemenu>
-
   </mat-sidenav>
-  <mat-sidenav-content id=makemebig>
-    <div class="container" id="example-container">
-      <img id="menuIcon" src="assets/icons/menu-black-36dp.svg"
-        (click)="openMenu()"
-        [ngStyle]="{'visibility': this.displayMenuIcon}">
 
-      @if (displayBody==='live') {
+  <mat-sidenav-content >
+    <div class="admin-content">
+      <div class="menu-icon">
+        <img
+          src="assets/icons/menu-black-36dp.svg"
+          (click)="openMenu()"
+          [ngStyle]="{ visibility: displayMenuIcon }"
+        />
+      </div>
+
+      @if (displayBody === 'live') {
         <app-admin-live-orders></app-admin-live-orders>
       }
-      @if (displayBody==='menu') {
+
+      @if (displayBody === 'menu') {
         <app-admin-menu></app-admin-menu>
       }
-      @if (displayBody==='products') {
+
+      @if (displayBody === 'products') {
         <app-admin-products></app-admin-products>
       }
-      @if (displayBody==='completed') {
+
+      @if (displayBody === 'completed') {
         <app-admin-completed-orders></app-admin-completed-orders>
       }
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
-
-
-
-
-
-
-
-
-

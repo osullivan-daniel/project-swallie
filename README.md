@@ -11,3 +11,7 @@ At this point the main issue is typing which has curently been disabled. The pla
 And by we I mean me - its a Cork thing...
 Although Ai might be helping so it really is we just mostly me!
 
+
+start admin  : npm run startAdmin
+start portal : npm run startPortal
+start backend: uvicorn app.main:app --reload (from backend dir)
