@@ -31,8 +31,9 @@
               <button
                 mat-raised-button
                 class="swally-button"
-                /* [disabled]="disableOrderButton" */
-              (click)='displayConfirmation(eachOrder, i)'>Complete</button>
+                (click)="completeOrder(eachOrder)">
+                Move to Completed
+              </button>
             </div>
           </mat-card>
         </div>
@@ -77,7 +78,7 @@
                 mat-raised-button
                 class="swally-button"
                 (click)="startOrder(eachOrder)">
-                Move to in progress
+                Move to In Progress
               </button>
             </div>
             }

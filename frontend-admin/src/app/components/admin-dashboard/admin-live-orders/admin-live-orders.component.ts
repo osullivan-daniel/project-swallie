@@ -41,11 +41,11 @@ export class AdminLiveOrdersComponent {
   currencyCode = config.currency;
 
   constructor(
+    public dialog: MatDialog,
     private _adminService: AdminService,
     private readonly cdr: ChangeDetectorRef,
     private readonly ordersService: OrdersService,
-    private readonly changeDetectorRef: ChangeDetectorRef,
-    public dialog: MatDialog,
+    
   ) {
     console.log('AdminLiveOrdersComponent constructed');
   }
@@ -55,30 +55,17 @@ export class AdminLiveOrdersComponent {
   }
 
   ngOnInit(): void {
-    this.ordersService.getInQueueOrders().subscribe({
-      next: (orders) => {
-        console.log('Orders received from FastAPI:', orders);
-        this.localInQueue = orders;
-        this.changeDetectorRef.markForCheck();
+    this.ordersService.loadInProgressOrders();
+    this.ordersService.loadInQueueOrders();
 
-        console.log('localInQueue:', this.localInQueue);
-      },
-      error: (error) => {
-        console.error('Failed to load completed orders:', error);
-      },
+    this.ordersService.inProgressOrders$.subscribe((orders) => {
+      this.localInProgress = orders;
+      this.cdr.markForCheck();
     });
 
-    this.ordersService.getInProgressOrders().subscribe({
-      next: (orders) => {
-        console.log('Orders received from FastAPI:', orders);
-        this.localInProgress = orders;
-        this.changeDetectorRef.markForCheck();
-
-        console.log('localInProgress:', this.localInProgress);
-      },
-      error: (error) => {
-        console.error('Failed to load completed orders:', error);
-      },
+    this.ordersService.inQueueOrders$.subscribe((orders) => {
+      this.localInQueue = orders;
+      this.cdr.markForCheck();
     });
   }
 
@@ -97,6 +84,23 @@ export class AdminLiveOrdersComponent {
             orderStatus: OrderStatus.IN_PROGRESS,
           },
         ];
+
+        this.cdr.markForCheck();
+      },
+      error: (error) => {
+        console.error('Failed to start order', error);
+      },
+    });
+  }
+
+  completeOrder(order: Order): void {
+    this.ordersService.completeOrder(order.orderId).subscribe({
+      next: (completedOrder) => {
+        this.localInProgress = this.localInProgress.filter(
+          (eachOrder) => eachOrder.orderId !== order.orderId,
+        );
+
+        this.ordersService.addCompletedOrder(completedOrder);
 
         this.cdr.markForCheck();
       },

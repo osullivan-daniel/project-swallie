@@ -36,29 +36,20 @@ export class AdminCompletedOrdersComponent implements OnInit {
   currencyCode = config.currency;
 
   constructor(
-    private readonly ordersService: OrdersService,
-    private readonly changeDetectorRef: ChangeDetectorRef,
     public dialog: MatDialog,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly ordersService: OrdersService,
+    
   ) {
     console.log('AdminCompletedOrdersComponent constructed');
   }
 
   ngOnInit(): void {
-    this.ordersService.getCompletedOrders().subscribe({
-      next: (orders) => {
-        console.log('Orders received from FastAPI:', orders);
-        this.localCompleted = orders;
-        this.changeDetectorRef.markForCheck();
-
-        console.log('localCompleted:', this.localCompleted);
-      },
-      error: (error) => {
-        console.error('Failed to load completed orders:', error);
-      },
-    });
+    this.ordersService.loadCompletedOrders();
 
     this.ordersService.completedOrders$.subscribe((orders) => {
       this.localCompleted = orders;
+      this.cdr.markForCheck();
     });
   }
 

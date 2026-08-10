@@ -38,28 +38,94 @@ export class OrdersService {
   private readonly apiUrl = 'http://127.0.0.1:8000';
 
   private completedOrdersSubject = new BehaviorSubject<Order[]>([]);
+  private inProgressOrdersSubject = new BehaviorSubject<Order[]>([]);
+  private inQueueOrdersSubject = new BehaviorSubject<Order[]>([]);
 
   completedOrders$ = this.completedOrdersSubject.asObservable();
+  inProgressOrders$ = this.inProgressOrdersSubject.asObservable();
+  inQueueOrders$ = this.inQueueOrdersSubject.asObservable();
 
-  getCompletedOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.apiUrl}/orders/completed`);
-  }
+  private completedOrdersLoaded = false;
+  private inProgressOrdersLoaded = false;
+  private inQueueOrdersLoaded = false;
 
-  appendLocalCompleteOrder(order: Order): void {
+  addCompletedOrder(order: Order): void {
     const currentOrders = this.completedOrdersSubject.value;
-
     this.completedOrdersSubject.next([...currentOrders, order]);
   }
 
-  getInProgressOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.apiUrl}/orders/inProgress`);
+  addInProgressOrder(order: Order): void {
+    const currentOrders = this.inProgressOrdersSubject.value;
+    this.inProgressOrdersSubject.next([...currentOrders, order]);
   }
 
-  getInQueueOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.apiUrl}/orders/inQueue`);
+  addInQueueOrder(order: Order): void {
+    const currentOrders = this.inQueueOrdersSubject.value;
+    this.inQueueOrdersSubject.next([...currentOrders, order]);
   }
+
 
   startOrder(orderId: number) {
-    return this.http.post(`http://127.0.0.1:8000/orders/${orderId}/start`, {});
+    return this.http.post(`${this.apiUrl}/orders/${orderId}/start`, {});
+  }
+
+  completeOrder(orderId: number): Observable<Order> {
+    return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/complete`, {});
+  }
+
+  loadCompletedOrders(): void {
+
+    if (this.completedOrdersLoaded) {
+      return;
+    }
+
+    console.log('Loading Completed Orders');
+    this.http.get<Order[]>(`${this.apiUrl}/orders/completed`).subscribe({
+      next: (orders) => {
+        this.completedOrdersSubject.next(orders);
+        this.completedOrdersLoaded = true;
+        
+      },
+      error: (error) => {
+        console.error('Failed to load completed orders:', error);
+      },
+    });
+  }
+
+  loadInProgressOrders(): void {
+
+    if (this.inProgressOrdersLoaded) {
+      return;
+    }
+
+    console.log('Loading InProgress Orders');
+    this.http.get<Order[]>(`${this.apiUrl}/orders/inProgress`).subscribe({
+      next: (orders) => {
+        this.inProgressOrdersSubject.next(orders);
+        this.inProgressOrdersLoaded = true;
+        
+      },
+      error: (error) => {
+        console.error('Failed to load completed orders:', error);
+      },
+    });
+  }
+
+  loadInQueueOrders(): void {
+
+    if (this.inQueueOrdersLoaded) {
+      return;
+    }
+
+    console.log('Loading In Queue Orders');
+    this.http.get<Order[]>(`${this.apiUrl}/orders/inQueue`).subscribe({
+      next: (orders) => {
+        this.inQueueOrdersSubject.next(orders);
+        this.inQueueOrdersLoaded = true;
+      },
+      error: (error) => {
+        console.error('Failed to load completed orders:', error);
+      },
+    });
   }
 }
