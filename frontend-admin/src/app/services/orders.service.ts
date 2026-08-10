@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -65,8 +66,27 @@ export class OrdersService {
   }
 
 
-  startOrder(orderId: number) {
-    return this.http.post(`${this.apiUrl}/orders/${orderId}/start`, {});
+  startOrder(orderId: number): Observable<Order> {
+    return this.http.post<Order>(
+      `${this.apiUrl}/orders/${orderId}/start`,
+      {}
+    ).pipe(
+      tap((startedOrder) => {
+        const currentInQueue = this.inQueueOrdersSubject.value;
+        const currentInProgress = this.inProgressOrdersSubject.value;
+
+        this.inQueueOrdersSubject.next(
+          currentInQueue.filter(
+            order => order.orderId !== startedOrder.orderId
+          )
+        );
+
+        this.inProgressOrdersSubject.next([
+          ...currentInProgress,
+          startedOrder,
+        ]);
+      })
+    );
   }
 
   completeOrder(orderId: number): Observable<Order> {

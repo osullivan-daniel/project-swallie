@@ -72,19 +72,6 @@ export class AdminLiveOrdersComponent {
   startOrder(order: Order): void {
     this.ordersService.startOrder(order.orderId).subscribe({
       next: () => {
-        console.log(`Order ${order.orderId} started`);
-        this.localInQueue = this.localInQueue.filter(
-          (eachOrder) => eachOrder.orderId !== order.orderId,
-        );
-
-        this.localInProgress = [
-          ...this.localInProgress,
-          {
-            ...order,
-            orderStatus: OrderStatus.IN_PROGRESS,
-          },
-        ];
-
         this.cdr.markForCheck();
       },
       error: (error) => {
