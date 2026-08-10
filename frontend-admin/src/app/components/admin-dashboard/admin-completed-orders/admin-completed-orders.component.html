@@ -3,7 +3,7 @@
 <mat-nav-list>
   <div>
     <mat-nav-list>
-      @for (eachOrder of localComplete; track eachOrder; let i = $index) {
+      @for (eachOrder of localCompleted; track eachOrder; let i = $index) {
         <div class="swally-item-list">
           <mat-card class="swally-card">
             <mat-table class="swally-table" [dataSource]="eachOrder.orderItems">

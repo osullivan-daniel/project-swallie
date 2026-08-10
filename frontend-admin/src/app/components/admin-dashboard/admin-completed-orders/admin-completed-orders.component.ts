@@ -12,10 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 
 import { config } from '../../../config';
-import {
-  OrdersService,
-  Order,
-} from '../../../services/orders.service';
+import { OrdersService, Order } from '../../../services/orders.service';
 import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
 
 @Component({
@@ -24,10 +21,16 @@ import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confi
   styleUrl: 'admin-completed-orders.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatListModule, MatCardModule, MatTableModule, MatButtonModule, CurrencyPipe],
+  imports: [
+    MatListModule,
+    MatCardModule,
+    MatTableModule,
+    MatButtonModule,
+    CurrencyPipe,
+  ],
 })
 export class AdminCompletedOrdersComponent implements OnInit {
-  localComplete: Order[] = [];
+  localCompleted: Order[] = [];
 
   displayedColumns = ['name', 'size', 'qty', 'price'];
   currencyCode = config.currency;
@@ -44,14 +47,18 @@ export class AdminCompletedOrdersComponent implements OnInit {
     this.ordersService.getCompletedOrders().subscribe({
       next: (orders) => {
         console.log('Orders received from FastAPI:', orders);
-        this.localComplete = orders;
+        this.localCompleted = orders;
         this.changeDetectorRef.markForCheck();
 
-        console.log('localComplete:', this.localComplete);
+        console.log('localCompleted:', this.localCompleted);
       },
       error: (error) => {
         console.error('Failed to load completed orders:', error);
       },
+    });
+
+    this.ordersService.completedOrders$.subscribe((orders) => {
+      this.localCompleted = orders;
     });
   }
 

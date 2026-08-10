@@ -12,7 +12,10 @@ And by we I mean me - its a Cork thing...
 Although Ai might be helping so it really is we just mostly me!
 
 
-start admin  : npm run startAdmin 
-start portal : npm run startPortal 
+start admin  : npm run startAdmin (from root dir) 
+start portal : npm run startPortal (from root dir) 
 start backend: uvicorn app.main:app --reload (from backend dir) 
-start db     : docker-compose up -d
+start db     : docker-compose up -d (from root dir) 
+clean db     : python -m scripts.clean (from backend dir) 
+seed db      : python -m scripts.seed (from backend dir) 
+access db    : docker exec -it swallie-postgres psql -U swallie -d swallie

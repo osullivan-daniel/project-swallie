@@ -2,7 +2,7 @@
 <mat-nav-list>
   <div class=swally-item-list>
     <mat-nav-list>
-      @for (eachOrder of localProgress; track eachOrder; let i = $index) {
+      @for (eachOrder of localInProgress; track eachOrder; let i = $index) {
         <div class="swally-item-list">
           <mat-card class="swally-card">
             <mat-table class="swally-table" [dataSource]="eachOrder.orderItems">
@@ -46,7 +46,7 @@
 <mat-nav-list>
   <div class=swally-item-list>
     <mat-nav-list>
-      @for (eachOrder of localQueue; track eachOrder; let i = $index) {
+      @for (eachOrder of localInQueue; track eachOrder; let i = $index) {
         <div class="swally-item-list">
           <mat-card class="swally-card">
             <mat-table class="swally-table" [dataSource]="eachOrder.orderItems">
@@ -76,9 +76,10 @@
               <button
                 mat-raised-button
                 class="swally-button"
-                  /* [disabled]="disableOrderButton" */
-                (click)='onMoveToInProgress(i)'>Move To In Progress</button>
-              </div>
+                (click)="startOrder(eachOrder)">
+                Move to in progress
+              </button>
+            </div>
             }
           </mat-card>
         </div>

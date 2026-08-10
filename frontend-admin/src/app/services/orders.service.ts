@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export enum OrderStatus {
   IN_QUEUE = 'inQueue',
   IN_PROGRESS = 'inProgress',
   COMPLETED = 'completed',
-  CANCELLED = 'cancelled'
+  CANCELLED = 'cancelled',
 }
-
 
 export interface OrderItem {
   productId: number;
@@ -18,7 +16,6 @@ export interface OrderItem {
   qty: number;
   itemPrice: number;
 }
-
 
 export interface Order {
   orderId: number;
@@ -32,31 +29,37 @@ export interface Order {
   orderItems: OrderItem[];
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdersService {
+  constructor(private readonly http: HttpClient) {}
 
   private readonly apiUrl = 'http://127.0.0.1:8000';
 
-  constructor(private readonly http: HttpClient) {}
+  private completedOrdersSubject = new BehaviorSubject<Order[]>([]);
+
+  completedOrders$ = this.completedOrdersSubject.asObservable();
 
   getCompletedOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(
-      `${this.apiUrl}/orders/completed`
-    );
+    return this.http.get<Order[]>(`${this.apiUrl}/orders/completed`);
+  }
+
+  appendLocalCompleteOrder(order: Order): void {
+    const currentOrders = this.completedOrdersSubject.value;
+
+    this.completedOrdersSubject.next([...currentOrders, order]);
   }
 
   getInProgressOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(
-      `${this.apiUrl}/orders/inProgress`
-    );
+    return this.http.get<Order[]>(`${this.apiUrl}/orders/inProgress`);
   }
 
   getInQueueOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(
-      `${this.apiUrl}/orders/inQueue`
-    );
+    return this.http.get<Order[]>(`${this.apiUrl}/orders/inQueue`);
+  }
+
+  startOrder(orderId: number) {
+    return this.http.post(`http://127.0.0.1:8000/orders/${orderId}/start`, {});
   }
 }
