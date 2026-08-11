@@ -31,11 +31,13 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </mat-table>
 <p class="order-total">Total £{{total}}</p>
-<div class='button-div'>
-    <button mat-raised-button mat-dialog-close 
+<div class="swally-button-div">
+    <button mat-raised-button mat-dialog-close
+        class="swally-button"
         id='submit'
         (click)='onSave()'>Submit Order</button>
     <button mat-raised-button mat-dialog-close
+        class="swally-button"
         id='back'
         (click)='onBack()'>Back</button>
 </div>

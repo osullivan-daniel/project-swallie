@@ -8,7 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { SharedUiModule } from 'shared-ui';
 import { GuiStyleService } from 'shared-services';
 import { AdminService } from '../../../services/admin.service';
-import { AdminMenuComponent } from '../admin-menu/admin-menu.component';
+import { AdminStockComponent } from '../admin-stock/admin-stock.component';
 import { AdminSidemenuComponent } from '../admin-sidemenu/admin-sidemenu.component';
 import { AdminProductsComponent } from '../admin-products/admin-products.component';
 import { AdminLiveOrdersComponent } from '../admin-live-orders/admin-live-orders.component';
@@ -17,6 +17,7 @@ import { AdminCompletedOrdersComponent } from '../admin-completed-orders/admin-c
 @Component({
   selector: 'app-admin',
   templateUrl: 'admin-main.component.html',
+  styleUrl: 'admin-main.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
@@ -26,7 +27,7 @@ import { AdminCompletedOrdersComponent } from '../admin-completed-orders/admin-c
     MatCardModule,
     MatTableModule,
     MatSidenavModule,
-    AdminMenuComponent,
+    AdminStockComponent,
     AdminSidemenuComponent,
     AdminProductsComponent,
     AdminLiveOrdersComponent,

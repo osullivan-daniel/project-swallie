@@ -1,8 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { v4 as uuid } from 'uuid';
+import { MatButtonModule } from '@angular/material/button';
 import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+
 import { Product } from 'shared-services';
 import { ProductService } from '../../../services/product.service'
-import { v4 as uuid } from 'uuid';
+
 
 @Component({
     selector: 'app-admin-products',
@@ -10,7 +14,7 @@ import { v4 as uuid } from 'uuid';
     styleUrls: ['admin-products.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports:[ReactiveFormsModule]
+    imports:[ReactiveFormsModule, MatButtonModule]
 })
 export class AdminProductsComponent implements OnInit 
 {

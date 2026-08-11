@@ -32,7 +32,7 @@
 
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </mat-table>
-<div class="button-div">
-  <button mat-raised-button mat-dialog-close id="update" [disabled]="disableOrderButton" (click)="onSave()">Update order</button>
-  <button mat-raised-button mat-dialog-close id="back" (click)="onBack()">Back</button>
+<div class="swally-button-div">
+  <button mat-raised-button mat-dialog-close class="swally-button" id="update" [disabled]="disableOrderButton" (click)="onSave()">Update order</button>
+  <button mat-raised-button mat-dialog-close class="swally-button" id="back" (click)="onBack()">Back</button>
 </div>
