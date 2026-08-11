@@ -1,9 +1,9 @@
-from datetime import datetime, timezone
 from decimal import Decimal
-
+from datetime import datetime, timezone
 from app.db.database import SessionLocal
 from app.db.models import Order, OrderItem, OrderStatus
 
+from app.shared.product_size import ProductSize
 
 def seed():
     db = SessionLocal()
@@ -20,14 +20,14 @@ def seed():
                     OrderItem(
                         product_id=1,
                         product_name="BLACK IS THE COLOUR",
-                        product_size="cans",
+                        product_size=ProductSize.CAN_330,
                         qty=1,
                         item_price=Decimal("4.50"),
                     ),
                     OrderItem(
                         product_id=2,
                         product_name="RIGHT HAND MAN BACK",
-                        product_size="pint",
+                        product_size=ProductSize.PINT,
                         qty=2,
                         item_price=Decimal("6.25"),
                     ),
@@ -43,7 +43,7 @@ def seed():
                     OrderItem(
                         product_id=1,
                         product_name="BLACK IS THE COLOUR",
-                        product_size="cans",
+                        product_size=ProductSize.CAN_440,
                         qty=1,
                         item_price=Decimal("4.50"),
                     ),
@@ -59,7 +59,7 @@ def seed():
                     OrderItem(
                         product_id=1,
                         product_name="BLACK IS THE COLOUR",
-                        product_size="cans",
+                        product_size=ProductSize.PINT_THIRD,
                         qty=2,
                         item_price=Decimal("4.50"),
                     ),
@@ -76,7 +76,7 @@ def seed():
                     OrderItem(
                         product_id=1,
                         product_name="BLACK IS THE COLOUR",
-                        product_size="cans",
+                        product_size=ProductSize.PINT_THIRD,
                         qty=3,
                         item_price=Decimal("4.50"),
                     ),
@@ -93,7 +93,7 @@ def seed():
                     OrderItem(
                         product_id=2,
                         product_name="FOREVER AGO",
-                        product_size="pint",
+                        product_size=ProductSize.PINT_HALF,
                         qty=1,
                         item_price=Decimal("4.50"),
                     ),
