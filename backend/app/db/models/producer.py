@@ -1,7 +1,7 @@
 import uuid
 from sqlalchemy import String, text
-from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
 
@@ -34,3 +34,6 @@ class Producer(Base):
         default=True
     )
 
+    products: Mapped[list["Product"]] = relationship(
+        back_populates="producer"
+    )

@@ -1,7 +1,7 @@
 import uuid
 from decimal import Decimal
-from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Enum as SQLEnum, ForeignKey, Numeric, String, text
 
 from app.db.base import Base
@@ -43,4 +43,8 @@ class ProductVariant(Base):
     is_active: Mapped[bool] = mapped_column(
         nullable=False,
         default=True
+    )
+
+    product: Mapped["Product"] = relationship(
+        back_populates="variants"
     )
