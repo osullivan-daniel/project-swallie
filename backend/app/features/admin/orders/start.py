@@ -1,8 +1,9 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from fastapi import APIRouter, Depends, HTTPException
 
 from app.db.database import get_db
 from app.db.models import Order, OrderStatus
+from app.features.admin.orders.schemas import Order as OrderSchema
 
 
 router = APIRouter(
@@ -11,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.post("/{order_id}/start")
+@router.post("/{order_id}/start", response_model=OrderSchema)
 async def start_order(order_id: int, db: Session = Depends(get_db)):
 
     order = (

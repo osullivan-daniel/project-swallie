@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from app.db.database import get_db
 from app.db.models import Order, OrderStatus
+from app.features.admin.orders.schemas import Order as OrderSchema
 
 
 router = APIRouter(
@@ -12,7 +13,7 @@ router = APIRouter(
 )
 
 
-@router.post("/{order_id}/complete")
+@router.post("/{order_id}/complete", response_model=OrderSchema)
 async def complete_order(order_id: int, db: Session = Depends(get_db)):
 
     order = (

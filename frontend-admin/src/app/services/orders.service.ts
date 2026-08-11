@@ -67,11 +67,11 @@ export class OrdersService {
 
 
   startOrder(orderId: number): Observable<Order> {
-    return this.http.post<Order>(
-      `${this.apiUrl}/orders/${orderId}/start`,
-      {}
+    return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/start`,{}
     ).pipe(
       tap((startedOrder) => {
+
+        console.log('this', startedOrder)
         const currentInQueue = this.inQueueOrdersSubject.value;
         const currentInProgress = this.inProgressOrdersSubject.value;
 
@@ -85,6 +85,9 @@ export class OrdersService {
           ...currentInProgress,
           startedOrder,
         ]);
+
+        console.log('SERVICE QUEUE:', this.inQueueOrdersSubject.value);
+        console.log('SERVICE PROGRESS:', this.inProgressOrdersSubject.value);
       })
     );
   }

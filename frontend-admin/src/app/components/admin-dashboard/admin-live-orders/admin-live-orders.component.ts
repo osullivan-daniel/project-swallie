@@ -72,6 +72,7 @@ export class AdminLiveOrdersComponent {
   startOrder(order: Order): void {
     this.ordersService.startOrder(order.orderId).subscribe({
       next: () => {
+        console.log(`Order ${order.orderId} started`);
         this.cdr.markForCheck();
       },
       error: (error) => {
