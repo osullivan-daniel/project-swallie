@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Product } from 'shared-services';
 import { v4 as uuid } from 'uuid';
+
+export enum productSize {
+  CAN_330 = 'Can 330ml',
+  CAN_440 = 'Can 440ml',
+  BOTTLE_330 = "Bottle 330ml",
+  BOTTLE_500 = "Bottle 500ml",
+  PINT_THIRD = 'Pint 1/3rd',
+  PINT_HALF = 'Pint 1/2',
+  PINT = 'Pint',
+}
 
 
 
@@ -10,16 +21,19 @@ import { v4 as uuid } from 'uuid';
     providedIn: 'root'
   })
 
-  export class ProductService
-  {
+  export class ProductService {
+    constructor(private readonly http: HttpClient) {}
+
     private productList = new BehaviorSubject(null);
-  
-    constructor(){}
+    productList$ = this.productList.asObservable();
+
 
     getProducts()
     {
         return this.productList.asObservable();
     }
+    
+
 
     //This will later be updated with api call
     updateAvailableProductsFromServer()
@@ -89,9 +103,9 @@ import { v4 as uuid } from 'uuid';
       return returnItem
     }
 
-    load()
+    loadAllProducts()
     {
-      console.log('On load')
+      console.log('Loading Product Service At Startup Time')
       this.productList.next(this.updateAvailableProductsFromServer());
     }
   }

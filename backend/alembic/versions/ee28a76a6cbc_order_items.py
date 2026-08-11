@@ -21,6 +21,8 @@ depends_on: Union[str, Sequence[str], None] = None
 product_size_enum = sa.Enum(
     'Can 330ml',
     'Can 440ml',
+    'Bottle 330ml',
+    'Bottle 500ml',
     'Pint 1/3rd',
     'Pint 1/2',
     'Pint',

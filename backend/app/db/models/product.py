@@ -33,7 +33,7 @@ class Product(Base):
 
     abv: Mapped[Decimal] = mapped_column(
       Numeric(4, 2),
-      nullable=False,
+      nullable=True,
     )
 
     description: Mapped[str | None] = mapped_column(
