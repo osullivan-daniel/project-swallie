@@ -1,11 +1,13 @@
 import { v4 as uuid } from 'uuid';
 import { MatButtonModule } from '@angular/material/button';
 import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 
 import { Product } from 'shared-services';
 import { ProductService } from '../../../services/product.service'
+import { ProducerService, Producer } from '../../../services/producers.service';
+
 
 
 @Component({
@@ -18,15 +20,28 @@ import { ProductService } from '../../../services/product.service'
 })
 export class AdminProductsComponent implements OnInit 
 {
+  localProducers: Producer[] = [];
   formCompleted:boolean = true;
   newProductForm: any;
   styleList = ["IPA", "TIPA", "Stout"]
+  // producerList=[{"name":"PLACEHOLDER_1", "id":1}, {"name":"PLACEHOLDER_2", "id":2}, {"name":"PLACEHOLDER_3", "id":3}]
+
+  addNewProducer() 
+  {
+    console.log("PLACEHOLDER")
+  }
 
   availableProductsLocal: Array<Product> = []
   
-  constructor(private formBuilder: UntypedFormBuilder, private _productService: ProductService) 
+  constructor(
+    private formBuilder: UntypedFormBuilder, 
+    private _productService: ProductService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly producerService: ProducerService
+  ) 
   {
     this.newProductForm = this.formBuilder.group({'name': '','style': '','abv': '', 'imgUrl': ''}); 
+    
   }
 
   
@@ -40,6 +55,13 @@ export class AdminProductsComponent implements OnInit
 
   ngOnInit(): void {
     this._productService.getProducts().subscribe(value => this.availableProductsLocal = value);
+
+    this.producerService.loadProducers();
+
+    this.producerService.producers$.subscribe((producers) => {
+      this.localProducers = producers;
+      this.cdr.markForCheck();
+    });
   }
 }
 

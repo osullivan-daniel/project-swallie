@@ -8,6 +8,8 @@ from app.features.admin.orders.complete import router as complete
 from app.features.admin.orders.cancel import router as cancel
 from app.features.admin.orders.start import router as start
 
+from app.features.admin.producer.producers import router as producers
+
 app = FastAPI()
 
 app.add_middleware(
@@ -24,3 +26,6 @@ app.include_router(orders_in_queue)
 app.include_router(complete)
 app.include_router(cancel)
 app.include_router(start)
+
+
+app.include_router(producers)

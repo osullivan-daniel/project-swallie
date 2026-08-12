@@ -33,6 +33,7 @@ export interface Order {
 @Injectable({
   providedIn: 'root',
 })
+
 export class OrdersService {
   constructor(private readonly http: HttpClient) {}
 
@@ -64,7 +65,6 @@ export class OrdersService {
     const currentOrders = this.inQueueOrdersSubject.value;
     this.inQueueOrdersSubject.next([...currentOrders, order]);
   }
-
 
   startOrder(orderId: number): Observable<Order> {
     return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/start`,{}
@@ -117,10 +117,6 @@ export class OrdersService {
       })
     );
   }
-
-  // completeOrder(orderId: number): Observable<Order> {
-  //   return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/complete`, {});
-  // }
 
   loadCompletedOrders(): void {
 
