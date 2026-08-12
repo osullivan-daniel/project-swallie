@@ -11,13 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 
 import { config } from '../../../config';
-import { AdminService } from '../../../services/admin.service';
-import {
-  Order,
-  OrdersService,
-  OrderStatus,
-} from '../../../services/orders.service';
-import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
+import { Order,OrdersService } from '../../../services/orders.service';
 
 @Component({
   selector: 'app-admin-live-orders',
@@ -42,16 +36,11 @@ export class AdminLiveOrdersComponent {
 
   constructor(
     public dialog: MatDialog,
-    private _adminService: AdminService,
     private readonly cdr: ChangeDetectorRef,
     private readonly ordersService: OrdersService,
     
   ) {
     console.log('AdminLiveOrdersComponent constructed');
-  }
-
-  onMoveToInProgress(index) {
-    this._adminService.removeFromInQueue(index);
   }
 
   ngOnInit(): void {
@@ -83,34 +72,13 @@ export class AdminLiveOrdersComponent {
 
   completeOrder(order: Order): void {
     this.ordersService.completeOrder(order.orderId).subscribe({
-      next: (completedOrder) => {
-        this.localInProgress = this.localInProgress.filter(
-          (eachOrder) => eachOrder.orderId !== order.orderId,
-        );
-
-        this.ordersService.addCompletedOrder(completedOrder);
-
+      next: () => {
+        console.log(`Order ${order.orderId} completed`);
         this.cdr.markForCheck();
       },
       error: (error) => {
-        console.error('Failed to start order', error);
+        console.error('Failed to complete order', error);
       },
-    });
-  }
-
-  public displayConfirmation(selectedOrder, index): void {
-    console.log(selectedOrder);
-
-    let dialogRef = this.dialog.open(AdminConfirmDialogComponent, {
-      disableClose: true,
-      data: {
-        tableNum: selectedOrder.tableNum,
-        custName: selectedOrder.custName,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((res) => {
-      this._adminService.removeFromInProgress(index);
     });
   }
 }

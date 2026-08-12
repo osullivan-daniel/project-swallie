@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 
 from app.db.database import get_db
 from app.db.models import Order, OrderStatus
-from app.features.admin.orders.schemas import Order as OrderSchema
+from app.features.shared.orderSchemas import Order as OrderSchema
 
 router = APIRouter(
     prefix="/orders",
