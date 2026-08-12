@@ -5,7 +5,7 @@ import { GuiStyleService } from 'shared-services';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styles: ['div { height: 100px; width: 100%; }'],
+  styleUrl:'./header.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })

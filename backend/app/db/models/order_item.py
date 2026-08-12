@@ -1,9 +1,10 @@
 from decimal import Decimal
-
-from sqlalchemy import ForeignKey, Integer, Numeric, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-
 from app.db.base import Base
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Enum as SQLEnum, ForeignKey, Integer, Numeric, String
+
+
+from app.shared.product_size import ProductSize
 
 
 class OrderItem(Base):
@@ -26,8 +27,11 @@ class OrderItem(Base):
         nullable=False,
     )
 
-    product_size: Mapped[str] = mapped_column(
-        String(100),
+    product_size: Mapped[ProductSize] = mapped_column(
+        SQLEnum(
+            ProductSize,
+            values_callable=lambda enum: [item.value for item in enum],
+        ),
         nullable=False,
     )
 

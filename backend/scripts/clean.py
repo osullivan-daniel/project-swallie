@@ -1,21 +1,24 @@
 from app.db.models import Order
+from app.db.models import Product
+from app.db.models import Producer
+from app.db.models import ProductVariant
 from app.db.database import SessionLocal
 
 
-def clean():
+def clean(table, tableName):
     db = SessionLocal()
 
     try:
-        orders = db.query(Order).all()
+        allRecords = db.query(table).all()
 
-        count = len(orders)
+        count = len(allRecords)
 
-        for order in orders:
-            db.delete(order)
+        for each in allRecords:
+            db.delete(each)
 
         db.commit()
 
-        print(f"Removed {count} orders.")
+        print(f"Removed {count} records from {tableName}.")
 
     except Exception:
         db.rollback()
@@ -25,5 +28,14 @@ def clean():
         db.close()
 
 
+
+def cleanAll():
+    clean(Order, 'Orders')
+    clean(ProductVariant, 'ProductVariants')
+    clean(Product, 'Products')
+    clean(Producer, 'Producers')
+
+
+
 if __name__ == "__main__":
-    clean()
+    cleanAll()

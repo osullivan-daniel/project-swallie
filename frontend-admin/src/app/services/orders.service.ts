@@ -93,8 +93,34 @@ export class OrdersService {
   }
 
   completeOrder(orderId: number): Observable<Order> {
-    return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/complete`, {});
+    return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/complete`,{}
+    ).pipe(
+      tap((completedOrder) => {
+
+        console.log('this', completedOrder)
+        const currentCompleted = this.completedOrdersSubject.value;
+        const currentInProgress = this.inProgressOrdersSubject.value;
+
+        this.inProgressOrdersSubject.next(
+          currentInProgress.filter(
+            order => order.orderId !== completedOrder.orderId
+          )
+        );
+
+        this.completedOrdersSubject.next([
+          ...currentCompleted,
+          completedOrder,
+        ]);
+
+        console.log('SERVICE PROGRESS:', this.inProgressOrdersSubject.value);
+        console.log('SERVICE COMPLETED:', this.completedOrdersSubject.value);
+      })
+    );
   }
+
+  // completeOrder(orderId: number): Observable<Order> {
+  //   return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/complete`, {});
+  // }
 
   loadCompletedOrders(): void {
 
