@@ -1,4 +1,4 @@
-<div class="div_test">
+<div class="div_boarder">
   <form [formGroup]="newProductForm" (ngSubmit)="onSubmit(newProductForm)">
 
     <!-- Producer -->
@@ -20,8 +20,7 @@
           type="button"
           mat-raised-button
           class="swally-button"
-          /* style="position: relative; top: -10px !important;" */
-          (click)="addNewProducer()">
+          (click)="addProducer()">
           Add new
         </button>
       </div>
