@@ -1,2 +1,3 @@
 - Review continued use of admin service???
 - review logo size - NG0913: An image with src http://localhost:4200/assets/img/worksOnMyTap.png has intrinsic file dimensions much larger than its rendered size.
+- Add Producer - Description - small only appears when Description is selected - no obvous cause or solution

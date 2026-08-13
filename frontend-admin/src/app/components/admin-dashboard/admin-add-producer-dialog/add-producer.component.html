@@ -1,0 +1,81 @@
+<div class="div_boarder">
+  <h2>Add Producer</h2>
+
+  <form [formGroup]="newProducerForm" (ngSubmit)="onSubmit(newProducerForm)">
+    <!-- Producer -->
+    <div class="form-group">
+      <label for="producerName">Producer Name</label>
+      <input type="text" formControlName="producerName" maxlength="255" required />
+    </div>
+
+    <!-- Address -->
+    <h3>Producer Address</h3>
+
+    <div formGroupName="address">
+      <div>
+        <label for="street1">Street 1</label>
+        <input type="text" formControlName="street1" maxlength="200" required />
+      </div>
+
+      <div>
+        <label for="street2">Street 2</label>
+        <input type="text" formControlName="street2" maxlength="200" />
+      </div>
+
+      <div>
+        <label for="city">City</label>
+        <input type="text" formControlName="city" maxlength="100" required />
+      </div>
+
+      <div>
+        <label for="county">County</label>
+        <input type="text" formControlName="county" maxlength="100" required />
+      </div>
+
+      <div>
+        <label for="postCode">Postcode</label>
+        <input type="text" formControlName="postCode" maxlength="20" required />
+      </div>
+
+      <div>
+        <label for="country">Country</label>
+        <input type="text" formControlName="country" maxlength="100" required />
+      </div>
+    </div>
+
+    <div>
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        maxlength="1500"
+        rows="5"
+      ></textarea>
+
+      <small>Allowed Characters {{ newProducerForm.controls.description.value?.length ?? 0 }}/1500</small>
+    </div>
+
+    <div class="swally-button-div">
+      <mat-dialog-actions align="end">
+        <button
+          mat-button
+          type="button"
+          class="swally-button"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+
+        <button
+          mat-flat-button
+          type="button"
+          class="swally-button"
+          [disabled]="newProducerForm.invalid"
+          (click)="onSubmit(newProducerForm)"
+        >
+          Add producer
+        </button>
+      </mat-dialog-actions>
+    </div>
+  </form>
+</div>

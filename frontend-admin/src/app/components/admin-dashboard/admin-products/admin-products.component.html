@@ -1,23 +1,56 @@
-<div class="div_test">
+<div class="div_boarder">
   <form [formGroup]="newProductForm" (ngSubmit)="onSubmit(newProductForm)">
+
+    <!-- Producer -->
+    <div class="form-group">
+      <label for="producer">Producer</label>
+
+      <div class="producer-select">
+        <select id="producer" formControlName="localProducers" required>
+          <option value="" disabled>Select producer</option>
+
+          @for (producer of localProducers; track producer.producerId) {
+            <option [value]="producer.producerId">
+              {{ producer.producerName }}
+            </option>
+          }
+        </select>
+
+        <button
+          type="button"
+          mat-raised-button
+          class="swally-button"
+          (click)="addProducer()">
+          Add new
+        </button>
+      </div>
+    </div>
+
+    <!-- Name -->
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" formControlName="name" required />
     </div>
+
+    <!-- Style -->
     <div class="form-group">
       <label for="style">Style</label>
       <input type="text" formControlName="style" required list="beerStyles" />
+
       <datalist id="beerStyles">
         @for (option of styleList; track option) {
           <option [value]="option">{{ option }}</option>
         }
       </datalist>
     </div>
+
+    <!-- ABV -->
     <div class="form-group">
       <label for="abv">ABV</label>
       <input type="number" formControlName="abv" required />
     </div>
 
+    <!-- Image URL -->
     <div class="form-group">
       <label for="imgUrl">imgUrl</label>
       <input type="text" formControlName="imgUrl" required />
@@ -31,5 +64,6 @@
         Add Product
       </button>
     </div>
+
   </form>
 </div>

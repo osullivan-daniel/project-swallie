@@ -1,11 +1,15 @@
 import { v4 as uuid } from 'uuid';
+import { MatDialog } from '@angular/material/dialog';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 
 import { Product } from 'shared-services';
 import { ProductService } from '../../../services/product.service'
+import { ProducerService, Producer } from '../../../services/producers.service';
+import { AddProducerComponent } from '../admin-add-producer-dialog/add-producer.component'
 
 
 @Component({
@@ -16,20 +20,63 @@ import { ProductService } from '../../../services/product.service'
     standalone: true,
     imports:[ReactiveFormsModule, MatButtonModule]
 })
+
 export class AdminProductsComponent implements OnInit 
 {
-  formCompleted:boolean = true;
+  private readonly dialog = inject(MatDialog);  
   newProductForm: any;
+  localProducers: Producer[] = [];
+  formCompleted:boolean = true;
+  
   styleList = ["IPA", "TIPA", "Stout"]
 
   availableProductsLocal: Array<Product> = []
   
-  constructor(private formBuilder: UntypedFormBuilder, private _productService: ProductService) 
+  constructor(
+    private formBuilder: UntypedFormBuilder, 
+    private _productService: ProductService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly producerService: ProducerService
+  ) 
   {
-    this.newProductForm = this.formBuilder.group({'name': '','style': '','abv': '', 'imgUrl': ''}); 
+    console.log('AdminProductsComponent constructed');
+    this.newProductForm = this.formBuilder.group({
+      localProducers:[], 
+      'name': '',
+      'style': '',
+      'abv': '',
+      'imgUrl': ''}); 
   }
 
-  
+  ngOnInit(): void {
+
+    this._productService.getProducts().subscribe(value => this.availableProductsLocal = value);
+
+    this.producerService.loadProducers();
+
+    this.producerService.producers$.subscribe((producers) => {
+      this.localProducers = producers;
+      this.cdr.markForCheck();
+    });
+  }
+
+
+  addProducer(): void {
+  const dialogRef = this.dialog.open(AddProducerComponent, {
+    width: '600px'
+  });
+
+  dialogRef.afterClosed().subscribe(producer => {
+    if (!producer) {
+      return;
+    }
+
+    // Add returned producer to your dropdown
+    // and select it here.
+  });
+}
+
+
   onSubmit(newProduct) 
   {
     let newProductObject = new Product(uuid(), newProduct.value.name, newProduct.value.style, newProduct.value.abv, newProduct.value.imgUrl)
@@ -37,10 +84,11 @@ export class AdminProductsComponent implements OnInit
     this.newProductForm.reset();
   }
 
-
-  ngOnInit(): void {
-    this._productService.getProducts().subscribe(value => this.availableProductsLocal = value);
+  addNewProducer() 
+  {
+    console.log("PLACEHOLDER")
   }
+
 }
 
 

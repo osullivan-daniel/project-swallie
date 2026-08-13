@@ -37,8 +37,7 @@ export class AdminLiveOrdersComponent {
   constructor(
     public dialog: MatDialog,
     private readonly cdr: ChangeDetectorRef,
-    private readonly ordersService: OrdersService,
-    
+    private readonly ordersService: OrdersService
   ) {
     console.log('AdminLiveOrdersComponent constructed');
   }
