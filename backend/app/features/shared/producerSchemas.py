@@ -1,11 +1,31 @@
 import uuid
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic.alias_generators import to_camel
+from pydantic import BaseModel, ConfigDict, Field, AliasGenerator
 
-class Producer(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
 
-    producerId: uuid.UUID = Field(validation_alias="id")
-    producerName: str = Field(validation_alias="producer_name")
+class ProducerCreate(BaseModel):
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        populate_by_name=True
+    )
+
+    producer_name: str
     address: dict
-    description: str | None
-    isActive: bool = Field(validation_alias="is_active")
+    description: str | None = None
+
+
+
+class ProducerResponse(BaseModel):
+    model_config = ConfigDict(
+        alias_generator=AliasGenerator(
+            validation_alias=lambda field_name: field_name,
+            serialization_alias=to_camel,
+        ),
+        from_attributes=True,
+    )
+
+    id: uuid.UUID = Field(serialization_alias="producerId")
+    producer_name: str
+    address: dict
+    description: str | None = None
+    is_active: bool

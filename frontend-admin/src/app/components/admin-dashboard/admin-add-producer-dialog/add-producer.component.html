@@ -5,7 +5,7 @@
     <!-- Producer -->
     <div class="form-group">
       <label for="producerName">Producer Name</label>
-      <input type="text" formControlName="producerName" required />
+      <input type="text" formControlName="producerName" maxlength="255" required />
     </div>
 
     <!-- Address -->
@@ -14,32 +14,32 @@
     <div formGroupName="address">
       <div>
         <label for="street1">Street 1</label>
-        <input type="text" formControlName="street1" required />
+        <input type="text" formControlName="street1" maxlength="200" required />
       </div>
 
       <div>
         <label for="street2">Street 2</label>
-        <input type="text" formControlName="street2" />
+        <input type="text" formControlName="street2" maxlength="200" />
       </div>
 
       <div>
         <label for="city">City</label>
-        <input type="text" formControlName="city" required />
+        <input type="text" formControlName="city" maxlength="100" required />
       </div>
 
       <div>
         <label for="county">County</label>
-        <input type="text" formControlName="county" required />
+        <input type="text" formControlName="county" maxlength="100" required />
       </div>
 
       <div>
         <label for="postCode">Postcode</label>
-        <input type="text" formControlName="postCode" required />
+        <input type="text" formControlName="postCode" maxlength="20" required />
       </div>
 
       <div>
         <label for="country">Country</label>
-        <input type="text" formControlName="country" required />
+        <input type="text" formControlName="country" maxlength="100" required />
       </div>
     </div>
 

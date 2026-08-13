@@ -1,18 +1,13 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef
-} from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { Producer, ProducerService} from '../../../services/producers.service';
 
 @Component({
   selector: 'app-add-producer',
@@ -30,23 +25,25 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AddProducerComponent {
 
+  constructor(
+    private readonly producerService: ProducerService
+  ) {
+    console.log('addProducerComponent constructed');
+  }
+
   private readonly fb = inject(FormBuilder);
-
   readonly dialogRef = inject(MatDialogRef<AddProducerComponent>);
-
-  // We'll use this later when wiring the API call.
-  // private readonly producerService = inject(ProducerService);
 
   readonly newProducerForm = this.fb.group({
     producerName: ['', Validators.required],
 
     address: this.fb.group({
-      street1: ['', Validators.required],
-      street2: [''],
-      city: ['', Validators.required],
-      county: ['', Validators.required],
-      postCode: ['', Validators.required],
-      country: ['', Validators.required]
+      street1: ['', [Validators.maxLength(200), Validators.required]],
+      street2: ['', [Validators.maxLength(200)]],
+      city: ['', [Validators.maxLength(100), Validators.required]],
+      county: ['', [Validators.maxLength(100), Validators.required]],
+      postCode: ['', [Validators.maxLength(20), Validators.required]],
+      country: ['', [Validators.maxLength(100), Validators.required]]
     }),
 
     description: ['', Validators.maxLength(1500)]
@@ -62,15 +59,13 @@ export class AddProducerComponent {
       return;
     }
 
-    const producer = this.newProducerForm.getRawValue();
+    const producer: Producer = newProducerForm.getRawValue() as Producer;
 
-    // API call goes here.
-    //
-    // this.producerService.createProducer(producer).subscribe({
-    //   next: (createdProducer) => {
-    //     this.dialogRef.close(createdProducer);
-    //   }
-    // });
+    this.producerService.createProducer(producer).subscribe({
+      next: (createdProducer) => {
+        this.dialogRef.close(createdProducer);
+      }
+    });
 
     console.log(producer);
   }
