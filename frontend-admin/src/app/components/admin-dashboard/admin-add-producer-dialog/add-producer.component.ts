@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-add-producer',
+  styleUrl: './add-producer.component.css',
   standalone: true,
   imports: [
     MatCardModule,
@@ -36,8 +37,8 @@ export class AddProducerComponent {
   // We'll use this later when wiring the API call.
   // private readonly producerService = inject(ProducerService);
 
-  readonly producerForm = this.fb.group({
-    producer_name: ['', Validators.required],
+  readonly newProducerForm = this.fb.group({
+    producerName: ['', Validators.required],
 
     address: this.fb.group({
       street1: ['', Validators.required],
@@ -55,13 +56,13 @@ export class AddProducerComponent {
     this.dialogRef.close();
   }
 
-  save(): void {
-    if (this.producerForm.invalid) {
-      this.producerForm.markAllAsTouched();
+  onSubmit(newProducerForm) : void {
+    if (this.newProducerForm.invalid) {
+      this.newProducerForm.markAllAsTouched();
       return;
     }
 
-    const producer = this.producerForm.getRawValue();
+    const producer = this.newProducerForm.getRawValue();
 
     // API call goes here.
     //
@@ -73,4 +74,5 @@ export class AddProducerComponent {
 
     console.log(producer);
   }
+  
 }

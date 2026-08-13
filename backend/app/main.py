@@ -10,6 +10,9 @@ from app.features.admin.orders.start import router as start
 
 from app.features.admin.producer.producers import router as producers
 
+from app.features.admin.product.products import router as products
+from app.features.admin.product.product_variants import router as product_variants
+
 app = FastAPI()
 
 app.add_middleware(
@@ -29,3 +32,9 @@ app.include_router(start)
 
 
 app.include_router(producers)
+
+
+app.include_router(products)
+
+
+app.include_router(product_variants)

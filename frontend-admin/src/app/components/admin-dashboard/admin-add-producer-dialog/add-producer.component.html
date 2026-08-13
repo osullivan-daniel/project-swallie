@@ -1,127 +1,81 @@
-<h2 mat-dialog-title>Add Producer</h2>
+<div class="div_boarder">
+  <h2>Add Producer</h2>
 
-<mat-dialog-content class="test">
-  <form [formGroup]="producerForm">
-
-    <mat-form-field appearance="outline" class="my-form-field">
-      <mat-label>Producer name</mat-label>
-      <input
-        matInput
-        formControlName="producer_name"
-      />
-
-      @if (
-        producerForm.controls.producer_name.touched &&
-        producerForm.controls.producer_name.hasError('required')
-      ) {
-        <mat-error>Producer name is required</mat-error>
-      }
-    </mat-form-field>
-
-
-    <h3>Address</h3>
-
-    <div formGroupName="address">
-
-      <mat-form-field appearance="outline">
-        <mat-label>Street 1</mat-label>
-        <input
-        class="test"
-          matInput
-          formControlName="street1"
-        />
-
-        @if (
-          producerForm.controls.address.controls.street1.touched &&
-          producerForm.controls.address.controls.street1.hasError('required')
-        ) {
-          <mat-error>Street 1 is required</mat-error>
-        }
-      </mat-form-field>
-
-
-      <mat-form-field appearance="outline" class="test">
-        <mat-label>Street 2</mat-label>
-        <input
-          matInput
-          formControlName="street2"
-        />
-      </mat-form-field>
-
-
-      <mat-form-field appearance="outline">
-        <mat-label>City</mat-label>
-        <input
-          matInput
-          formControlName="city"
-        />
-      </mat-form-field>
-
-
-      <mat-form-field appearance="outline">
-        <mat-label>County</mat-label>
-        <input
-          matInput
-          formControlName="county"
-        />
-      </mat-form-field>
-
-
-      <mat-form-field appearance="outline">
-        <mat-label>Post code</mat-label>
-        <input
-          matInput
-          formControlName="postCode"
-        />
-      </mat-form-field>
-
-
-      <mat-form-field appearance="outline">
-        <mat-label>Country</mat-label>
-        <input
-          matInput
-          formControlName="country"
-        />
-      </mat-form-field>
-
+  <form [formGroup]="newProducerForm" (ngSubmit)="onSubmit(newProducerForm)">
+    <!-- Producer -->
+    <div class="form-group">
+      <label for="producerName">Producer Name</label>
+      <input type="text" formControlName="producerName" required />
     </div>
 
+    <!-- Address -->
+    <h3>Producer Address</h3>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Description</mat-label>
+    <div formGroupName="address">
+      <div>
+        <label for="street1">Street 1</label>
+        <input type="text" formControlName="street1" required />
+      </div>
+
+      <div>
+        <label for="street2">Street 2</label>
+        <input type="text" formControlName="street2" />
+      </div>
+
+      <div>
+        <label for="city">City</label>
+        <input type="text" formControlName="city" required />
+      </div>
+
+      <div>
+        <label for="county">County</label>
+        <input type="text" formControlName="county" required />
+      </div>
+
+      <div>
+        <label for="postCode">Postcode</label>
+        <input type="text" formControlName="postCode" required />
+      </div>
+
+      <div>
+        <label for="country">Country</label>
+        <input type="text" formControlName="country" required />
+      </div>
+    </div>
+
+    <div>
+      <label for="description">Description</label>
       <textarea
-        matInput
+        id="description"
         formControlName="description"
         maxlength="1500"
         rows="5"
       ></textarea>
 
-      <mat-hint align="end">
-        {{ producerForm.controls.description.value?.length ?? 0 }}/1500
-      </mat-hint>
-    </mat-form-field>
+      <small>Allowed Characters {{ newProducerForm.controls.description.value?.length ?? 0 }}/1500</small>
+    </div>
 
+    <div class="swally-button-div">
+      <mat-dialog-actions align="end">
+        <button
+          mat-button
+          type="button"
+          class="swally-button"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+
+        <button
+          mat-flat-button
+          type="button"
+          class="swally-button"
+          [disabled]="newProducerForm.invalid"
+          (click)="onSubmit(newProducerForm)"
+        >
+          Add producer
+        </button>
+      </mat-dialog-actions>
+    </div>
   </form>
-</mat-dialog-content>
-
-
-<mat-dialog-actions align="end">
-  <button
-    mat-button
-    type="button"
-    class="swally-button"
-    (click)="cancel()"
-  >
-    Cancel
-  </button>
-
-  <button
-    mat-flat-button
-    type="button"
-    class="swally-button"
-    [disabled]="producerForm.invalid"
-    (click)="save()"
-  >
-    Add producer
-  </button>
-</mat-dialog-actions>
+</div>
