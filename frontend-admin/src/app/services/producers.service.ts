@@ -5,6 +5,18 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 
+interface Product {
+    productId: uuid;
+    producerId: uuid;
+    productName: string;
+    style: string;
+    abv: number | null;
+    description: string | null;
+    imageKey: string | null;
+    isActive: boolean;
+}
+
+
 interface Address {
   street1: string;
   street2?: string;
@@ -21,6 +33,7 @@ export interface Producer {
   address: Address;
   description: string | null;
   isActive?: boolean;
+  products: Product[] | null;
 }
 
 @Injectable({ providedIn: 'root' })

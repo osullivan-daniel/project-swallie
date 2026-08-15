@@ -19,3 +19,4 @@ start db     : docker-compose up -d (from root dir)
 clean db     : python -m scripts.clean (from backend dir) 
 seed db      : python -m scripts.seed (from backend dir) 
 access db    : docker exec -it swallie-postgres psql -U swallie -d swallie
+new libarys  : npx nx g @nx/angular:library ........
