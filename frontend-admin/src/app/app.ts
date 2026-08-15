@@ -12,9 +12,9 @@ import { MenuService } from 'shared-services';
 export class App {
   protected title = 'frontend-admin';
 
-  constructor(productService: ProductService, menuService: MenuService,){
-    productService.loadAllProducts()
-    menuService.load(productService.getProducts())
-  }
+  // constructor(productService: ProductService, menuService: MenuService,){
+  //   // productService.loadAllProducts()
+  //   // menuService.load(productService.getProducts())
+  // }
 }
 

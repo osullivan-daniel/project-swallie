@@ -1,12 +1,11 @@
-import { v4 as uuid } from 'uuid';
 import { MatDialog } from '@angular/material/dialog';
-import { FormControl, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
-
-import { Product } from 'shared-services';
+import { uniqueNameValidator } from 'shared-functions';
+import { Product } from '../../../services/product.service';
 import { ProductService } from '../../../services/product.service'
 import { ProducerService, Producer } from '../../../services/producers.service';
 import { AddProducerComponent } from '../admin-add-producer-dialog/add-producer.component'
@@ -18,40 +17,52 @@ import { AddProducerComponent } from '../admin-add-producer-dialog/add-producer.
     styleUrls: ['admin-products.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports:[ReactiveFormsModule, MatButtonModule]
+    imports:[ReactiveFormsModule, MatFormFieldModule, MatButtonModule]
 })
 
 export class AdminProductsComponent implements OnInit 
 {
   private readonly dialog = inject(MatDialog);  
-  newProductForm: any;
+  localProductNamesSet: Set<string> = new Set();
   localProducers: Producer[] = [];
-  formCompleted:boolean = true;
-  
-  styleList = ["IPA", "TIPA", "Stout"]
+  newProductForm: FormGroup;
 
-  availableProductsLocal: Array<Product> = []
-  
   constructor(
-    private formBuilder: UntypedFormBuilder, 
-    private _productService: ProductService,
+    private productService: ProductService,
     private readonly cdr: ChangeDetectorRef,
     private readonly producerService: ProducerService
   ) 
   {
     console.log('AdminProductsComponent constructed');
-    this.newProductForm = this.formBuilder.group({
-      localProducers:[], 
-      'name': '',
-      'style': '',
-      'abv': '',
-      'imgUrl': ''}); 
+
+    this.newProductForm = this.fb.group({
+      producerId: ['', [Validators.required]],
+      productName: ['', [uniqueNameValidator(() => this.localProductNamesSet), Validators.required]],
+      style: ['', [Validators.maxLength(20), Validators.required]],
+      abv: ['', [Validators.maxLength(20), Validators.required]],
+      imgUrl: ['', [Validators.maxLength(500)]]
+    });
+
+    this.newProductForm.get('producerId')!.valueChanges.subscribe(id => {
+      const newProducerId = this.localProducers.find(
+        item => item.producerId === id
+      );
+
+      this.localProductNamesSet = new Set(
+        newProducerId?.products
+          .map(item => item.productName.trim().toLowerCase())
+          .filter(Boolean) ?? []
+      );
+
+      console.log(this.localProductNamesSet)
+    });
   }
 
+  private readonly fb = inject(FormBuilder);
+
+
+
   ngOnInit(): void {
-
-    this._productService.getProducts().subscribe(value => this.availableProductsLocal = value);
-
     this.producerService.loadProducers();
 
     this.producerService.producers$.subscribe((producers) => {
@@ -62,33 +73,28 @@ export class AdminProductsComponent implements OnInit
 
 
   addProducer(): void {
-  const dialogRef = this.dialog.open(AddProducerComponent, {
-    width: '600px'
-  });
+    this.dialog.open(AddProducerComponent);
+  }
 
-  dialogRef.afterClosed().subscribe(producer => {
-    if (!producer) {
+
+  onSubmit(newProductForm): void {
+  
+    if (this.newProductForm.invalid) {
+      this.newProductForm.markAllAsTouched();
       return;
     }
 
-    // Add returned producer to your dropdown
-    // and select it here.
-  });
-}
+    const product: Product = newProductForm.getRawValue() as Product;
 
+    console.log("admin-products.component.ts")
+    console.log(product)
 
-  onSubmit(newProduct) 
-  {
-    let newProductObject = new Product(uuid(), newProduct.value.name, newProduct.value.style, newProduct.value.abv, newProduct.value.imgUrl)
-    this._productService.addProduct(newProductObject)
+    this.productService.createProduct(product).subscribe({
+      next: (createdProduct) => {
+        console.log("Did it work")
+        console.log(createdProduct)
+      }
+    });
     this.newProductForm.reset();
   }
-
-  addNewProducer() 
-  {
-    console.log("PLACEHOLDER")
-  }
-
 }
-
-

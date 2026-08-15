@@ -4,17 +4,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+import { Product } from './product.service';
 
-interface Product {
-    productId: uuid;
-    producerId: uuid;
-    productName: string;
-    style: string;
-    abv: number | null;
-    description: string | null;
-    imageKey: string | null;
-    isActive: boolean;
-}
 
 
 interface Address {

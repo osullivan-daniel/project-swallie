@@ -23,9 +23,3 @@ textarea {
   align-items: center;
   padding-top: 15px;
 }
-
-.swally-button:disabled {
-  background-color: #e0e0e0 !important;
-  color: #999 !important;
-  cursor: not-allowed;
-}

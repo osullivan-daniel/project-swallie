@@ -45,3 +45,9 @@ button.swally-button {
   border-radius: 4px;
   box-shadow: 5px 5px 5px rgba(0,0,0,0.15) !important;
 }
+
+.swally-button:disabled {
+  background-color: #e0e0e0 !important;
+  color: #999 !important;
+  cursor: not-allowed;
+}

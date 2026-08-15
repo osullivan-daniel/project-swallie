@@ -1,7 +1,8 @@
 import uuid
 from pydantic.alias_generators import to_camel
 from pydantic import BaseModel, ConfigDict, Field, AliasGenerator
-from app.features.shared.productSchemas import Product
+
+from app.features.shared.productSchemas import ProductResponse as Product
 
 class ProducerCreate(BaseModel):
     model_config = ConfigDict(

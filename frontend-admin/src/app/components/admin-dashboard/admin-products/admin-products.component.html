@@ -6,7 +6,7 @@
       <label for="producer">Producer</label>
 
       <div class="producer-select">
-        <select id="producer" formControlName="localProducers" required>
+        <select formControlName="producerId" required>
           <option value="" disabled>Select producer</option>
 
           @for (producer of localProducers; track producer.producerId) {
@@ -29,38 +29,38 @@
     <!-- Name -->
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" formControlName="name" required />
+      <input type="text" formControlName="productName" required />
+        @if (newProductForm.controls.productName.hasError('duplicateName')) {
+        <div class="swally-error">A product with this name already exists.</div>
+      }
     </div>
 
     <!-- Style -->
-    <div class="form-group">
+    <div>
       <label for="style">Style</label>
-      <input type="text" formControlName="style" required list="beerStyles" />
-
-      <datalist id="beerStyles">
-        @for (option of styleList; track option) {
-          <option [value]="option">{{ option }}</option>
-        }
-      </datalist>
+      <input type="text" formControlName="style" maxlength="50" required/>
     </div>
 
     <!-- ABV -->
     <div class="form-group">
       <label for="abv">ABV</label>
-      <input type="number" formControlName="abv" required />
+      <input type="number" formControlName="abv" required/>
     </div>
 
     <!-- Image URL -->
     <div class="form-group">
       <label for="imgUrl">imgUrl</label>
-      <input type="text" formControlName="imgUrl" required />
+      <input type="text" formControlName="imgUrl"/>
     </div>
 
     <div class="swally-button-div">
       <button
-        mat-raised-button
-        class="swally-button"
-        [disabled]="!newProductForm.valid">
+          mat-button
+          type="button"
+          class="swally-button"
+          [disabled]="newProductForm.invalid"
+          (click)="onSubmit(newProductForm)"
+        >
         Add Product
       </button>
     </div>

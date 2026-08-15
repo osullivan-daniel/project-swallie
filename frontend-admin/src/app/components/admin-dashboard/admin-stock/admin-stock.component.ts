@@ -37,66 +37,66 @@ export class AdminStockComponent {
               private __menuService: MenuService) 
   {
 
-    this.__productService.getProducts().subscribe(value => {
-      this.availableProductsLocal=value;
-    });  
+    // this.__productService.getProducts().subscribe(value => {
+    //   this.availableProductsLocal=value;
+    // });  
 
     this.menuGroupArray = new UntypedFormArray([]);
 
     this.availableProductsLocal.forEach( item => {
       
-      let menuGroup = this.formBuilder.group({
-        0: this.formBuilder.group({"size": item['cans'], 
-                                   "price": new UntypedFormControl(
-                                            {value: item['cansPrice'], disabled: !item['cans']})
-        }),
-        1: this.formBuilder.group({"size": item['halves'], 
-                                   "price": new UntypedFormControl(
-                                            {value: item['halvesPrice'], disabled: !item['halves']})
-        }),
-        2: this.formBuilder.group({"size": item['thirds'], 
-                                   "price": new UntypedFormControl(
-                                            {value: item['thirdsPrice'], disabled: !item['thirds']})
-        })
-      });
-      this.menuGroupArray.push(menuGroup)
+      // let menuGroup = this.formBuilder.group({
+      //   0: this.formBuilder.group({"size": item['cans'], 
+      //                              "price": new UntypedFormControl(
+      //                                       {value: item['cansPrice'], disabled: !item['cans']})
+      //   }),
+      //   1: this.formBuilder.group({"size": item['halves'], 
+      //                              "price": new UntypedFormControl(
+      //                                       {value: item['halvesPrice'], disabled: !item['halves']})
+      //   }),
+      //   2: this.formBuilder.group({"size": item['thirds'], 
+      //                              "price": new UntypedFormControl(
+      //                                       {value: item['thirdsPrice'], disabled: !item['thirds']})
+      //   })
+      // });
+      // this.menuGroupArray.push(menuGroup)
 
-      this.listWithDetailsTest.push({
-        'name': item.name,
-        'productId': item.productId,
-        'updateButtonVisable': false, 
-        'sizeData': [{"size": "Can's", "price": item['cansPrice'], "available": item['cans']}, 
-                     {"size": "1/2's", "price": item['halvesPrice'], "available": item['halves']}, 
-                     {"size": "1/3's", "price": item['thirdsPrice'], "available": item['thirds']}]
-      })
+      // this.listWithDetailsTest.push({
+      //   'name': item.name,
+      //   'productId': item.productId,
+      //   'updateButtonVisable': false, 
+      //   'sizeData': [{"size": "Can's", "price": item['cansPrice'], "available": item['cans']}, 
+      //                {"size": "1/2's", "price": item['halvesPrice'], "available": item['halves']}, 
+      //                {"size": "1/3's", "price": item['thirdsPrice'], "available": item['thirds']}]
+      // })
     });
   }
 
 
   onSubmit(item)
   {
-    item.updateButtonVisable = false;
-    let product = this.__productService.getProductById(item.productId)
+    // item.updateButtonVisable = false;
+    // // let product = this.__productService.getProductById(item.productId)
 
-    item.sizeData.forEach(each => {
-      if(each.size === "Can's")
-      {
-        product.cans = each.available
-        product.cansPrice = each.price
-      }
-      else if(each.size === "1/2's")
-      {
-        product.halves = each.available
-        product.halvesPrice = each.price
-      }
-      else if(each.size === "1/3's")
-      {
-        product.thirds = each.available
-        product.thirdsPrice = each.price
-      }
-    });
+    // item.sizeData.forEach(each => {
+    //   if(each.size === "Can's")
+    //   {
+    //     product.cans = each.available
+    //     product.cansPrice = each.price
+    //   }
+    //   else if(each.size === "1/2's")
+    //   {
+    //     product.halves = each.available
+    //     product.halvesPrice = each.price
+    //   }
+    //   else if(each.size === "1/3's")
+    //   {
+    //     product.thirds = each.available
+    //     product.thirdsPrice = each.price
+    //   }
+    // });
 
-    this.__menuService.load(this.__productService.getProducts())
+    // this.__menuService.load(this.__productService.getProducts())
   }
 
 

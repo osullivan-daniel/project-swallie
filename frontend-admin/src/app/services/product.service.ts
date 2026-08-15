@@ -1,9 +1,9 @@
+import { v4 as uuid } from 'uuid';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Product } from 'shared-services';
-import { v4 as uuid } from 'uuid';
 
 export enum productSize {
   CAN_330 = 'Can 330ml',
@@ -15,97 +15,33 @@ export enum productSize {
   PINT = 'Pint',
 }
 
+export interface Product {
+    productId?: uuid;
+    producerId: uuid;
+    productName: string;
+    style: string;
+    abv?: number | null;
+    description?: string | null;
+    imageKey?: string | null;
+    isActive?: boolean;
+}
 
 
-@Injectable({
-    providedIn: 'root'
-  })
+@Injectable({ providedIn: 'root' })
 
-  export class ProductService {
-    constructor(private readonly http: HttpClient) {}
+export class ProductService {
+  constructor(private readonly http: HttpClient) {}
 
-    private productList = new BehaviorSubject(null);
-    productList$ = this.productList.asObservable();
+  private readonly apiUrl = 'http://127.0.0.1:8000';
 
+  createProduct(newProduct: Product): Observable<Product> {
+    return this.http
+      .post<Product>(`${this.apiUrl}/products/createProduct`, newProduct)
+      .pipe(
+        tap((Product) => {
 
-    getProducts()
-    {
-        return this.productList.asObservable();
-    }
-    
-
-
-    //This will later be updated with api call
-    updateAvailableProductsFromServer()
-    {
-      let prodList = []
-      
-      prodList.push(new Product(uuid(), "BLACK IS THE COLOUR", "IPA", 7.7,
-                               "../../assets/img/cans/ipas/black+is+the+colour+can+shot+small.jpg",
-                               true,false,false,2.50))
-  
-      prodList.push(new Product(uuid(), "RIGHT HAND MAN BACK", "IPA", 7.2,
-                               "../../assets/img/cans/ipas/right+hand+man+back+can+shot+small.jpg",
-                               false,true,false,null,3))
-                               
-      prodList.push(new Product(uuid(), "SCREWBALL", "IPA", 5.1,
-                                "../../assets/img/cans/ipas/screwball-can-shot.jpg",
-                                false,true,false,null,2.75))
-  
-      prodList.push(new Product(uuid(), "FOREVER AGO", "IPA", 6,
-                                "../../assets/img/cans/ipas/forever+ago+can+shot+small.jpg",
-                                false,true,false,null,3.25))
-  
-      prodList.push(new Product(uuid(), "HR", "TIPA", 10,
-                                "../../assets/img/cans/tipas/HR-can-shot-small_180x.webp",
-                                false,false,true,null,null,4))
-  
-      prodList.push(new Product(uuid(), "15", "Stout", 9.7,
-                                "../../assets/img/cans/stouts/15+can+shot+small.jpg",
-                                true,false,false,3.75))
-                                
-      prodList.push(new Product(uuid(), "SOTERIOLOGY", "Stout", 11.7,
-                                "../../assets/img/cans/stouts/soteriology+can+shot+small.jpg",
-                                true,false,true,3.55,null,3))
-  
-      prodList.push(new Product(uuid(), "YOU'RE NOT GETTING ANY", "Stout", 12,
-                                "../../assets/img/cans/stouts/youre+not+getting+any+can+shot+small.jpg",
-                                true,true,false,3.5,4.25))
-      
-      return prodList
-    }
-  
-    addProduct(newProduct: Product): void
-    {
-      //TODO:: fresh GET?
-      //TODO:: POST update? 
-
-      let prodList = [] 
-    
-      this.productList.value.forEach( item => {
-        const clone = Object.assign( {}, item );
-        prodList.push(Object.setPrototypeOf( clone, Product.prototype ));
-      });
-  
-      prodList.push(newProduct)
-      this.productList.next(prodList);
-    }
-
-    getProductById(id: string): Product
-    {
-      let returnItem = null
-      this.productList.value.forEach( item => {
-        if (id == item.productId)
-        {
-          returnItem = item
-        }
-      });
-      return returnItem
-    }
-
-    loadAllProducts()
-    {
-      console.log('Loading Product Service At Startup Time')
-      this.productList.next(this.updateAvailableProductsFromServer());
-    }
+          console.log('Created new Product', Product);
+      }),
+    );
   }
+}
