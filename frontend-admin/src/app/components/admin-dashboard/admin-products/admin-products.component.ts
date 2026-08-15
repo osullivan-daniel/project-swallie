@@ -60,22 +60,13 @@ export class AdminProductsComponent implements OnInit
 
   private readonly fb = inject(FormBuilder);
 
-
-
   ngOnInit(): void {
-    this.producerService.loadProducers();
-
-    this.producerService.producers$.subscribe((producers) => {
-      this.localProducers = producers;
-      this.cdr.markForCheck();
-    });
+    this.callLoadProducers()
   }
-
 
   addProducer(): void {
     this.dialog.open(AddProducerComponent);
   }
-
 
   onSubmit(newProductForm): void {
   
@@ -96,7 +87,12 @@ export class AdminProductsComponent implements OnInit
       }
     });
 
-    this.producerService.loadProducers(true);
+    this.callLoadProducers(true)
+  }
+
+  callLoadProducers(override: boolean=false): void {
+
+    this.producerService.loadProducers(override);
 
     this.producerService.producers$.subscribe((producers) => {
       this.localProducers = producers;
@@ -106,3 +102,4 @@ export class AdminProductsComponent implements OnInit
     this.newProductForm.reset();
   }
 }
+
