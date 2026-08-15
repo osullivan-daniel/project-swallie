@@ -39,8 +39,8 @@ export class ProducerService {
 
   private producersLoaded = false;
 
-  loadProducers(): void {
-    if (this.producersLoaded) {
+  loadProducers(forceReload = false): void {
+    if (this.producersLoaded && !forceReload) {
       return;
     }
 

@@ -95,6 +95,14 @@ export class AdminProductsComponent implements OnInit
         console.log(createdProduct)
       }
     });
+
+    this.producerService.loadProducers(true);
+
+    this.producerService.producers$.subscribe((producers) => {
+      this.localProducers = producers;
+      this.cdr.markForCheck();
+    });
+
     this.newProductForm.reset();
   }
 }
