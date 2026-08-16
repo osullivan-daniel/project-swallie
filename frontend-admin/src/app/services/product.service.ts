@@ -4,16 +4,8 @@ import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { ProductVariant } from './product-variants.service';
 
-export enum productSize {
-  CAN_330 = 'Can 330ml',
-  CAN_440 = 'Can 440ml',
-  BOTTLE_330 = "Bottle 330ml",
-  BOTTLE_500 = "Bottle 500ml",
-  PINT_THIRD = 'Pint 1/3rd',
-  PINT_HALF = 'Pint 1/2',
-  PINT = 'Pint',
-}
 
 export interface Product {
     productId?: uuid;
@@ -24,6 +16,7 @@ export interface Product {
     description?: string | null;
     imageKey?: string | null;
     isActive?: boolean;
+    variants?: ProductVariant[] 
 }
 
 

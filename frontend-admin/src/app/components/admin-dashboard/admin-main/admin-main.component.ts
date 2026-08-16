@@ -11,8 +11,11 @@ import { AdminService } from '../../../services/admin.service';
 import { AdminStockComponent } from '../admin-stock/admin-stock.component';
 import { AdminSidemenuComponent } from '../admin-sidemenu/admin-sidemenu.component';
 import { AdminProductsComponent } from '../admin-products/admin-products.component';
+import { AdminProductVarieties } from '../admin-product-varieties/admin-product-varieties';
 import { AdminLiveOrdersComponent } from '../admin-live-orders/admin-live-orders.component';
 import { AdminCompletedOrdersComponent } from '../admin-completed-orders/admin-completed-orders.component';
+
+
 
 @Component({
   selector: 'app-admin',
@@ -28,6 +31,7 @@ import { AdminCompletedOrdersComponent } from '../admin-completed-orders/admin-c
     MatTableModule,
     MatSidenavModule,
     AdminStockComponent,
+    AdminProductVarieties,
     AdminSidemenuComponent,
     AdminProductsComponent,
     AdminLiveOrdersComponent,

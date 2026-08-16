@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 
 from app.db.database import get_db
 from app.db.models import ProductVariant
-from app.features.shared.productVariantsAndForeignKeys import ProductVariant as ProductVariantSchema
+from app.features.shared.productVariants import ProductVariantResponse as ProductVariantSchema
 
 router = APIRouter(
     prefix="/products",

@@ -1,6 +1,5 @@
 <div class="div_boarder">
   <form [formGroup]="newProductForm" (ngSubmit)="onSubmit(newProductForm)">
-
     <!-- Producer -->
     <div class="form-group">
       <label for="producer">Producer</label>
@@ -16,54 +15,41 @@
           }
         </select>
 
-        <button
-          type="button"
-          mat-raised-button
-          class="swally-button"
-          (click)="addProducer()">
-          Add new
+        <button type="button" mat-raised-button class="swally-button" (click)="addProducer()">
+          Add New Producer
         </button>
       </div>
-    </div>
 
-    <!-- Name -->
-    <div class="form-group">
+      <!-- Name -->
       <label for="name">Name</label>
       <input type="text" formControlName="productName" required />
-        @if (newProductForm.controls.productName.hasError('duplicateName')) {
+      @if (newProductForm.controls.productName.hasError('duplicateName')) {
         <div class="swally-error">A product with this name already exists.</div>
       }
-    </div>
 
-    <!-- Style -->
-    <div>
+      <!-- Style -->
       <label for="style">Style</label>
-      <input type="text" formControlName="style" maxlength="50" required/>
-    </div>
+      <input type="text" formControlName="style" maxlength="50" required />
 
-    <!-- ABV -->
-    <div class="form-group">
+      <!-- ABV -->
       <label for="abv">ABV</label>
-      <input type="number" formControlName="abv" required/>
-    </div>
+      <input type="number" formControlName="abv" required />
 
-    <!-- Image URL -->
-    <div class="form-group">
+      <!-- Image URL -->
       <label for="imgUrl">imgUrl</label>
-      <input type="text" formControlName="imgUrl"/>
-    </div>
+      <input type="text" formControlName="imgUrl" />
 
-    <div class="swally-button-div">
-      <button
+      <div class="swally-button-div">
+        <button
           mat-button
           type="button"
           class="swally-button"
           [disabled]="newProductForm.invalid"
           (click)="onSubmit(newProductForm)"
         >
-        Add Product
-      </button>
+          Add Product
+        </button>
+      </div>
     </div>
-
   </form>
 </div>

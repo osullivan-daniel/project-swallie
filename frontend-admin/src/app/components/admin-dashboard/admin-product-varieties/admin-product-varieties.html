@@ -1,0 +1,66 @@
+<div class="div_boarder">
+  <form [formGroup]="newProductVarietyForm" (ngSubmit)="onSubmit(newProductVarietyForm)">
+    <div class="form-group">
+
+      <!-- Producer -->
+      <label for="producer">Producer</label>
+
+      <div class="producer-select">
+        <select formControlName="producerId" required>
+          <option value="" disabled>Select producer</option>
+
+          @for (producer of localProducers; track producer.producerId) {
+          <option [value]="producer.producerId">
+            {{ producer.producerName }}
+          </option>
+          }
+        </select>
+      </div>
+
+      <!-- Product -->
+      <label for="product">Product</label>
+
+      <div class="product-select">
+        <select formControlName="productId" required>
+          <option value="" disabled>Select product</option>
+
+          @for (product of localProducts; track product.productId) {
+          <option [value]="product.productId">{{ product.productName }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Product Size -->
+      <label for="productSize">Product Size</label>
+
+      <div class="product-size-select">
+        <select formControlName="productSize" required>
+          <option value="" disabled>Select product size</option>
+
+          @for (productSize of localproductSizes; track productSize.key) {
+          <option [value]="productSize.key", [disabled]="!productSize.active">{{ productSize.value }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Price -->
+      <label for="price">Price</label>
+      <input type="number" formControlName="price" required />
+
+      <!-- Image URL -->
+      <label for="imgUrl">imgUrl</label>
+      <input type="text" formControlName="imgUrl" />
+
+      <div class="swally-button-div">
+        <button
+          mat-button
+          type="button"
+          class="swally-button"
+          [disabled]="newProductVarietyForm.invalid"
+          (click)="onSubmit(newProductVarietyForm)">
+          Add Product Variety
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

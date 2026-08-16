@@ -22,6 +22,7 @@ import { AddProducerComponent } from '../admin-add-producer-dialog/add-producer.
 
 export class AdminProductsComponent implements OnInit 
 {
+  private readonly fb = inject(FormBuilder);
   private readonly dialog = inject(MatDialog);  
   localProductNamesSet: Set<string> = new Set();
   localProducers: Producer[] = [];
@@ -58,7 +59,7 @@ export class AdminProductsComponent implements OnInit
     });
   }
 
-  private readonly fb = inject(FormBuilder);
+  
 
   ngOnInit(): void {
     this.callLoadProducers()

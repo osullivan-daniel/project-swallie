@@ -3,6 +3,7 @@ from decimal import Decimal
 from pydantic.alias_generators import to_camel
 from pydantic import BaseModel, ConfigDict, Field, AliasGenerator
 
+from app.features.shared.productVariants import ProductVariantResponse
 
 
 class ProductCreate(BaseModel):
@@ -36,3 +37,4 @@ class ProductResponse(BaseModel):
     description: str | None
     image_key: str | None
     is_active: bool
+    variants: list[ProductVariantResponse] | None = None
