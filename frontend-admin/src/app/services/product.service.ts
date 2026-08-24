@@ -1,111 +1,71 @@
+import { v4 as uuid } from 'uuid';
+import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Product } from 'shared-services';
-import { v4 as uuid } from 'uuid';
+import { ProductVariant } from './product-variants.service';
 
-export enum productSize {
-  CAN_330 = 'Can 330ml',
-  CAN_440 = 'Can 440ml',
-  BOTTLE_330 = "Bottle 330ml",
-  BOTTLE_500 = "Bottle 500ml",
-  PINT_THIRD = 'Pint 1/3rd',
-  PINT_HALF = 'Pint 1/2',
-  PINT = 'Pint',
+
+export interface Product {
+    productId?: uuid;
+    producerId: uuid;
+    productName: string;
+    style: string;
+    abv?: number | null;
+    description?: string | null;
+    imageKey?: string | null;
+    isActive?: boolean;
+    variants?: ProductVariant[] 
 }
 
 
+@Injectable({ providedIn: 'root' })
 
-@Injectable({
-    providedIn: 'root'
-  })
+export class ProductService {
+  constructor(private readonly http: HttpClient) {}
 
-  export class ProductService {
-    constructor(private readonly http: HttpClient) {}
+  private readonly apiUrl = 'http://127.0.0.1:8000';
 
-    private productList = new BehaviorSubject(null);
-    productList$ = this.productList.asObservable();
-
-
-    getProducts()
-    {
-        return this.productList.asObservable();
-    }
-    
-
-
-    //This will later be updated with api call
-    updateAvailableProductsFromServer()
-    {
-      let prodList = []
-      
-      prodList.push(new Product(uuid(), "BLACK IS THE COLOUR", "IPA", 7.7,
-                               "../../assets/img/cans/ipas/black+is+the+colour+can+shot+small.jpg",
-                               true,false,false,2.50))
+    private productsSubject = new BehaviorSubject<Product[]>([]);
   
-      prodList.push(new Product(uuid(), "RIGHT HAND MAN BACK", "IPA", 7.2,
-                               "../../assets/img/cans/ipas/right+hand+man+back+can+shot+small.jpg",
-                               false,true,false,null,3))
-                               
-      prodList.push(new Product(uuid(), "SCREWBALL", "IPA", 5.1,
-                                "../../assets/img/cans/ipas/screwball-can-shot.jpg",
-                                false,true,false,null,2.75))
+    products$ = this.productsSubject.asObservable();
   
-      prodList.push(new Product(uuid(), "FOREVER AGO", "IPA", 6,
-                                "../../assets/img/cans/ipas/forever+ago+can+shot+small.jpg",
-                                false,true,false,null,3.25))
+    private productsLoaded = false;
   
-      prodList.push(new Product(uuid(), "HR", "TIPA", 10,
-                                "../../assets/img/cans/tipas/HR-can-shot-small_180x.webp",
-                                false,false,true,null,null,4))
+    loadProducts(forceReload = false): void {
+      if (this.productsLoaded && !forceReload) {
+        return;
+      }
   
-      prodList.push(new Product(uuid(), "15", "Stout", 9.7,
-                                "../../assets/img/cans/stouts/15+can+shot+small.jpg",
-                                true,false,false,3.75))
-                                
-      prodList.push(new Product(uuid(), "SOTERIOLOGY", "Stout", 11.7,
-                                "../../assets/img/cans/stouts/soteriology+can+shot+small.jpg",
-                                true,false,true,3.55,null,3))
+      console.log('Loading Products');
+      this.http.get<Product[]>(`${this.apiUrl}/products/products`).subscribe({
+        next: (products) => {
+          console.log(products);
   
-      prodList.push(new Product(uuid(), "YOU'RE NOT GETTING ANY", "Stout", 12,
-                                "../../assets/img/cans/stouts/youre+not+getting+any+can+shot+small.jpg",
-                                true,true,false,3.5,4.25))
-      
-      return prodList
-    }
-  
-    addProduct(newProduct: Product): void
-    {
-      //TODO:: fresh GET?
-      //TODO:: POST update? 
-
-      let prodList = [] 
-    
-      this.productList.value.forEach( item => {
-        const clone = Object.assign( {}, item );
-        prodList.push(Object.setPrototypeOf( clone, Product.prototype ));
+          this.productsSubject.next(products);
+          this.productsLoaded = true;
+        },
+        error: (error) => {
+          console.error('Failed to load products:', error);
+        },
       });
-  
-      prodList.push(newProduct)
-      this.productList.next(prodList);
     }
 
-    getProductById(id: string): Product
-    {
-      let returnItem = null
-      this.productList.value.forEach( item => {
-        if (id == item.productId)
-        {
-          returnItem = item
-        }
-      });
-      return returnItem
-    }
+  createProduct(newProduct: Product): Observable<Product> {
+    return this.http
+      .post<Product>(`${this.apiUrl}/products/createProduct`, newProduct)
+      .pipe(
+        tap((product) => {
 
-    loadAllProducts()
-    {
-      console.log('Loading Product Service At Startup Time')
-      this.productList.next(this.updateAvailableProductsFromServer());
-    }
+          const currentProducts = this.productsSubject.value;
+          console.log('Created new Product', product);
+
+          this.productsSubject.next([
+            ...currentProducts,
+            product,
+          ]);
+      }),
+    );
   }
+}

@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+import { Product } from './product.service';
+
+
 
 interface Address {
   street1: string;
@@ -21,6 +24,7 @@ export interface Producer {
   address: Address;
   description: string | null;
   isActive?: boolean;
+  products: Product[] | null;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -35,8 +39,8 @@ export class ProducerService {
 
   private producersLoaded = false;
 
-  loadProducers(): void {
-    if (this.producersLoaded) {
+  loadProducers(forceReload = false): void {
+    if (this.producersLoaded && !forceReload) {
       return;
     }
 

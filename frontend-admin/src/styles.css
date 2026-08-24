@@ -30,6 +30,10 @@
     box-sizing: border-box !important;;
 }
 
+.swally-error {
+    color: rgb(194, 47, 47) ;
+}
+
 .swally-button-div {
     display: flex;
     justify-content: center;
@@ -42,19 +46,8 @@ button.swally-button {
   box-shadow: 5px 5px 5px rgba(0,0,0,0.15) !important;
 }
 
-
-.app-field {
-  width: 100%;
-
-  --mdc-outlined-text-field-container-shape: 10px;
-  --mdc-outlined-text-field-container-height: 52px;
-
-  --mdc-outlined-text-field-outline-color: #d1d5db;
-  --mdc-outlined-text-field-hover-outline-color: #9ca3af;
-  --mdc-outlined-text-field-focus-outline-color: #2563eb;
-
-  --mdc-outlined-text-field-label-text-color: #6b7280;
-  --mdc-outlined-text-field-focus-label-text-color: #2563eb;
-
-  --mdc-outlined-text-field-input-text-color: #111827;
+.swally-button:disabled {
+  background-color: #e0e0e0 !important;
+  color: #999 !important;
+  cursor: not-allowed;
 }

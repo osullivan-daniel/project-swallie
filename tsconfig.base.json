@@ -12,7 +12,8 @@
     "paths": {
       "src/*": ["./src/*"],
       "shared-ui": ["./libs/shared-ui/src/index.ts"],
-      "shared-services": ["./libs/shared-services/src/index.ts"]
+      "shared-services": ["./libs/shared-services/src/index.ts"],
+      "shared-functions": ["./libs/shared-functions/src/index.ts"]
     }
   }
 }

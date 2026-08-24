@@ -28,7 +28,11 @@
         <app-admin-live-orders></app-admin-live-orders>
       }
 
-      @if (displayBody === 'menu') {
+      @if (displayBody === 'completed') {
+        <app-admin-completed-orders></app-admin-completed-orders>
+      }
+
+      @if (displayBody === 'availableStock') {
         <app-admin-stock></app-admin-stock>
       }
 
@@ -36,8 +40,8 @@
         <app-admin-products></app-admin-products>
       }
 
-      @if (displayBody === 'completed') {
-        <app-admin-completed-orders></app-admin-completed-orders>
+      @if (displayBody === 'productVarieties') {
+        <app-admin-product-varieties></app-admin-product-varieties>
       }
     </div>
   </mat-sidenav-content>

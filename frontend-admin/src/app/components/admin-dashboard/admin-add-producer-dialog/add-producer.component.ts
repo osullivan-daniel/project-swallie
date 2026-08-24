@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -7,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
+import { uniqueNameValidator } from 'shared-functions'
 import { Producer, ProducerService} from '../../../services/producers.service';
 
 @Component({
@@ -14,6 +16,7 @@ import { Producer, ProducerService} from '../../../services/producers.service';
   styleUrl: './add-producer.component.css',
   standalone: true,
   imports: [
+    CommonModule,
     MatCardModule,
     ReactiveFormsModule,
     MatDialogModule,
@@ -24,6 +27,7 @@ import { Producer, ProducerService} from '../../../services/producers.service';
   templateUrl: './add-producer.component.html'
 })
 export class AddProducerComponent {
+  localProducerNamesSet: Set<string> = new Set();
 
   constructor(
     private readonly producerService: ProducerService
@@ -35,7 +39,7 @@ export class AddProducerComponent {
   readonly dialogRef = inject(MatDialogRef<AddProducerComponent>);
 
   readonly newProducerForm = this.fb.group({
-    producerName: ['', Validators.required],
+    producerName: ['', [Validators.required, uniqueNameValidator(() => this.localProducerNamesSet)]],
 
     address: this.fb.group({
       street1: ['', [Validators.maxLength(200), Validators.required]],
@@ -68,6 +72,18 @@ export class AddProducerComponent {
     });
 
     console.log(producer);
+  }  
+
+  ngOnInit(): void {
+    this.producerService.loadProducers();
+
+    this.localProducerNamesSet.clear();
+
+    this.producerService.producers$.subscribe(items => {
+      this.localProducerNamesSet = new Set(items.map(item => item.producerName.trim().toLowerCase()));
+    });
+
+    console.log(this.localProducerNamesSet)
   }
-  
 }
+

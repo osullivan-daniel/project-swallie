@@ -1,22 +1,23 @@
 import uuid
+from decimal import Decimal
 from pydantic.alias_generators import to_camel
 from pydantic import BaseModel, ConfigDict, Field, AliasGenerator
 
-from app.features.shared.productSchemas import ProductResponse as Product
+from app.shared.product_size import ProductSize
 
-class ProducerCreate(BaseModel):
+class ProductVariantCreate(BaseModel):
     model_config = ConfigDict(
         alias_generator=to_camel,
         populate_by_name=True
     )
 
-    producer_name: str
-    address: dict
-    description: str | None = None
+    product_id: uuid.UUID
+    product_size: str
+    item_price: Decimal
+    image_key: str | None
 
 
-
-class ProducerResponse(BaseModel):
+class ProductVariantResponse(BaseModel):
     model_config = ConfigDict(
         alias_generator=AliasGenerator(
             validation_alias=lambda field_name: field_name,
@@ -25,9 +26,9 @@ class ProducerResponse(BaseModel):
         from_attributes=True,
     )
 
-    id: uuid.UUID = Field(serialization_alias="producerId")
-    producer_name: str
-    address: dict
-    description: str | None = None
+    id: uuid.UUID = Field(serialization_alias="productVarietyId")
+    product_id: uuid.UUID
+    product_size: ProductSize
+    item_price: Decimal
+    image_key: str | None
     is_active: bool
-    products: list[Product] | None = None

@@ -5,7 +5,10 @@
     <!-- Producer -->
     <div class="form-group">
       <label for="producerName">Producer Name</label>
-      <input type="text" formControlName="producerName" maxlength="255" required />
+      <input type="text" formControlName="producerName" maxlength="255" required/>
+      @if (newProducerForm.controls.producerName.hasError('duplicateName')) {
+        <div class="swally-error">A producer with this name already exists.</div>
+      }
     </div>
 
     <!-- Address -->
@@ -52,7 +55,12 @@
         rows="5"
       ></textarea>
 
-      <small>Allowed Characters {{ newProducerForm.controls.description.value?.length ?? 0 }}/1500</small>
+      <small
+        >Allowed Characters
+        {{
+          newProducerForm.controls.description.value?.length ?? 0
+        }}/1500</small
+      >
     </div>
 
     <div class="swally-button-div">
@@ -67,7 +75,7 @@
         </button>
 
         <button
-          mat-flat-button
+          mat-button
           type="button"
           class="swally-button"
           [disabled]="newProducerForm.invalid"
