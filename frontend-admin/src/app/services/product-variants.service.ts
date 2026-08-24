@@ -34,7 +34,7 @@ export class ProductVariantService {
 
   createProductVariant(newProductVariant: ProductVariant): Observable<ProductVariant> {
     return this.http
-      .post<ProductVariant>(`${this.apiUrl}/products/createProduct`, newProductVariant)
+      .post<ProductVariant>(`${this.apiUrl}/products/createProductVariants`, newProductVariant)
       .pipe(
         tap((productVariant) => {
 

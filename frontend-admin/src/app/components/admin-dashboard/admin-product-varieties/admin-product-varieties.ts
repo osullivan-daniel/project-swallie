@@ -48,12 +48,12 @@ export class AdminProductVarieties implements OnInit
       producerId: ['', [Validators.required]],
       productId: ['', [Validators.required]],
       productSize: ['', [Validators.required]],
-      price: ['', [Validators.required]],
-      imgUrl: ['']
+      itemPrice: ['', [Validators.required]],
+      imageKey: ['']
     });
 
-    const priceControl = this.newProductVarietyForm.get('price')!;
-    const imgUrlControl = this.newProductVarietyForm.get('imgUrl')!;
+    const priceControl = this.newProductVarietyForm.get('itemPrice')!;
+    const imgUrlControl = this.newProductVarietyForm.get('imageKey')!;
     const productControl = this.newProductVarietyForm.get('productId')!;
     const productSizeControl = this.newProductVarietyForm.get('productSize')!;
     
@@ -95,9 +95,6 @@ export class AdminProductVarieties implements OnInit
         active: !alreadyAddedVariants?.includes(item.value.trim().toLowerCase())
       }));
 
-      console.log("test456::", this.localproductSizes)
-
-
       for(const each of [priceControl, imgUrlControl])
       {
         this.disableControl(each)
@@ -137,10 +134,15 @@ export class AdminProductVarieties implements OnInit
 
     const productVariant: ProductVariant = newProductVarietyForm.getRawValue() as ProductVariant;
 
-    
+    const size = productVariant.productSize;
+
+    if (size in ProductSizes) {
+      productVariant.productSize =
+        ProductSizes[size as unknown as keyof typeof ProductSizes];
+    }
+
     this.productVariantService.createProductVariant(productVariant).subscribe({
       next: (createdProduct) => {
-        console.log("Did it work")
         console.log(createdProduct)
       }
     });
@@ -175,8 +177,8 @@ export class AdminProductVarieties implements OnInit
 
     this.disableControl(this.newProductVarietyForm.get('productId')!);
     this.disableControl(this.newProductVarietyForm.get('productSize')!);
-    this.disableControl(this.newProductVarietyForm.get('price')!);
-    this.disableControl(this.newProductVarietyForm.get('imgUrl')!);
+    this.disableControl(this.newProductVarietyForm.get('itemPrice')!);
+    this.disableControl(this.newProductVarietyForm.get('imageKey')!);
 
     this.enableControl(this.newProductVarietyForm.get('producerId'))
   }

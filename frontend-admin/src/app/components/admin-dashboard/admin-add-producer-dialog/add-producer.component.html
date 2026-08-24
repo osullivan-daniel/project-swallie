@@ -7,7 +7,7 @@
       <label for="producerName">Producer Name</label>
       <input type="text" formControlName="producerName" maxlength="255" required/>
       @if (newProducerForm.controls.producerName.hasError('duplicateName')) {
-        <div class="swally-error">A product with this name already exists.</div>
+        <div class="swally-error">A producer with this name already exists.</div>
       }
     </div>
 
