@@ -1,9 +1,11 @@
+from ..settings import settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+HOST = settings.database_host
+
 DATABASE_URL = (
-    "postgresql+psycopg://"
-    "swallie:swallie_dev@127.0.0.1:5432/swallie"
+    f"postgresql+psycopg://swallie:swallie_dev@{HOST}:5432/swallie"
 )
 
 engine = create_engine(DATABASE_URL)

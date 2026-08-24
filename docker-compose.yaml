@@ -12,5 +12,23 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    
+    environment:
+      DATABASE_HOST: postgres
+
+    container_name: swallie-backend
+    restart: unless-stopped
+
+    depends_on:
+      - postgres
+
+    ports:
+      - "8000:8000"
+
 volumes:
   postgres_data:
