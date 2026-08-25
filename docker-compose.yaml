@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:17
+    image: postgres:18
     container_name: swallie-postgres
     restart: unless-stopped
     environment:
@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
 
   redis:
     image: redis:8
@@ -25,19 +25,25 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    
     environment:
       DATABASE_HOST: postgres
-
     container_name: swallie-backend
     restart: unless-stopped
-
     depends_on:
       - postgres
-
     ports:
       - "8000:8000"
 
+  frontend-admin:
+    build:
+      context: .
+      dockerfile: frontend-admin/Dockerfile
+    container_name: swallie-frontend-admin
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:

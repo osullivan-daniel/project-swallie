@@ -1,0 +1,10 @@
+.angular
+.idea
+.nx
+.vscode
+.git
+backend/.env
+src
+node_modules
+frontend-admin/node_modules
+frontend-portal/node_modules

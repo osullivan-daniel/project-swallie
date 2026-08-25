@@ -1,9 +1,0 @@
-- Review continued use of admin service???
-- review logo size - NG0913: An image with src http://localhost:4200/assets/img/worksOnMyTap.png has intrinsic file dimensions much larger than its rendered size.
-- ineffiant reloading on some forms - see Add Product Varient for corect way to do it
-- Price change & image change? ability
-- Auth - Move producer/product funchinality behind a manager role leaving order functinality behind staff role
-- Producer Image? & Defaults for no images - something form the producer could be used as a no image - logo or something
-- Rework & rename the customer portal
-- Add required messages for markAllAsTouched() - while not technically required as we only enable the button when the form is valid but a double protection
-- tidy logging
