@@ -37,8 +37,6 @@ export interface Order {
 export class OrdersService {
   constructor(private readonly http: HttpClient) {}
 
-  private readonly apiUrl = 'http://127.0.0.1:8000';
-
   private completedOrdersSubject = new BehaviorSubject<Order[]>([]);
   private inProgressOrdersSubject = new BehaviorSubject<Order[]>([]);
   private inQueueOrdersSubject = new BehaviorSubject<Order[]>([]);
@@ -67,7 +65,7 @@ export class OrdersService {
   }
 
   startOrder(orderId: number): Observable<Order> {
-    return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/start`,{}
+    return this.http.post<Order>(`/orders/${orderId}/start`,{}
     ).pipe(
       tap((startedOrder) => {
 
@@ -93,7 +91,7 @@ export class OrdersService {
   }
 
   completeOrder(orderId: number): Observable<Order> {
-    return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/complete`,{}
+    return this.http.post<Order>(`/orders/${orderId}/complete`,{}
     ).pipe(
       tap((completedOrder) => {
 
@@ -125,7 +123,7 @@ export class OrdersService {
     }
 
     console.log('Loading Completed Orders');
-    this.http.get<Order[]>(`${this.apiUrl}/orders/completed`).subscribe({
+    this.http.get<Order[]>(`/orders/completed`).subscribe({
       next: (orders) => {
         this.completedOrdersSubject.next(orders);
         this.completedOrdersLoaded = true;
@@ -144,7 +142,7 @@ export class OrdersService {
     }
 
     console.log('Loading InProgress Orders');
-    this.http.get<Order[]>(`${this.apiUrl}/orders/inProgress`).subscribe({
+    this.http.get<Order[]>(`/orders/inProgress`).subscribe({
       next: (orders) => {
         this.inProgressOrdersSubject.next(orders);
         this.inProgressOrdersLoaded = true;
@@ -163,7 +161,7 @@ export class OrdersService {
     }
 
     console.log('Loading In Queue Orders');
-    this.http.get<Order[]>(`${this.apiUrl}/orders/inQueue`).subscribe({
+    this.http.get<Order[]>(`/orders/inQueue`).subscribe({
       next: (orders) => {
         this.inQueueOrdersSubject.next(orders);
         this.inQueueOrdersLoaded = true;

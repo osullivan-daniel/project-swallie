@@ -31,8 +31,6 @@ export interface Producer {
 export class ProducerService {
   constructor(private readonly http: HttpClient) {}
 
-  private readonly apiUrl = 'http://127.0.0.1:8000';
-
   private producersSubject = new BehaviorSubject<Producer[]>([]);
 
   producers$ = this.producersSubject.asObservable();
@@ -45,7 +43,7 @@ export class ProducerService {
     }
 
     console.log('Loading Producers');
-    this.http.get<Producer[]>(`${this.apiUrl}/producers/producers`).subscribe({
+    this.http.get<Producer[]>(`/producers/producers`).subscribe({
       next: (producers) => {
         console.log(producers);
 
@@ -60,7 +58,7 @@ export class ProducerService {
 
   createProducer(newProducer: Producer): Observable<Producer> {
     return this.http
-      .post<Producer>(`${this.apiUrl}/producers/createProducer`, newProducer)
+      .post<Producer>(`/producers/createProducer`, newProducer)
       .pipe(
         tap((producer) => {
 
