@@ -12,6 +12,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  redis:
+    image: redis:8
+    container_name: swallie-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/var/lib/redis/data
 
   backend:
     build:
@@ -30,5 +38,7 @@ services:
     ports:
       - "8000:8000"
 
+
 volumes:
   postgres_data:
+  redis_data:
