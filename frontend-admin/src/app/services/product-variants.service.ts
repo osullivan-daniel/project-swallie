@@ -30,11 +30,9 @@ export interface ProductVariant {
 export class ProductVariantService {
   constructor(private readonly http: HttpClient) {}
 
-  private readonly apiUrl = 'http://127.0.0.1:8000';
-
   createProductVariant(newProductVariant: ProductVariant): Observable<ProductVariant> {
     return this.http
-      .post<ProductVariant>(`${this.apiUrl}/products/createProductVariants`, newProductVariant)
+      .post<ProductVariant>(`/products/createProductVariants`, newProductVariant)
       .pipe(
         tap((productVariant) => {
 

@@ -25,8 +25,6 @@ export interface Product {
 export class ProductService {
   constructor(private readonly http: HttpClient) {}
 
-  private readonly apiUrl = 'http://127.0.0.1:8000';
-
     private productsSubject = new BehaviorSubject<Product[]>([]);
   
     products$ = this.productsSubject.asObservable();
@@ -39,7 +37,7 @@ export class ProductService {
       }
   
       console.log('Loading Products');
-      this.http.get<Product[]>(`${this.apiUrl}/products/products`).subscribe({
+      this.http.get<Product[]>(`/products/products`).subscribe({
         next: (products) => {
           console.log(products);
   
@@ -54,7 +52,7 @@ export class ProductService {
 
   createProduct(newProduct: Product): Observable<Product> {
     return this.http
-      .post<Product>(`${this.apiUrl}/products/createProduct`, newProduct)
+      .post<Product>(`/products/createProduct`, newProduct)
       .pipe(
         tap((product) => {
 
