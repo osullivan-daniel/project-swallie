@@ -27,10 +27,12 @@ services:
       dockerfile: Dockerfile
     environment:
       DATABASE_HOST: postgres
+      REDIS_HOST: redis
     container_name: swallie-backend
     restart: unless-stopped
     depends_on:
       - postgres
+      - redis
     ports:
       - "8000:8000"
 
