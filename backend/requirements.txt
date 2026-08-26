@@ -1,5 +1,7 @@
+redis
 alembic
 fastapi
+slowapi
 sqlalchemy
 psycopg[binary]
 uvicorn[standard]
