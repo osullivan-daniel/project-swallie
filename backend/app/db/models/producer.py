@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import String, text
+from sqlalchemy import UniqueConstraint, String, text
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -16,7 +16,7 @@ class Producer(Base):
 
     producer_name: Mapped[str] = mapped_column(
         String(255),
-        nullable=False,
+        nullable=False
     )
 
     address: Mapped[dict] = mapped_column(
@@ -36,4 +36,11 @@ class Producer(Base):
 
     products: Mapped[list["Product"]] = relationship(
         back_populates="producer"
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "producer_name",
+            name="uq_producer_producer_name",
+        ),
     )

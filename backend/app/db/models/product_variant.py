@@ -2,7 +2,7 @@ import uuid
 from decimal import Decimal
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Enum as SQLEnum, ForeignKey, Numeric, String, text
+from sqlalchemy import Enum as SQLEnum, ForeignKey, UniqueConstraint, Numeric, String, text
 
 from app.db.base import Base
 from app.shared.product_size import ProductSize
@@ -47,4 +47,12 @@ class ProductVariant(Base):
 
     product: Mapped["Product"] = relationship(
         back_populates="variants"
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "product_id",
+            "product_size",
+            name="uq_product_size_per_product",
+        ),
     )

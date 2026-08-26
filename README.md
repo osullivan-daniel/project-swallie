@@ -18,6 +18,12 @@ Finally, the API tests were expanded to include both functional and non-function
 
 The application is currently in a usable/demoable state. The core admin workflow is implemented and the application can be run locally using either the full Dockeriser 'prod' version, or alternativly running the individual dev componants locally (except for the database that is only dockerised)
 
+## Tests
+
+There is two suites (ya suites is a bit of a stretch!) funtional and non functional. Functional runs in parallel while non functional doesnt as it resets rate limits so the test runs are clean, which is why we have the script runAllTest.sh running it will combine the results from both suites into a single report.
+
+Tests should be run from the tests directory against the fully dockerised deployment - a later enhancement would be to add config to allow the tests to be run against a local "dev" instance and the deployed "prod" instance
+
 ## Next Steps
 
 - [ ] Review use of enums - text value should only be uused for displaying but there is a disconect FastApi is expecting the text value at the moment - this effects both Order Staus and Variant size
@@ -38,9 +44,9 @@ The application is currently in a usable/demoable state. The core admin workflow
 
 ## full dockerised implementation set up
 
-docker-compose up --build (from root dir)  This is where you can tell my docker is an old version you will likely use docker compose up --build!  
-alembic upgrade head (from backend dir)  
-python -m scripts.seed (from backend dir)  
+docker-compose up --build (from root dir) - This is where you can tell my docker is an old version you will likely use docker compose up --build!  
+alembic upgrade head (from backend dir)   - This requires a local python env with the requirments installed
+python -m scripts.seed (from backend dir) - This requires a local python env with the requirments installed
 
 ## local dev commands
 

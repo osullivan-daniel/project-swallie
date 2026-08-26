@@ -1,7 +1,8 @@
 from fastapi import Request
 from app.rate_limit import limiter
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends
+from sqlalchemy.exc import IntegrityError
+from fastapi import Request, APIRouter, Depends, HTTPException, status
 
 from app.db.database import get_db
 from app.db.models import Producer
@@ -25,7 +26,19 @@ async def create_producer(request: Request, new_producer: ProducerCreateSchema, 
     producer = Producer(**new_producer.model_dump())
 
     db.add(producer)
-    db.commit()
-    db.refresh(producer)
+
+    try:
+        db.commit()
+        db.refresh(producer)
+    except IntegrityError as exc:
+        db.rollback()
+
+        if "uq_producer_producer_name" in str(exc.orig):
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="A producer with that name already exists.",
+            ) from exc
+
+        raise
 
     return producer
