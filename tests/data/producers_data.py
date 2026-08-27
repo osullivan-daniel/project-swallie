@@ -29,6 +29,7 @@ def valid_producer_create():
 
 def valid_producer_create_response_default_values():
     return {
+        "description": None,
         "isActive": True, 
         "products": []
     }
