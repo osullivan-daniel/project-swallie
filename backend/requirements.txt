@@ -2,6 +2,7 @@ redis
 alembic
 fastapi
 slowapi
+requests
 sqlalchemy
 psycopg[binary]
 uvicorn[standard]
